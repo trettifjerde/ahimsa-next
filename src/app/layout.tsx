@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Chilanka, Poppins } from "next/font/google";
+import localFont from "next/font/local";
+import Navigation from "@/components/layout/nav";
+import Footer from "@/components/layout/footer";
+import "../globals.css";
+import "../icons.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({ subsets: ["latin-ext"], weight: ["300", "400", "500", "700"] });
+const chilanka = Chilanka({ subsets: ["latin-ext"], weight: ["400"], variable: '--chilanka' });
+const icons = localFont({ src: '../fonts/icomoon.ttf', variable: '--icons' });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="hr">
+      <body className={`${inter.className} ${chilanka.variable} ${icons.variable}`}>
+        <Navigation />
+        <div id="content">
+          {children}
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

@@ -1,0 +1,41 @@
+.main header {
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.main header h1,
+.main header h3,
+.main header h5 {
+    font-weight: 400;
+}
+
+.main header h1,
+.main header h3 {
+    font-family: var(--chilanka);
+    text-align: center;
+}
+
+.main header h1 {
+    font-size: 8rem;
+}
+
+.main header h3 {
+    font-size: 2rem;
+    color: var(--cian);
+}
+
+.main header span {
+    color: var(--cian);
+}
+
+.main header h5 {
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    font-size: 0.75rem;
+    text-align: right;
+    line-height: 1;
+}
+
+
