@@ -156,6 +156,7 @@ footer .info span {
   animation-fill-mode: forwards;
   box-shadow: 0 0 3px 1px var(--gray-shadow);
 }
+
 .popup::before {
   position: absolute;
   content: '';
