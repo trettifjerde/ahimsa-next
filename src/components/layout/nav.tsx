@@ -1,14 +1,15 @@
-import Image from "next/image";
-import logo from "@/../public/logo.svg";
+import Link from "next/link";
+import Logo from "./logo";
 export default function Navigation() {
     return <nav>
-        <div className="logo">
-            <Image src={logo} fill alt="Ahimsa logo"/>
-        </div>
+        <Link href="/" className="logo-c">
+            <Logo />
+        </Link>
         <ul>
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link</li>
+            <Link href="/news"><li>News</li></Link>
+            <Link href="/gallery"><li>Gallery</li></Link>
+            <Link href="/team"><li>Team</li></Link>
+            <Link href="/volunteer"><li>Join us</li></Link>
         </ul>
     </nav>
 }

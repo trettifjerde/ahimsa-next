@@ -1,11 +1,18 @@
 :root {
-  --cian: #55b0b3;
+  --cian: rgb(85, 176, 179);
+  --cian-dark: rgb(31, 129, 132);
   --green: rgb(161, 211, 167);
   --green-trans: rgba(61, 164, 72, 0.5);
+  --green-dark: rgb(61, 164, 72);
   --blue: rgb(169, 211, 236);
   --blue-trans: rgba(89, 181, 234, 0.5);
-  --light: #fefefe;
+  --blue-dark: rgb(89, 181, 234);
+  --light: rgb(253, 253, 250);
   --gray-shadow: rgba(143, 143, 143, 0.5);
+
+  --box-shadow: 0 0 1px var(--gray-shadow);
+
+  --p-margin: 0.25rem;
 }
 
 * {
@@ -25,7 +32,8 @@ body {
   display: grid;
   grid-template-columns: minmax(5rem, 10vw) auto;
   background-color: var(--light);
-  line-height: 1.25;
+  line-height: 1.35;
+  font-weight: 300;
 }
 
 body::before,
@@ -60,7 +68,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   border-radius: 0 3rem 3rem 0;
-  box-shadow: 0 0 3px 1px var(--gray-shadow);
+  box-shadow: 0 0 3px var(--gray-shadow);
   background-color: var(--light);
   font-family: var(--chilanka);
   font-weight: 600;
@@ -72,7 +80,7 @@ nav ul {
 }
 
 nav ul li {
-  margin: 1rem 0.5rem;
+  margin: 2rem 0.5rem;
 }
 
 #content {
@@ -81,12 +89,33 @@ nav ul li {
 }
 
 main, footer {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
   padding: 3rem;
 }
 
 main {
   position: relative;
   margin-block: 30vh;
+}
+
+main p {
+  margin-block: var(--p-margin);
+  text-indent: 1rem;
+}
+
+article a {
+  color: var(--green-dark);
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color .3s ease;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+article a:hover {
+  color: var(--blue-dark);
 }
 
 footer {
@@ -100,13 +129,12 @@ footer .links {
   display: flex;
   gap: 1rem;
   font-size: 2rem;
-  margin-bottom: 1.5rem;
 }
 
 footer .info {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-end;
   gap: 0 3rem;
 }
@@ -136,11 +164,30 @@ footer .info span {
   cursor: pointer;
 }
 
+.logo-c {
+  display: block;
+  line-height: 1;
+}
+
 .logo {
-  position: relative;
   width: 100%;
   max-width: 6rem;
   aspect-ratio: 1/1;
+  transition: transform .2s;
+}
+.logo:hover {
+  transform: scale(1.1);
+}
+.logo path {
+  transition: fill .2s ease-in-out;
+}
+.logo #left,
+.logo:hover #right {
+  fill: var(--green);
+}
+.logo #right,
+.logo:hover #left {
+  fill: var(--blue);
 }
 
 .popup {
@@ -184,6 +231,10 @@ footer .info span {
 
 b {
   font-weight: 500;
+}
+
+strong {
+  color: var(--cian-dark);
 }
 
 @keyframes popup {

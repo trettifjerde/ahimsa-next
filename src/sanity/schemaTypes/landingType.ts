@@ -6,10 +6,6 @@ export const landingType = defineType({
     type: 'document',
     fields: [
         defineField({
-            name: 'header',
-            type: 'string'
-        }),
-        defineField({
             name: 'text',
             type: 'array',
             of: [{type: 'block'}]

@@ -1,0 +1,1 @@
+export const DESCRIPTION = "Udruga mladih Ahimsa (sanskrt: nenasilje, ljubav, suosjećanje) iz Zadra osnovana je krajem 2016. godine. Cilj Udruge je prevencija nasilja među mladima, zaštita i borba za ljudska prava, poticanje mladih na brigu za stare, nemoćne i potrebite, te promicanje ideje očuvanja prirode i okoliša sa svrhom razvoja cjelokupnog civilnog društva.";

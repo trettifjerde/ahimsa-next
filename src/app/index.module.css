@@ -2,6 +2,7 @@
     position: relative;
     width: fit-content;
     margin-inline: auto;
+    margin-bottom: 10vh;
 }
 
 .main header h1,
@@ -31,11 +32,33 @@
 
 .main header h5 {
     position: absolute;
-    top: 50%;
-    left: 85%;
+    top: 45%;
+    left: 90%;
     font-size: 0.75rem;
     text-align: right;
     line-height: 1;
+    font-weight: inherit;
+    transform: rotate(-5deg);
+}
+
+.main article {
+    padding: 5rem;
+    position: relative;
+    background-color: var(--light);
+    border-radius: 5% 25%;
+    box-shadow: var(--box-shadow);
+    margin-block: 3rem;
+    width: fit-content;
+}
+
+.main p::before {
+    content: '';
+    position: absolute;
+    inset: -0.5rem;
+    background-image: linear-gradient(to right, var(--green), var(--blue));
+    border-radius: 0.5rem 100%;
+    transform: rotate(1deg);
+    z-index: -1;
 }
 
 
