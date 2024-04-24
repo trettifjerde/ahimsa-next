@@ -1,12 +1,16 @@
 import {PortableText} from '@portabletext/react'
 import { client } from "@/sanity/lib/client";
-import { LANDING_QUERY, LandingQuery } from "@/sanity/lib/queries";
+import { landingQuery } from "@/sanity/lib/queries";
 
 import Main from "@/components/layout/main";
 import styles from './index.module.css';
+import { LandingQueryResult } from '../../sanity.types';
 
 export default async function Index() {
-  const landing = await client.fetch<LandingQuery>(LANDING_QUERY);
+  const landing = await client.fetch<LandingQueryResult>(landingQuery);
+
+  if (!landing || !landing.text)
+    throw new Error('Error fetching landing info');
 
   return <Main className={styles.main}>
     <header>

@@ -8,6 +8,7 @@
   --blue-trans: rgba(89, 181, 234, 0.5);
   --blue-dark: rgb(89, 181, 234);
   --light: rgb(253, 253, 250);
+  --dark: rgb(34, 34, 34);
   --gray-shadow: rgba(143, 143, 143, 0.5);
 
   --box-shadow: 0 0 1px var(--gray-shadow);
@@ -26,12 +27,25 @@ a {
   color: inherit;
 }
 
+h1,
+h2,
+h3, 
+h4 {
+  font-weight: 400;
+  font-family: var(--handwritten);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
 body {
   position: relative;
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(5rem, 10vw) auto;
   background-color: var(--light);
+  color: var(--dark);
   line-height: 1.35;
   font-weight: 300;
 }
@@ -70,8 +84,8 @@ nav {
   border-radius: 0 3rem 3rem 0;
   box-shadow: 0 0 3px var(--gray-shadow);
   background-color: var(--light);
-  font-family: var(--chilanka);
-  font-weight: 600;
+  font-family: var(--handwritten);
+  font-weight: 400;
 }
 
 nav ul {
@@ -97,7 +111,8 @@ main, footer {
 
 main {
   position: relative;
-  margin-block: 30vh;
+  margin-top: 25vh;
+  margin-bottom: 5vh;
 }
 
 main p {
@@ -235,6 +250,7 @@ b {
 
 strong {
   color: var(--cian-dark);
+  font-family: var(--handwritten);
 }
 
 @keyframes popup {

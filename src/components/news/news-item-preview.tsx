@@ -1,15 +1,25 @@
-import { NewsListQuery } from "@/sanity/lib/queries";
-import { PortableText } from "@portabletext/react";
 import Link from "next/link";
+import styles from './news-prev.module.css';
+import { NewsListQueryResult } from "../../../sanity.types";
+import Image from "next/image";
+import logo from '@/../public/logo.svg';
 
-export default function NewsItemPreview({news}: {news: NewsListQuery}) {
-    const date = new Date(news.date).toLocaleDateString('hr');
+type Info = Exclude<NewsListQueryResult, null>[0];
+
+export default function NewsItemPreview({ news }: { news: Info }) {
 
     return <Link href={`/news/${news.slug}`}>
-        <article>
-            <h2>{news.title}</h2>
-            <div>{date}</div>
-            <PortableText value={news.description}/>
+            <article className={styles.prev}>
+            <div>
+                <h2>{news.title}</h2>
+                <div>{news.date}</div>
+            </div>
+            <div className={styles.ic}>
+                <Image src={news.image || logo} alt="Dekorativna slika" fill />
+            </div>
+            <div>
+                {news.excerpt}
+            </div>
         </article>
     </Link>
 }

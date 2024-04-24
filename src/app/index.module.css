@@ -6,14 +6,7 @@
 }
 
 .main header h1,
-.main header h3,
-.main header h5 {
-    font-weight: 400;
-}
-
-.main header h1,
 .main header h3 {
-    font-family: var(--chilanka);
     text-align: center;
 }
 
@@ -32,7 +25,7 @@
 
 .main header h5 {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 90%;
     font-size: 0.75rem;
     text-align: right;
