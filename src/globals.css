@@ -8,6 +8,7 @@
   --blue-trans: rgba(89, 181, 234, 0.5);
   --blue-dark: rgb(89, 181, 234);
   --light: rgb(253, 253, 250);
+  --light-dark: rgb(242, 247, 243);
   --dark: rgb(34, 34, 34);
   --gray-shadow: rgba(143, 143, 143, 0.5);
 
@@ -44,7 +45,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(5rem, 10vw) auto;
-  background-color: var(--light);
+  background-color: var(--light-dark);
   color: var(--dark);
   line-height: 1.35;
   font-weight: 300;
@@ -82,7 +83,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   border-radius: 0 3rem 3rem 0;
-  box-shadow: 0 0 3px var(--gray-shadow);
+  box-shadow: 0 0 1px var(--gray-shadow);
   background-color: var(--light);
   font-family: var(--handwritten);
   font-weight: 400;

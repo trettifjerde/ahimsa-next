@@ -6,10 +6,10 @@ export default function Navigation() {
             <Logo />
         </Link>
         <ul>
-            <Link href="/news"><li>News</li></Link>
-            <Link href="/gallery"><li>Gallery</li></Link>
-            <Link href="/team"><li>Team</li></Link>
-            <Link href="/volunteer"><li>Join us</li></Link>
+            <Link href="/news"><li>Novosti</li></Link>
+            <Link href="/gallery"><li>Galerije</li></Link>
+            <Link href="/team"><li>O nama</li></Link>
+            <Link href="/volunteer"><li>Volontiraj</li></Link>
         </ul>
     </nav>
 }

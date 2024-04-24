@@ -6,10 +6,5 @@ export const client = createClient({
   apiVersion,
   dataset,
   projectId,
-  useCdn,
-  perspective: 'published',
-  stega: {
-    enabled: false,
-    studioUrl: '/content'
-  }
+  useCdn
 })
