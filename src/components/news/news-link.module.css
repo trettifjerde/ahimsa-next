@@ -1,0 +1,19 @@
+.li {
+    margin-block: 1rem;
+    transform: translateX(0) scale(1);
+    color: var(--dark);
+    transition: transform .2s ease, color .2s ease;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.li:hover {
+    color: var(--cian);
+}
+
+li.li.active {
+    transform: translateX(-1rem) scale(1.2);
+    color: var(--cian);
+    font-weight: 500;
+    cursor: default;
+}

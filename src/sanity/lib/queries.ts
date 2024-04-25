@@ -25,7 +25,7 @@ export const newsListQuery = groq`
     "image": image.asset -> url, 
     date, 
     excerpt
-}`
+}`;
 export const newsArticleQuery = groq`
     *[_type == "news" && slug.current == $slug]
     [0] 

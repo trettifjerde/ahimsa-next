@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer";
 import { DESCRIPTION } from "@/utils/data";
 import "../globals.css";
 import "../icons.css";
+import Main from "@/components/layout/main";
 
 const mainFont = Poppins({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--mainFont'});
 const handwritten = Shantell_Sans({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--handwritten' });
@@ -26,7 +27,9 @@ export default function RootLayout({
       <body className={`${mainFont.className} ${handwritten.variable} ${icons.variable}`}>
         <Navigation />
         <div id="content">
-          {children}
+          <Main>
+            {children}
+          </Main>
           <Footer />
         </div>
       </body>

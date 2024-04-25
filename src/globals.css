@@ -7,10 +7,12 @@
   --blue: rgb(169, 211, 236);
   --blue-trans: rgba(89, 181, 234, 0.5);
   --blue-dark: rgb(89, 181, 234);
-  --light: rgb(253, 253, 250);
-  --light-dark: rgb(242, 247, 243);
+  --light: rgb(245, 250, 246);
+  --light-dark: rgb(240, 245, 241);
+  --light-trans: rgb(240, 245, 241, 0.75);
+  --light-shadow: rgb(240, 245, 241, 0.3);
   --dark: rgb(34, 34, 34);
-  --gray-shadow: rgba(143, 143, 143, 0.5);
+  --gray-shadow: rgba(143, 148, 144, 0.5);
 
   --box-shadow: 0 0 1px var(--gray-shadow);
 
@@ -77,16 +79,31 @@ nav {
   position: sticky;
   top: 0;
   height: 100vh;
+  font-family: var(--handwritten);
+  font-weight: 400;
+  padding-block: 0.5rem;
+  z-index: 10;
+}
+
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, var(--green), var(--blue));
+  border-radius: 0 4rem 4rem 0;
+  z-index: -1;
+}
+
+.nav-inner {
+  height: 100%;
   padding: 2rem 0.5rem;
+  background-color: var(--light);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   border-radius: 0 3rem 3rem 0;
   box-shadow: 0 0 1px var(--gray-shadow);
-  background-color: var(--light);
-  font-family: var(--handwritten);
-  font-weight: 400;
 }
 
 nav ul {
@@ -121,15 +138,18 @@ main p {
   text-indent: 1rem;
 }
 
+.a,
 article a {
+  cursor: pointer;
   color: var(--green-dark);
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: underline;
   transition: color .3s ease;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 
+.a:hover,
 article a:hover {
   color: var(--blue-dark);
 }

@@ -1,29 +1,29 @@
-.main header {
+.h {
     position: relative;
     width: fit-content;
     margin-inline: auto;
     margin-bottom: 10vh;
 }
 
-.main header h1,
-.main header h3 {
+.h h1,
+.h h3 {
     text-align: center;
 }
 
-.main header h1 {
+.h h1 {
     font-size: 8rem;
 }
 
-.main header h3 {
+.h h3 {
     font-size: 2rem;
     color: var(--cian);
 }
 
-.main header span {
+.h span {
     color: var(--cian);
 }
 
-.main header h5 {
+.h h5 {
     position: absolute;
     top: 50%;
     left: 90%;
@@ -34,7 +34,7 @@
     transform: rotate(-5deg);
 }
 
-.main article {
+.a {
     padding: 5rem;
     position: relative;
     background-color: var(--light);
@@ -44,7 +44,7 @@
     width: fit-content;
 }
 
-.main p::before {
+.a p::before {
     content: '';
     position: absolute;
     inset: -0.5rem;

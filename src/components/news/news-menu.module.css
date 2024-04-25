@@ -1,0 +1,39 @@
+.menu {
+    position: sticky;
+    top: 10vh;
+    font-family: var(--handwritten);
+    z-index: 0;
+}
+
+.menu::before {
+    content: '';
+    position: absolute;
+    inset: -.5rem 0;
+    border-radius: 4rem 0 0 4rem;
+    background-image: linear-gradient(135deg, var(--green), var(--blue));
+    z-index: -1;
+}
+
+.menu ul {
+    list-style-type: none;
+    border-radius: 3rem 0 0 3rem;
+    box-shadow: var(--box-shadow);
+    background-color: var(--light);
+    padding-block: 2rem;
+    padding-inline: 3rem 2rem;
+}
+
+.l {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: linear-gradient(90deg, var(--light-shadow) 30%, var(--light-trans) 50%, var(--light-shadow) 70%);
+    background-size: 300% 100%;
+    border-radius: var(--br);
+    animation: shimmer 1s infinite;
+}
+
+@keyframes shimmer {
+    from {background-position-x: 100%;}
+    to {background-position-x: 0%;}
+}

@@ -2,7 +2,6 @@ import {PortableText} from '@portabletext/react'
 import { client } from "@/sanity/lib/client";
 import { landingQuery } from "@/sanity/lib/queries";
 
-import Main from "@/components/layout/main";
 import styles from './index.module.css';
 import { LandingQueryResult } from '../../sanity.types';
 
@@ -12,16 +11,16 @@ export default async function Index() {
   if (!landing || !landing.text)
     throw new Error('Error fetching landing info');
 
-  return <Main className={styles.main}>
-    <header>
+  return <>
+    <header className={styles.h}>
       <h1>Ahimsa<span>*</span></h1>
       <h5><span>* </span><b>sanskrt</b>: nenasilje, ljubav, suosjećanje</h5>
       <h3>Udruga mladih</h3>
     </header>
 
-    <article>
+    <article className={styles.a}>
        <PortableText value={landing.text} />
     </article>
 
-  </Main>
+  </>
 }
