@@ -8,8 +8,8 @@ type Info = Exclude<NewsListQueryResult, null>[0];
 
 export default function NewsItemPreview({ news }: { news: Info }) {
 
-    return <Link href={`/news/${news.slug}`}>
-            <article className={styles.prev}>
+    return <Link className={styles.a} href={`/news/${news.slug}`}>
+        <article className={styles.art}>
             <div>
                 <h2>{news.title}</h2>
                 <div>{news.date}</div>

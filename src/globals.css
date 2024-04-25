@@ -2,7 +2,7 @@
   --cian: rgb(85, 176, 179);
   --cian-dark: rgb(31, 129, 132);
   --green: rgb(161, 211, 167);
-  --green-trans: rgba(61, 164, 72, 0.5);
+  --green-trans: rgba(64, 183, 95, 0.5);
   --green-dark: rgb(61, 164, 72);
   --blue: rgb(169, 211, 236);
   --blue-trans: rgba(89, 181, 234, 0.5);
@@ -81,7 +81,7 @@ nav {
   height: 100vh;
   font-family: var(--handwritten);
   font-weight: 400;
-  padding-block: 0.5rem;
+  padding-block: 1rem;
   z-index: 10;
 }
 
@@ -90,7 +90,7 @@ nav::before {
   position: absolute;
   inset: 0;
   background-image: linear-gradient(180deg, var(--green), var(--blue));
-  border-radius: 0 4rem 4rem 0;
+  border-radius: 15% 5rem 5rem 10%;
   z-index: -1;
 }
 
@@ -102,8 +102,8 @@ nav::before {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border-radius: 0 3rem 3rem 0;
-  box-shadow: 0 0 1px var(--gray-shadow);
+  border-radius: 0 30% 4rem 10%;
+  box-shadow: var(--box-shadow);
 }
 
 nav ul {
