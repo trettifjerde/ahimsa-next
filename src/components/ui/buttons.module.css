@@ -1,0 +1,53 @@
+.b {
+    border-radius: 2rem 25%;
+    padding: 0.5rem 1rem;
+    font-family: var(--handwritten);
+    font-weight: 500;
+    background-color: var(--light);
+    color: var(--cian);
+    transition: background-color .2s;
+    box-shadow: var(--box-shadow);
+}
+
+.b:hover {
+    background-color: var(--cian);
+    color: var(--light);
+}
+
+.spb {
+    --br: 2rem 25%;
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+    border-radius: var(--br);
+}
+
+.spb.loading::before,
+.spb.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--br);
+
+}
+
+.spb.loading::before {
+    z-index: -1;
+    background-image: linear-gradient(0deg, var(--blue), var(--green));
+    animation: scale 0.5s infinite alternate;
+}
+
+.spb.loading::after {
+    z-index: 10;
+    background-color: var(--light-trans);
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}

@@ -6,7 +6,7 @@ export default function NewsLayout({children}: {children: ReactNode}) {
     const years = getYears();
 
     return <>
-        <h1>News</h1>
+        <h1>Novosti</h1>
         <div className={styles.c}>
             {children}
             <Suspense>

@@ -1,11 +1,16 @@
 import { redirect } from "next/navigation";
 import { getYearNews } from "@/sanity/lib/fetches";
 import NewsItemPreview from "@/components/news/news-prev";
+import NewsGrid from "@/components/news/news-grid";
+import { NEWS_BATCH_SIZE, getNewsListQueryParams } from "@/utils/serverHelpers";
 
 export default async function News({ searchParams }: { searchParams?: { year?: string } }) {
     const year = searchParams?.year;
-    const fetchParams = getFetchParams({ year });
+    const fetchParams = getNewsListQueryParams({ year });
 
+    console.log('News Page search params');
+
+    // url params provided and invalid
     if (!fetchParams)
         redirect('/news');
 
@@ -14,24 +19,21 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
     if (!news)
         throw new Error('Failed to fetch news');
 
+    const lastNews = news.length === 0 ? null : news[news.length - 1];
 
     return <div>
-            {news.map(item => <NewsItemPreview key={item.slug} news={item} />)}
-            {news.length === 0 && <div>No news this year</div>}
+            {lastNews && <NewsGrid 
+                batchSize={NEWS_BATCH_SIZE} 
+                hasMore={news.length <= NEWS_BATCH_SIZE}
+                lastDate={lastNews.date}
+                lastId={lastNews._id}
+                year={year}
+                >
+
+                {news.map(item => <NewsItemPreview key={item.slug} news={item} />)}
+
+            </NewsGrid>}
+
+            {!lastNews && <div>No news this year</div>}
         </div>
-}
-
-function getFetchParams({ year, lastId = '' }: { year?: string, lastId?: string }) {
-    const batchSize = parseInt(process.env.NEWS_BATCH_SIZE || '10');
-
-    if (!year) {
-        return { lastDate: new Date().toISOString(), limit: '', lastId, batchSize };
-    }
-
-    if (year.length === 4) {
-        const n = parseInt(year);
-        if (n > 2015 && n <= new Date().getFullYear())
-            return { lastDate: new Date(n, 11, 31).toISOString(), limit: `${n}-01-01`, lastId, batchSize };
-    }
-    return null;
 }
