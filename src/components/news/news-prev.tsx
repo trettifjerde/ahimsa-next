@@ -10,14 +10,14 @@ export default function NewsItemPreview({ news }: { news: Info }) {
 
     return <Link className={styles.a} href={`/news/${news.slug}`}>
         <article className={styles.art}>
-            <div>
+            <div className={styles.h}>
                 <h2>{news.title}</h2>
-                <div>{news.date}</div>
+                <div className={styles.d}>{new Date(news.date).toLocaleDateString('hr')}</div>
             </div>
             <div className={styles.ic}>
                 <Image src={news.image || logo} alt="Dekorativna slika" fill />
             </div>
-            <div>
+            <div className={styles.desc}>
                 {news.excerpt}
             </div>
         </article>

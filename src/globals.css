@@ -12,6 +12,7 @@
   --light-trans: rgb(240, 245, 241, 0.75);
   --light-shadow: rgb(240, 245, 241, 0.3);
   --dark: rgb(34, 34, 34);
+  --gray: rgb(143, 148, 144);
   --gray-shadow: rgba(143, 148, 144, 0.5);
 
   --box-shadow: 0 0 1px var(--gray-shadow);
@@ -39,7 +40,12 @@ h4 {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  margin-block: 3.5rem;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 body {
@@ -124,7 +130,7 @@ main, footer {
   width: 100%;
   max-width: 80rem;
   margin-inline: auto;
-  padding: 3rem;
+  padding-inline: 3rem;
 }
 
 main {
@@ -155,6 +161,7 @@ article a:hover {
 }
 
 footer {
+  padding-block: 3rem;
   font-size: 0.75rem;
   position: relative;
 }
