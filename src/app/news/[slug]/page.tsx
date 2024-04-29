@@ -14,7 +14,6 @@ export default async function NewsItem({params}: {params: {slug: string}}) {
     if (!news)
         notFound();
 
-    console.log(news.image);
     return <>
         <h1>{news.title}</h1>
         <div>{news.date}</div>

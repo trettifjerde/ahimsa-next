@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export default function NewsLink({children, active, onClick}: {children: ReactNode, active: boolean, onClick: () => void}) {
 
-    return <li className={`${styles.li} ${active ? styles.active : ''}`} onClick={onClick}>
+    return <li className={`${styles.li} ${active ? 'active' : ''}`} onClick={onClick}>
         {children}
     </li>
 }

@@ -1,4 +1,4 @@
-import styles from './loading.module.css';
+import styles from './news-loading.module.css';
 import Logo from '@/components/layout/logo';
 
 export default function NewsLoadingSpinner() {

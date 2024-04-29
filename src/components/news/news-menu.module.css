@@ -15,8 +15,9 @@
 }
 
 .menu ul {
-    list-style-type: none;
-    border-radius: 15% 2rem 10% 4rem;
+    --br: 15% 2rem 10% 4rem;
+    --transX: -1rem;
+    border-radius: var(--br);
     box-shadow: var(--box-shadow);
     background-color: var(--light);
     padding-block: 2rem;

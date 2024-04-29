@@ -5,7 +5,7 @@ export const UDRUGA_START_YEAR = parseInt(process.env.UDRUGA_START_YEAR || '2016
 
 function getEndYear(year?: string) {
 
-    if (!year)
+    if (!year || year === 'all')
         return '';
 
     if (year.length !== 4)

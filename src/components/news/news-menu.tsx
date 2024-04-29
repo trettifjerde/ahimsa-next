@@ -6,6 +6,7 @@ import NewsLink from "./news-link";
 import { useEffect, useState } from "react";
 
 export default function NewsMenu({years}: {years: number[]}) {
+
     const router = useRouter();
     const searchParams = useSearchParams();
     const [navigating, setNavigating] = useState(false);
@@ -35,11 +36,11 @@ export default function NewsMenu({years}: {years: number[]}) {
     }, [searchParams]);
 
     return <div className={styles.menu}>
-        <ul>
+        <ul className="menu">
             <NewsLink active={year === 0} onClick={() => goTo(0)}>Sve</NewsLink>
             {years.map(y => <NewsLink key={y} active={y === year} onClick={() => goTo(y)}>{y}</NewsLink>)}
+            {loading && <div className={styles.l}></div>}
         </ul>
 
-        {loading && <div className={styles.l}></div>}
     </div>
 }

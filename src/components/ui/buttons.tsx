@@ -4,18 +4,19 @@ import styles from './buttons.module.css';
 type ButtonProps = {
     type?: 'submit' | 'button', 
     disabled?: boolean,
+    className?: string,
     onClick: MouseEventHandler,
     children: ReactNode
 };
 type SpinnerButtonProps = ButtonProps & {loading: boolean};
 
 
-export function Button({children, type='button', disabled=false, onClick=()=>{}}: ButtonProps) {
-    return <button type={type} className={styles.b} disabled={disabled} onClick={onClick}>{children}</button>
+export function Button({className, children, type='button', disabled=false, onClick=()=>{}}: ButtonProps) {
+    return <button type={type} className={`${styles.b} ${className || ''}`} disabled={disabled} onClick={onClick}>{children}</button>
 }
 
-export function SpinnerButton({children, type, loading, disabled, onClick}: SpinnerButtonProps) {
-    return <span className={`${styles.spb} ${loading? styles.loading: ''}`}>
+export function SpinnerButton({className, children, type, loading, disabled, onClick}: SpinnerButtonProps) {
+    return <span className={`${styles.spb} ${loading? styles.loading: ''} ${className || ''}`}>
         <Button type={type} disabled={disabled} onClick={onClick}>{children}</Button>
     </span>
 }
