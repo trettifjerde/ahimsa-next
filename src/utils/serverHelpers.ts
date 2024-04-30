@@ -1,5 +1,3 @@
-import { GetYearNewsParams } from "@/sanity/lib/query-params";
-
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const UDRUGA_START_YEAR = parseInt(process.env.UDRUGA_START_YEAR || '2016');
 

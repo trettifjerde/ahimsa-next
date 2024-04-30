@@ -4,6 +4,7 @@ import NewsItemPreview from "@/components/news/news-prev";
 import NewsGrid from "@/components/news/news-grid";
 import { NEWS_BATCH_SIZE, getNewsListQueryParams } from "@/utils/serverHelpers";
 import { NewsListQueryResult } from "../../../../sanity.types";
+import styles from './news.module.css';
 
 export default async function News({ searchParams }: { searchParams?: { year?: string } }) {
     const year = searchParams?.year;
@@ -31,6 +32,6 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
         >
             {news.map(item => <NewsItemPreview key={item.slug} news={item} />)}
 
-            {!lastNews && <div>No news this year</div>}
+            {!lastNews && <div className={styles.emp}>No news this year</div>}
     </NewsGrid>
 }

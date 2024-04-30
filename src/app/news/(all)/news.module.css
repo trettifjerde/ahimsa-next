@@ -1,9 +1,10 @@
-.main {
-}
-
 .c {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 3rem;
-    align-items: center;
+}
+
+.emp {
+    flex-grow: 1;
+    align-content: center;
 }

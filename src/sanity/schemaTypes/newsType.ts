@@ -16,20 +16,17 @@ export const newsType = defineType({
         defineField({
             name: 'slug',
             type: 'slug',
-            title: 'Poveznica (samo onaj dio koji ide nakon "/news/")',
-            options: { source: 'title' },
+            title: 'Poveznica (samo dio nakon "/news/")',
+            options: { source: 'title'},
             validation: (rule) => rule
                 .required()
-                .error('Obavezno')
+                .error('Ne smije biti prazna ili poklapati se s poveznicama drugih novostnih članaka'),
         }),
         defineField({
             name: 'date',
             type: 'date',
             title: 'Datum',
-            initialValue: (new Date().toISOString()),
-            options: {
-                dateFormat: "DD. MM. YYYY.",
-            },
+            initialValue: (new Date().toISOString().slice(0, 10)),
             validation: (rule) => rule
             .required()
             .error('Obavezno')
@@ -52,16 +49,26 @@ export const newsType = defineType({
                 .error('Obavezno')
         }),
         defineField({
-            name: 'image',
-            title: 'Slika',
+            name: 'mainImage',
+            title: 'Naslovna slika',
             type: 'image',
+            options: {
+                hotspot: true
+            }
+
+        }),
+        defineField({
+            name: 'gallery',
+            title: 'Dodatne slike',
+            type: 'array',
+            of: [{type: 'image', options: {hotspot: true}}]
         }),
     ],
     preview: {
         select: {
           title: 'title',
           subtitle: 'excerpt',
-          media: 'image'
+          media: 'mainImage'
         }
       }
 });

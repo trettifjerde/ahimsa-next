@@ -10,7 +10,7 @@ export const newsListQuery = groq`
         _id,
         title, 
         "slug": slug.current, 
-        "image": image.asset -> url, 
+        "image": mainImage { asset, crop, hotspot },
         date, 
         excerpt
     }`;
@@ -20,7 +20,8 @@ export const newsArticleQuery = groq`
     [0] 
     { 
         title, 
-        "image": image.asset -> url, 
+        "image": mainImage.asset -> url, 
         date, 
-        description 
+        description,
+        "gallery": gallery[]{ asset, crop, hotspot}
     }`;
