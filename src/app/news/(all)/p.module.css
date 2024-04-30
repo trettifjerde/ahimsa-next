@@ -1,3 +1,8 @@
+.emp {
+    flex-grow: 1;
+    align-content: center;
+}
+
 .g {
     display: flex;
     flex-direction: column;

@@ -25,6 +25,10 @@
     padding-inline: 3rem 2rem;
 }
 
+.menu li {
+    margin-block: 1rem;
+}
+
 .l {
     position: absolute;
     inset: 0;

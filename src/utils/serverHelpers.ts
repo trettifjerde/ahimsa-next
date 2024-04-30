@@ -1,5 +1,33 @@
+import { UDRUGA_START_YEAR } from "./clientHelpers";
+
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
-export const UDRUGA_START_YEAR = parseInt(process.env.UDRUGA_START_YEAR || '2016');
+
+export function getNewsListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
+    
+    const end = getEndYear(year);
+    if (end === null)
+        return null;
+
+    const start = getStartDate({year, lastDate});
+    if (!start)
+        return null;
+    
+    const batchSize = NEWS_BATCH_SIZE;
+
+    return { start, end, lastId, batchSize };
+}
+
+export function getNewsListParamsFromURL(searchParams: URLSearchParams) {
+    const lastDate = searchParams.get('lastDate') || undefined;
+    const lastId = searchParams.get('lastId') || undefined;
+    const year = searchParams.get('year') || undefined;
+
+    // function is used for loading more news, so lastDate and lastId must be known, as some news are already fetched
+    if (!lastDate || !lastId)
+        return null;
+
+    return getNewsListQueryParams({lastDate, lastId, year});
+}
 
 function getEndYear(year?: string) {
 
@@ -32,31 +60,4 @@ function getStartDate({year, lastDate}: {lastDate?: string, year?: string}) {
         return null;
 
     return lastDate;
-}
-
-export function getNewsListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
-    
-    const end = getEndYear(year);
-    if (end === null)
-        return null;
-
-    const start = getStartDate({year, lastDate});
-    if (!start)
-        return null;
-    
-    const batchSize = NEWS_BATCH_SIZE;
-
-    return { start, end, lastId, batchSize };
-}
-
-export function getNewsListParamsFromURL(searchParams: URLSearchParams) {
-    const lastDate = searchParams.get('lastDate') || undefined;
-    const lastId = searchParams.get('lastId') || undefined;
-    const year = searchParams.get('year') || undefined;
-
-    // function is used for loading more news, so lastDate and lastId must be known, as some news are already fetched
-    if (!lastDate || !lastId)
-        return null;
-
-    return getNewsListQueryParams({lastDate, lastId, year});
 }

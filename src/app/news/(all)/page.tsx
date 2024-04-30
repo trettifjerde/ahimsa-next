@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 import { getYearNews } from "@/sanity/lib/fetches";
-import NewsItemPreview from "@/components/news/news-prev";
-import NewsGrid from "@/components/news/news-grid";
 import { NEWS_BATCH_SIZE, getNewsListQueryParams } from "@/utils/serverHelpers";
 import { NewsListQueryResult } from "../../../../sanity.types";
-import styles from './news.module.css';
+import NewsItemPreview from "@/components/news/news-prev";
+import styles from './p.module.css';
+import NewsGrid from "@/components/news/news-grid";
 
 export default async function News({ searchParams }: { searchParams?: { year?: string } }) {
     const year = searchParams?.year;
@@ -22,16 +22,17 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
     const lastNews : NewsListQueryResult['0'] | undefined = news[news.length - 1];
 
     return <NewsGrid 
-        batchSize={NEWS_BATCH_SIZE} 
-        year={year}
-        yearInfo={{
-            hasMore: news.length == NEWS_BATCH_SIZE,
-            lastDate: lastNews?.date || '',
-            lastId: lastNews?._id || ''
-        }}
-        >
-            {news.map(item => <NewsItemPreview key={item.slug} news={item} />)}
+            url="/news"
+            batchSize={NEWS_BATCH_SIZE} 
+            yearMeta={{
+                hasMore: news.length == NEWS_BATCH_SIZE,
+                lastDate: lastNews?.date || '',
+                lastId: lastNews?._id || '',
+                year
+            }}
+            >
+                {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
 
-            {!lastNews && <div className={styles.emp}>No news this year</div>}
-    </NewsGrid>
+                {!lastNews && <div className={styles.emp}>No news this year</div>}
+        </NewsGrid>
 }
