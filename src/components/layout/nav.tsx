@@ -3,6 +3,9 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./logo";
+import styles from './nav.module.css';
+import menuStyles from '@/styles/menu.module.css';
+
 export default function Navigation() {
     const pathname = usePathname();
 
@@ -11,9 +14,9 @@ export default function Navigation() {
             <Link href="/" className="logo-c">
                 <Logo />
             </Link>
-            <ul className="menu">
+            <ul className={`${menuStyles.menu} ${menuStyles.notrans} ${styles.menu}`}>
                 {paths.map(p => <Link key={p.url} href={p.url}>
-                    <li className={p.url === pathname ? 'active' : ''}>{p.text}</li>
+                    <li className={p.url === pathname ? menuStyles.active : ''}>{p.text}</li>
                 </Link>)}
             </ul>
         </div>

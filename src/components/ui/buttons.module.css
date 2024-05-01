@@ -20,6 +20,7 @@
     position: relative;
     z-index: 0;
     border-radius: var(--br);
+    transition: transform .2s ease-in-out;
 }
 
 .spb.loading::before,
@@ -40,6 +41,10 @@
 .spb.loading::after {
     z-index: 10;
     background-color: var(--light-trans);
+}
+
+.spb:hover {
+    transform: scale(1.15);
 }
 
 @keyframes scale {

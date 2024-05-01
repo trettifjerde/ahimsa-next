@@ -4,10 +4,9 @@ import localFont from "next/font/local";
 import Navigation from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { DESCRIPTION } from "@/utils/data";
-import "../globals.css";
-import "../icons.css";
+import "@/styles/globals.css";
+import "@/styles/icons.css";
 import Main from "@/components/layout/main";
-import { Suspense } from "react";
 
 const mainFont = Poppins({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--mainFont'});
 const handwritten = Shantell_Sans({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--handwritten' });

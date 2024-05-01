@@ -19,7 +19,7 @@ export default async function NewsItem({params}: {params: {slug: string}}) {
     const image = getImageUrl(news.image);
     const gallery = news.gallery;
 
-    return <>
+    return <article>
         <h1 className={styles.h}>{news.title}</h1>
         <div className={styles.date}>{date}</div>
         <div className={styles.ic}>
@@ -31,5 +31,5 @@ export default async function NewsItem({params}: {params: {slug: string}}) {
                 <Image src={getImageUrl(img)} alt="" width={150} height={150} />
             </div>)}
         </div>}
-    </>
+    </article>
 }

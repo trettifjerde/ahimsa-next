@@ -2,7 +2,6 @@
     align-self: start;
     position: sticky;
     top: 10vh;
-    font-family: var(--handwritten);
     z-index: 0;
 }
 

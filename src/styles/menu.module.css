@@ -1,0 +1,28 @@
+.menu {
+  --transX: 15%;
+  list-style: none;
+  font-family: var(--handwritten);
+  font-weight: 300;
+}
+
+.menu.notrans {
+    --transX: 0;
+}
+
+.menu li {
+  transform: translateX(0) scale(1);
+  color: var(--dark);
+  transition: transform .2s ease, color .2s ease;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  color: var(--cian);
+}
+
+.menu li.active {
+  transform: translateX(var(--transX)) scale(1.2);
+  color: var(--cian);
+  font-weight: 400;
+  cursor: default;
+}

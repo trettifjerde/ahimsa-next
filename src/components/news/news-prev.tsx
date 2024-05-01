@@ -13,7 +13,7 @@ export default function NewsItemPreview({ item }: { item: Info }) {
     return <Link className={styles.a} href={`/news/${item.slug}`}>
         <article className={styles.art}>
             <div className={styles.h}>
-                <h2>{item.title}</h2>
+                <h4>{item.title}</h4>
                 <div className={styles.d}>{new Date(item.date).toLocaleDateString('hr')}</div>
             </div>
             <div className={styles.ic}>

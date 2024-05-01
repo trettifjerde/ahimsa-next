@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { UDRUGA_ALL_YEARS } from "@/utils/clientHelpers";
 import styles from './year-menu.module.css';
+import menuStyles from '@/styles/menu.module.css';
 
 export function YearMenu({url}: {url: string}) {
 
@@ -35,7 +36,7 @@ export function YearMenu({url}: {url: string}) {
     }, [searchParams]);
 
     return <div className={styles.menu}>
-        <ul className="menu">
+        <ul className={menuStyles.menu}>
             <YearLink active={year === 0} onClick={() => goTo(0)}>Sve</YearLink>
             {UDRUGA_ALL_YEARS.map(y => <YearLink key={y} active={y === year} onClick={() => goTo(y)}>{y}</YearLink>)}
             {loading && <div className={styles.l}></div>}
@@ -44,7 +45,7 @@ export function YearMenu({url}: {url: string}) {
 }
 
 function YearLink({children, active, onClick}: {children: ReactNode, active: boolean, onClick: () => void}) {
-    return <li className={`${active ? 'active' : ''}`} onClick={onClick}>
+    return <li className={active ? menuStyles.active : ''} onClick={onClick}>
         {children}
     </li>
 }
