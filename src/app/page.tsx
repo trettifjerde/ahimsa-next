@@ -24,27 +24,27 @@ export default async function Index() {
       <h3>Udruga mladih</h3>
     </header>
 
+    <h2 className={styles.blb}><Link href="/team">tko smo?</Link></h2>
     <section className={styles.s}>
-      <Link href="/team"><h2>tko smo?</h2></Link>
       <article className={styles.l}>
         <PortableText value={landing.text} />
       </article>
     </section>
 
+    <h2 className={styles.blb}><Link href="/news">što radimo?</Link></h2>
     <section className={styles.s}>
-      <Link href="/news"><h2>što radimo?</h2></Link>
       <NewsGrid>
         {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
       </NewsGrid>
     </section>
 
-    <section className={styles.s}>
-      <Link href="/volunteer">
-        <div className={styles.join}>
-          <h5>Pridruži nam se</h5>
-        </div>
-      </Link>
-    </section>
+    <h3 className={styles.blb}>želiš nam se pridružiti?</h3>
+    <h3 className={styles.blb}>imaš bilo kakvu ideju?</h3>
 
+    <Link href="/volunteer">
+      <div className={styles.join}>
+        <h2>Slobodno nam se javi!</h2>
+      </div>
+    </Link>
   </>
 }

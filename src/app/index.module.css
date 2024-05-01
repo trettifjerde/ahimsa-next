@@ -56,11 +56,10 @@
 }
 
 .s {
-    margin-block: 6rem;
+    margin-block: 2rem 6rem;
 }
 
-.s h2 {
-    margin-block: 1em;
+.blb {
     width: fit-content;
     padding: 0.25em 0.75em;
     border: 1px solid var(--color);
@@ -68,18 +67,18 @@
     transition: color .2s, background-color .2s, transform .2s;
 }
 
-.s h2:hover {
+.blb:has(a:hover) {
     background-color: var(--color);
     transform: scale(1.1);
 }
 
-.s:nth-of-type(even) h2 {
+.blb:nth-of-type(even) {
     --color: var(--green-trans);
     margin-left: auto;
     border-radius: 1em 95% 0.25em 50%;
 }
 
-.s:nth-of-type(odd) h2 {
+.blb:nth-of-type(odd)  {
     --color: var(--blue-trans);
     margin-right: auto;
     border-radius: 95% 1em 50% 0.25em;
@@ -88,6 +87,7 @@
 .join {
     width: fit-content;
     margin-inline: auto;
+    margin-block: 6rem;
     position: relative;
     z-index: 0;
 }
@@ -108,14 +108,14 @@
     --bg: var(--green-trans);
     --scale: 1.2;
     --br: 50% 25%;
-    --inset: 0 -1rem;
+    --inset: 0 -2rem;
     --tr-dur: .8s;
 }
 .join::after {
     --bg: var(--blue-trans);
     --scale: 1.25;
     --br: 25% 50%;
-    --inset: -0.5rem 0;
+    --inset: -1.5rem 0;
     --tr-dur: .6s;
 }
 
@@ -124,7 +124,7 @@
     transform: scale(var(--scale));
 }
 
-.join h5 {
+.join > * {
     padding: 0.5rem 1rem;
     background-color: var(--light);
     border-radius: 25%;
@@ -133,7 +133,7 @@
     transition-timing-function: ease-in-out;
 }
 
-.join:hover h5 {
+.join:hover > * {
     background-color: transparent;
     color: var(--light);
     transform: scale(1.1);
