@@ -1,4 +1,4 @@
-import { GalleryEvent, GalleryEventPics } from "@/sanity/lib/types";
+import { GalleryEventPics } from "@/sanity/lib/types";
 import GalleryPic from "./gallery-pic";
 import { newsType } from "@/sanity/schemaTypes/newsType";
 

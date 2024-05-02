@@ -224,6 +224,10 @@ footer .info span {
   cursor: pointer;
 }
 
+#galleryPortal {
+  position: absolute;
+}
+
 .logo-c {
   display: block;
   line-height: 1;
