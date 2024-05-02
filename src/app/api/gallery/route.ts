@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getYearNews } from "@/sanity/lib/fetches";
+import { getYearGallery } from "@/sanity/lib/fetches";
 import { getListParamsFromURL } from "@/utils/serverHelpers";
 
 export async function GET(req: NextRequest) {
@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     if (!params)
         return NextResponse.json({error: 'Invalid params'}, {status: 400});
 
-    const news = await getYearNews(params);
+    const news = await getYearGallery(params);
 
     if (!news)
         return NextResponse.json([])

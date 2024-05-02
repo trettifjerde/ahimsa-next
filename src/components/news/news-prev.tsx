@@ -1,12 +1,10 @@
 import Link from "next/link";
 import styles from './news-prev.module.css';
-import { NewsListQueryResult } from "../../../sanity.types";
 import Image from "next/image";
 import { getImageUrl } from "@/utils/image-helpers";
+import { NewsListPreviewItem } from "@/sanity/lib/types";
 
-type Info = Exclude<NewsListQueryResult, null>[0];
-
-export default function NewsItemPreview({ item }: { item: Info }) {
+export default function NewsItemPreview({ item }: { item: NewsListPreviewItem }) {
 
     const image = getImageUrl(item.image);
 

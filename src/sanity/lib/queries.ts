@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 export const landingQuery = groq`*[_type == "landing"][0] { text }`;
 
 export const newsListQuery = groq`
-    *[_type == "news" && date <= $start && date >= $end && _id > $lastId] 
+    *[_type == "news" && date <= $end && date >= $start && _id > $lastId] 
     | order(date desc) 
     [0...$batchSize] 
     { 
@@ -25,3 +25,16 @@ export const newsArticleQuery = groq`
         description,
         "gallery": gallery[]{ asset, crop, hotspot}
     }`;
+
+export const galleryListQuery = groq`
+    *[_type == "news" && gallery != null && date <= $end && date >= $start && _id > $lastId] 
+    | order(date desc) 
+    [0...$batchSize] 
+    {
+        _id,
+        _type,
+        title,
+        date,
+        "slug": slug.current,
+        "gallery": gallery[] { asset, hotspot, crop }
+}`;

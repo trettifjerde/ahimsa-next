@@ -1,8 +1,8 @@
 import { ComponentType, ReactNode, Suspense } from "react";
-import { YearMenu } from "../year-menu/year-menu";
+import { YearMenu } from "../menu/year-menu";
 import styles from './year-layout.module.css';
 
-export default function YearGrid({header, children, url, GridComponent}: {
+export default function YearLayout({header, children, url, GridComponent}: {
     header: string, children: ReactNode, url: string, GridComponent: ComponentType<{children: ReactNode}>
 }) {
     

@@ -1,15 +1,16 @@
 import { UDRUGA_START_YEAR } from "./clientHelpers";
 
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
+export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
 
-export function getNewsListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
+export function getListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
     
-    const end = getEndYear(year);
-    if (end === null)
+    const start = getStartDate(year);
+    if (start === null)
         return null;
 
-    const start = getStartDate({year, lastDate});
-    if (!start)
+    const end = getEndDate({year, lastDate});
+    if (!end)
         return null;
     
     const batchSize = NEWS_BATCH_SIZE;
@@ -17,7 +18,9 @@ export function getNewsListQueryParams({ lastDate, year, lastId = '' }: { lastDa
     return { start, end, lastId, batchSize };
 }
 
-export function getNewsListParamsFromURL(searchParams: URLSearchParams) {
+export type YearListQueryParams = Exclude<ReturnType <typeof getListQueryParams>, null>; 
+
+export function getListParamsFromURL(searchParams: URLSearchParams) {
     const lastDate = searchParams.get('lastDate') || undefined;
     const lastId = searchParams.get('lastId') || undefined;
     const year = searchParams.get('year') || undefined;
@@ -26,10 +29,10 @@ export function getNewsListParamsFromURL(searchParams: URLSearchParams) {
     if (!lastDate || !lastId)
         return null;
 
-    return getNewsListQueryParams({lastDate, lastId, year});
+    return getListQueryParams({lastDate, lastId, year});
 }
 
-function getEndYear(year?: string) {
+function getStartDate(year?: string) {
 
     if (!year || year === 'all')
         return '';
@@ -46,7 +49,7 @@ function getEndYear(year?: string) {
 
 }
 
-function getStartDate({year, lastDate}: {lastDate?: string, year?: string}) {
+function getEndDate({year, lastDate}: {lastDate?: string, year?: string}) {
 
     if (!lastDate) {
 

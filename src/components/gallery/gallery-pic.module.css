@@ -1,0 +1,69 @@
+.c {
+    position: relative;
+    aspect-ratio: 1/1;
+    transition: transform .2s ease-in-out;
+    /* overflow: hidden; */
+}
+
+.c a {
+    font-size: 0.625rem;
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+    transition-property: opacity, transform, visibility;
+    transition-duration: .4s;
+    transition-timing-function: ease-in-out;
+
+    border-radius: var(--b-rad);
+}
+
+.c a div {
+    border-radius: var(--b-rad);
+    padding: 0.5rem;
+    background-color: var(--light);
+    box-shadow: var(--box-shadow);
+}
+
+.c:hover {
+    transform: scale(1.5);
+    z-index: 1;
+}
+
+.c:hover img {
+    cursor: zoom-in;
+}
+
+.c:hover a {
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+    transform: translateY(0);
+}
+
+.c:nth-of-type(odd) a {
+    --out-rad: 0.125rem 100%;
+    --b-rad: 5% 25%;
+    --c1: var(--green);
+    --c2: var(--blue);
+}
+.c:nth-of-type(even) a {
+    --out-rad: 100% 0.125rem;
+    --b-rad: 25% 5%;
+    --c1: var(--blue);
+    --c2: var(--green);
+}
+
+.c a::before {
+    content: '';
+    position: absolute;
+    inset: -.25rem;
+    background-image: linear-gradient(to right, var(--c1), var(--c2));
+    border-radius: var(--out-rad);
+    z-index: -1;
+}
+

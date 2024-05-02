@@ -1,1 +1,0 @@
-export type GetYearNewsParams = {start: string, end: string, lastId: string, batchSize: number};

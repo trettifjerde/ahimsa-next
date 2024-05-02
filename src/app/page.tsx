@@ -6,13 +6,13 @@ import styles from './index.module.css';
 import { LandingQueryResult } from '../../sanity.types';
 import { getYearNews } from '@/sanity/lib/fetches';
 import NewsItemPreview from '@/components/news/news-prev';
-import { getNewsListQueryParams } from '@/utils/serverHelpers';
+import { getListQueryParams } from '@/utils/serverHelpers';
 import NewsGrid from '@/components/news/news-grid';
 import Link from 'next/link';
 
 export default async function Index() {
 
-  const [landing, news] = await Promise.all([client.fetch<LandingQueryResult>(landingQuery), getYearNews(getNewsListQueryParams({})!)]);
+  const [landing, news] = await Promise.all([client.fetch<LandingQueryResult>(landingQuery), getYearNews(getListQueryParams({})!)]);
 
   if (!landing || !landing.text || !news)
     throw new Error('Error fetching landing info');

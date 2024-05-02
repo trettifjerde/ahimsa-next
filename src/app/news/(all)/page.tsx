@@ -1,14 +1,14 @@
 import { redirect } from "next/navigation";
 import { getYearNews } from "@/sanity/lib/fetches";
-import { NewsListQueryResult } from "../../../../sanity.types";
-import { NEWS_BATCH_SIZE, getNewsListQueryParams } from "@/utils/serverHelpers";
+import { NEWS_BATCH_SIZE, getListQueryParams } from "@/utils/serverHelpers";
 import NewsItemPreview from "@/components/news/news-prev";
 import NewsFetcher from "@/components/news/news-fetcher";
 import styles from './p.module.css';
+import { NewsListPreviewItem } from "@/sanity/lib/types";
 
 export default async function News({ searchParams }: { searchParams?: { year?: string } }) {
     const year = searchParams?.year;
-    const fetchParams = getNewsListQueryParams({ year });
+    const fetchParams = getListQueryParams({ year });
 
     // url params provided and invalid
     if (!fetchParams)
@@ -19,7 +19,7 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
     if (!news)
         throw new Error('Failed to fetch news');
 
-    const lastNews : NewsListQueryResult['0'] | undefined = news[news.length - 1];
+    const lastNews: NewsListPreviewItem | undefined = news[news.length - 1];
 
     return <>
         {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
