@@ -27,8 +27,8 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
         {!lastNews && <div className={styles.emp}>No news this year</div>}
 
         <NewsFetcher 
-            batchSize={NEWS_BATCH_SIZE} 
-            yearMeta={{
+            initInfo={{
+                batchSize: NEWS_BATCH_SIZE,
                 hasMore: news.length == NEWS_BATCH_SIZE,
                 lastDate: lastNews?.date || '',
                 lastId: lastNews?._id || '',

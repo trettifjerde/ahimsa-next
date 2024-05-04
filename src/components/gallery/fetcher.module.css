@@ -2,3 +2,6 @@
     text-align: center;
     grid-column: 1 / -1;
 }
+.emp {
+    grid-column: 1/-1;
+}

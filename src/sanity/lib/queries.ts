@@ -27,7 +27,7 @@ export const newsArticleQuery = groq`
     }`;
 
 export const galleryListQuery = groq`
-    *[_type == "news" && gallery != null && date <= $end && date >= $start && _id > $lastId] 
+    *[_type == "news" && defined(gallery) && date <= $end && date >= $start && _id > $lastId] 
     | order(date desc) 
     [0...$batchSize] 
     {
