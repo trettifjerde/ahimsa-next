@@ -1,6 +1,10 @@
 import { groq } from "next-sanity";
 
-export const landingQuery = groq`*[_type == "landing"][0] { text }`;
+export const landingQuery = groq`*[_type == "landing"][0] 
+{ 
+    text, 
+    "images": images[] { asset, crop, hotspot }
+}`;
 
 export const newsListQuery = groq`
     *[_type == "news" && date <= $end && date >= $start && _id > $lastId] 

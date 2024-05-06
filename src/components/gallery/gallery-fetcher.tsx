@@ -1,10 +1,11 @@
 'use client'
 
 import { SpinnerButton } from "../ui/buttons";
-import useBatchFetcher, { GetContentFromInit, GetContentFromRaw, RawInfo } from "@/hooks/useBatchFetcher";
+import useBatchFetcher, { GetContentFromRaw, RawInfo } from "@/hooks/useBatchFetcher";
 import { GalleryEvent, GalleryEventPic } from "@/sanity/lib/types";
-import styles from './fetcher.module.css';
 import GalleryPic from "./gallery-pic";
+import gridStyles from './gallery-grid.module.css';
+import fetcherStyles from '@/components/ui/year/layout/year-fetcher.module.css';
 
 type GalleryInitInfo = RawInfo<GalleryEvent>;
 
@@ -16,8 +17,8 @@ export default function GalleryFetcher({initInfo}: {initInfo: GalleryInitInfo}) 
 
     return <>
         {items.map(item => <GalleryPic key={item.id} slug={item.slug} title={item.title} image={item.image} />)}
-        {items.length === 0 && <div className={styles.emp}>No photos this year</div>}
-        {hasMore && <div className={styles.spb}><SpinnerButton loading={loading} onClick={handleFetchMore}>Load more</SpinnerButton></div>}
+        {items.length === 0 && <div className={gridStyles.emp}>No photos this year</div>}
+        {hasMore && <div className={fetcherStyles.spb}><SpinnerButton loading={loading} onClick={handleFetchMore}>Load more</SpinnerButton></div>}
     </>
 }
 

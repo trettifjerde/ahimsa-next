@@ -1,9 +1,10 @@
 'use client'
 
+import { NewsListQueryResult } from "../../../sanity.types";
+import useBatchFetcher, {  GetContentFromInit, GetContentFromRaw } from "@/hooks/useBatchFetcher";
 import NewsItemPreview from "./news-prev";
 import { SpinnerButton } from "../ui/buttons";
-import useBatchFetcher, {  GetContentFromInit, GetContentFromRaw, RawInfo } from "@/hooks/useBatchFetcher";
-import { NewsListQueryResult } from "../../../sanity.types";
+import fetcherStyles from '@/components/ui/year/layout/year-fetcher.module.css';
 
 type NewsInitInfo = {batchSize: number, hasMore: boolean, year?: string, lastDate: string, lastId: string};
 type News = Exclude<NewsListQueryResult, null>[0];
@@ -16,7 +17,7 @@ export default function NewsFetcher({initInfo}: {initInfo: NewsInitInfo}) {
 
     return <>
         {items.map(item => <NewsItemPreview key={item.slug} item={item} />)}
-        {hasMore && <SpinnerButton loading={loading} onClick={handleFetchMore}>Load more</SpinnerButton>}
+        {hasMore && <div className={fetcherStyles.spb}><SpinnerButton loading={loading} onClick={handleFetchMore}>Load more</SpinnerButton></div>}
     </>
 }
 

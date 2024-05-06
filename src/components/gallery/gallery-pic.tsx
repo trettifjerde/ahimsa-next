@@ -14,7 +14,8 @@ export default function GalleryPic({image, slug, title}: {image: SanityImageSour
     return <>
         <div className={styles.c}>
             <Image src={getImageUrl(image)} alt={`Slika iz članka ${title}`} fill onClick={() => setIsZoomed(true)}/>
-            <Link href={slug}><div>{title}</div></Link>
+            {slug && title && <Link className={styles.ribbon} href={slug}><div>{title}</div></Link>}
+            {!slug && title && <div className={styles.ribbon}><div>{title}</div></div>}
         </div>
         <GalleryPortal visible={isZoomed} src={getImageUrl(image)} href={slug} title={title} close={() => setIsZoomed(false)}/>
     </>

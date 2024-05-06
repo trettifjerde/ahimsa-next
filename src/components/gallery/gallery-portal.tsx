@@ -19,8 +19,11 @@ export default function GalleryPortal({visible, src, title, href, close}: {
     return (visible && ref.current) ? createPortal(<div className={styles.p} onClick={close}>
         <div className={styles.c}>
             <button type="button" className={styles.btn}>X</button>
+
             <Image src={src} fill alt=""/>
-            <Link href={href}><div>{title}</div></Link>
+            
+            {href && title && <Link className={styles.ribbon} href={href}><div>{title}</div></Link>}
+            {!href && title && <div className={styles.ribbon}><div>{title}</div></div>}
         </div>
     </div>, ref.current) : null;
 }

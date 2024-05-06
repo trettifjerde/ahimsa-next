@@ -1,8 +1,13 @@
 .g {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 10rem);
+    grid-template-columns: repeat(auto-fit, 10rem);
     grid-auto-rows: min-content;
     gap: 2rem;
     align-content: center;
     justify-content: center;
+}
+
+.emp {
+    grid-column: 1/-1;
 }

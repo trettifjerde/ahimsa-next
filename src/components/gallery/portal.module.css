@@ -15,14 +15,17 @@
     top: 1rem;
     right: 1rem;
     border-radius: 100%;
-    padding: 0.25rem 1rem;
-    background-image: linear-gradient(45deg, var(--blue), var(--green));
+    padding: 0.5rem 1.25rem;
     border-radius: 75% 0;
     font-family: var(--handwritten);
     font-size: 1.25rem;
     font-weight: 500;
+    box-shadow: var(--box-shadow);
+    color: var(--cian);
+    background-color: var(--light);
     transition: transform .2s ease-in-out;
 }
+
 .btn:hover {
     transform: scale(1.5);
 }
@@ -39,7 +42,7 @@
     object-fit: scale-down;
 }
 
-.c a {
+.ribbon {
     position: absolute;
     bottom: 5%;
     left: 0;
@@ -51,25 +54,11 @@
     opacity: 0;
     transform: translateY(100%);
     transition-property: opacity, transform, visibility;
-    transition-duration: .4s;
+    transition-duration: .3s;
     transition-timing-function: ease-in-out;
 }
 
-.c a div {
-    border-radius: 5% 25%;
-    padding: 2rem;
-    background-color: var(--light);
-    box-shadow: var(--box-shadow);
-}
-
-.c:hover a {
-    visibility: visible;
-    opacity: 1;
-    cursor: pointer;
-    transform: translateY(0);
-}
-
-.c a::before {
+.ribbon::before {
     content: '';
     position: absolute;
     inset: -1rem;
@@ -79,6 +68,20 @@
     transition: transform .2s ease-in-out;
 }
 
-.c a:hover {
+.ribbon div {
+    border-radius: 5% 25%;
+    padding: 2rem;
+    background-color: var(--light);
+    box-shadow: var(--box-shadow);
+}
+
+.c:hover .ribbon {
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+    transform: translateY(0);
+}
+
+.c:hover .ribbon:hover {
     transform: scale(1.15);
 }

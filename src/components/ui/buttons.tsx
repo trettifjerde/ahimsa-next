@@ -17,6 +17,6 @@ export function Button({className, children, type='button', disabled=false, onCl
 
 export function SpinnerButton({className, children, type, loading, disabled, onClick}: SpinnerButtonProps) {
     return <span className={`${styles.spb} ${loading? styles.loading: ''} ${className || ''}`}>
-        <Button type={type} disabled={disabled} onClick={onClick}>{children}</Button>
+        <Button className={className} type={type} disabled={disabled} onClick={onClick}>{children}</Button>
     </span>
 }

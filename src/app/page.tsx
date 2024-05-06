@@ -7,14 +7,16 @@ import { LandingQueryResult } from '../../sanity.types';
 import { getYearNews } from '@/sanity/lib/fetches';
 import NewsItemPreview from '@/components/news/news-prev';
 import { getListQueryParams } from '@/utils/serverHelpers';
-import NewsGrid from '@/components/news/news-grid';
 import Link from 'next/link';
+import GalleryPic from '@/components/gallery/gallery-pic';
+import NewsGrid from '@/components/news/news-grid';
+import GalleryGrid from '@/components/gallery/gallery-grid';
 
 export default async function Index() {
 
   const [landing, news] = await Promise.all([client.fetch<LandingQueryResult>(landingQuery), getYearNews(getListQueryParams({})!)]);
 
-  if (!landing || !landing.text || !news)
+  if (!landing || !news)
     throw new Error('Error fetching landing info');
 
   return <>
@@ -24,12 +26,14 @@ export default async function Index() {
       <h3>Udruga mladih</h3>
     </header>
 
-    <h2 className={styles.blb}><Link href="/team">tko smo?</Link></h2>
-    <section className={styles.s}>
-      <article className={styles.l}>
-        <PortableText value={landing.text} />
-      </article>
-    </section>
+    {landing.text && <>
+      <h2 className={styles.blb}><Link href="/team">tko smo?</Link></h2>
+      <section className={styles.s}>
+        <article className={styles.l}>
+          <PortableText value={landing.text} />
+        </article>
+      </section>
+    </>}
 
     <h2 className={styles.blb}><Link href="/news">što radimo?</Link></h2>
     <section className={styles.s}>
@@ -37,6 +41,15 @@ export default async function Index() {
         {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
       </NewsGrid>
     </section>
+
+    {landing.images && landing.images.length > 0 && <>
+      <h2 className={styles.blb}><Link href="/gallery">kako to izgleda?</Link></h2>
+      <section className={styles.s}>
+        <GalleryGrid>
+          {landing.images.map((image, i) => <GalleryPic key={i} image={image} slug='' title='' />)}
+        </GalleryGrid>
+      </section>
+    </>}
 
     <h3 className={styles.blb}>želiš nam se pridružiti?</h3>
     <h3 className={styles.blb}>imaš bilo kakvu ideju?</h3>

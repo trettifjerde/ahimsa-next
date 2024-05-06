@@ -3,3 +3,8 @@
     grid-template-columns: 1fr auto;
     gap: 3rem;
 }
+
+.g {
+    position: relative;
+    padding-bottom: 4rem;
+}

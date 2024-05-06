@@ -43,6 +43,7 @@
     box-shadow: var(--box-shadow);
     margin-block: 3rem;
     width: fit-content;
+    font-size: 1.25rem;
 }
 
 .l p::before {

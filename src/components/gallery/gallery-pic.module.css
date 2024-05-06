@@ -1,11 +1,14 @@
 .c {
     position: relative;
     aspect-ratio: 1/1;
-    transition: transform .2s ease-in-out;
-    /* overflow: hidden; */
+    transition: transform .4s;
 }
 
-.c a {
+.c img {
+    object-fit: cover;
+}
+
+.ribbon {
     font-size: 0.625rem;
     position: absolute;
     bottom: 3%;
@@ -22,11 +25,33 @@
     border-radius: var(--b-rad);
 }
 
-.c a div {
+.ribbon::before {
+    content: '';
+    position: absolute;
+    inset: -.25rem;
+    background-image: linear-gradient(to right, var(--c1), var(--c2));
+    border-radius: var(--out-rad);
+    z-index: -1;
+}
+
+.ribbon div {
     border-radius: var(--b-rad);
     padding: 0.5rem;
     background-color: var(--light);
     box-shadow: var(--box-shadow);
+}
+
+.c:nth-of-type(odd) .ribbon {
+    --out-rad: 0.125rem 100%;
+    --b-rad: 5% 25%;
+    --c1: var(--green);
+    --c2: var(--blue);
+}
+.c:nth-of-type(even) .ribbon {
+    --out-rad: 100% 0.125rem;
+    --b-rad: 25% 5%;
+    --c1: var(--blue);
+    --c2: var(--green);
 }
 
 .c:hover {
@@ -38,32 +63,10 @@
     cursor: zoom-in;
 }
 
-.c:hover a {
+.c:hover .ribbon {
     visibility: visible;
     opacity: 1;
     cursor: pointer;
     transform: translateY(0);
-}
-
-.c:nth-of-type(odd) a {
-    --out-rad: 0.125rem 100%;
-    --b-rad: 5% 25%;
-    --c1: var(--green);
-    --c2: var(--blue);
-}
-.c:nth-of-type(even) a {
-    --out-rad: 100% 0.125rem;
-    --b-rad: 25% 5%;
-    --c1: var(--blue);
-    --c2: var(--green);
-}
-
-.c a::before {
-    content: '';
-    position: absolute;
-    inset: -.25rem;
-    background-image: linear-gradient(to right, var(--c1), var(--c2));
-    border-radius: var(--out-rad);
-    z-index: -1;
 }
 
