@@ -6,11 +6,12 @@ import styles from './index.module.css';
 import { LandingQueryResult } from '../../sanity.types';
 import { getYearNews } from '@/sanity/lib/fetches';
 import NewsItemPreview from '@/components/news/news-prev';
-import { getListQueryParams } from '@/utils/serverHelpers';
+import { getListQueryParams, makePics } from '@/utils/serverHelpers';
 import Link from 'next/link';
 import GalleryPic from '@/components/gallery/gallery-pic';
 import NewsGrid from '@/components/news/news-grid';
 import GalleryGrid from '@/components/gallery/gallery-grid';
+import GalleryViewer from '@/components/gallery/gallery-viewer';
 
 export default async function Index() {
 
@@ -46,7 +47,7 @@ export default async function Index() {
       <h2 className={styles.blb}><Link href="/gallery">kako to izgleda?</Link></h2>
       <section className={styles.s}>
         <GalleryGrid>
-          {landing.images.map((image, i) => <GalleryPic key={i} image={image} slug='' title='' />)}
+          <GalleryViewer pics={makePics(landing.images)} />
         </GalleryGrid>
       </section>
     </>}

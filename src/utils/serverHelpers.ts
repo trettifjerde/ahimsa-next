@@ -1,24 +1,25 @@
+import { GalleryEvent, GalleryEventGallery, GalleryEventPic, GalleryImage } from "@/sanity/lib/types";
 import { UDRUGA_START_YEAR } from "./clientHelpers";
 
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
 
 export function getListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
-    
+
     const start = getStartDate(year);
     if (start === null)
         return null;
 
-    const end = getEndDate({year, lastDate});
+    const end = getEndDate({ year, lastDate });
     if (!end)
         return null;
-    
+
     const batchSize = NEWS_BATCH_SIZE;
 
     return { start, end, lastId, batchSize };
 }
 
-export type YearListQueryParams = Exclude<ReturnType <typeof getListQueryParams>, null>; 
+export type YearListQueryParams = Exclude<ReturnType<typeof getListQueryParams>, null>;
 
 export function getListParamsFromURL(searchParams: URLSearchParams) {
     const lastDate = searchParams.get('lastDate') || undefined;
@@ -29,7 +30,23 @@ export function getListParamsFromURL(searchParams: URLSearchParams) {
     if (!lastDate || !lastId)
         return null;
 
-    return getListQueryParams({lastDate, lastId, year});
+    return getListQueryParams({ lastDate, lastId, year });
+}
+
+export function makeGalleryPics(entry: GalleryEvent) {
+    return entry.gallery.map((image, i) => ({
+        image,
+        title: entry.title,
+        slug: `/${entry._type}/${entry.slug}`,
+        id: `${entry._type}${entry.slug}${i}`
+    }));
+}
+
+export function makePics(gallery: GalleryEventGallery) {
+    return gallery.map((image, i) => ({
+        id: `${i}`,
+        image
+    }))
 }
 
 function getStartDate(year?: string) {
@@ -49,7 +66,7 @@ function getStartDate(year?: string) {
 
 }
 
-function getEndDate({year, lastDate}: {lastDate?: string, year?: string}) {
+function getEndDate({ year, lastDate }: { lastDate?: string, year?: string }) {
 
     if (!lastDate) {
 

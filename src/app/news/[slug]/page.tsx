@@ -8,6 +8,8 @@ import { getImageUrl } from "@/utils/image-helpers";
 import styles from './a.module.css';
 import GalleryGrid from "@/components/gallery/gallery-grid";
 import GalleryPic from "@/components/gallery/gallery-pic";
+import GalleryViewer from "@/components/gallery/gallery-viewer";
+import { makePics } from "@/utils/serverHelpers";
 
 export default async function NewsItem({params}: {params: {slug: string}}) {
 
@@ -29,7 +31,7 @@ export default async function NewsItem({params}: {params: {slug: string}}) {
         <PortableText value={news.description} />
 
         {news.gallery && <GalleryGrid>
-            {news.gallery.map((img, i) => <GalleryPic key={i} image={img} />)}
+            <GalleryViewer pics={makePics(news.gallery)} />
         </GalleryGrid>}
     </article>
 }
