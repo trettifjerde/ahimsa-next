@@ -24,7 +24,7 @@ export const newsArticleQuery = groq`
     [0] 
     { 
         title, 
-        "image": mainImage.asset -> url, 
+        "image": mainImage { asset, crop, hotspot }, 
         date, 
         description,
         "gallery": gallery[]{ asset, crop, hotspot}

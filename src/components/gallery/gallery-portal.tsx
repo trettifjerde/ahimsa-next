@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 import styles from './portal.module.css';
 
 export default function GalleryPortal({visible, src, title, href, close}: {
-    visible: boolean, src: string, href: string, title: string, close: () => void
+    visible: boolean, src: string, href?: string, title?: string, close: () => void
 }) {
     console.log('portal', visible);
     const ref = useRef<Element | null>(null);

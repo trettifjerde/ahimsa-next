@@ -73,14 +73,14 @@
     transform: scale(1.1);
 }
 
-.blb:nth-of-type(even) {
-    --color: var(--green-trans);
+.blb:nth-of-type(odd) {
+    --color: var(--blue-trans);
     margin-left: auto;
     border-radius: 1em 95% 0.25em 50%;
 }
 
-.blb:nth-of-type(odd)  {
-    --color: var(--blue-trans);
+.blb:nth-of-type(even)  {
+    --color: var(--green-trans);
     margin-right: auto;
     border-radius: 95% 1em 50% 0.25em;
 }
