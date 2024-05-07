@@ -1,7 +1,7 @@
 .g {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 10rem);
+    grid-template-columns: repeat(auto-fit, 15rem);
     grid-auto-rows: min-content;
     gap: 2rem;
     align-content: center;

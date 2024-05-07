@@ -46,7 +46,7 @@
     font-size: 1.25rem;
 }
 
-.l p::before {
+.l::before {
     content: '';
     position: absolute;
     inset: -0.5rem;
@@ -54,6 +54,10 @@
     border-radius: 0.5rem 100%;
     transform: rotate(1deg);
     z-index: -1;
+}
+
+.l p {
+    margin-block: 1rem;
 }
 
 .s {

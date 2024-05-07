@@ -52,13 +52,17 @@ export default async function Index() {
       </section>
     </>}
 
-    <h3 className={styles.blb}>želiš nam se pridružiti?</h3>
-    <h3 className={styles.blb}>imaš bilo kakvu ideju?</h3>
 
-    <Link href="/volunteer">
-      <div className={styles.join}>
-        <h2>Slobodno nam se javi!</h2>
-      </div>
-    </Link>
+    <h3 className={styles.blb}>ako nam se želiš pridružiti</h3>
+    <h3 className={styles.blb}>ili imaš bilo kakvu ideju</h3>
+    
+    <section className={styles.s}>
+      <Link href="/volunteer">
+        <div className={styles.join}>
+          <h2>Slobodno nam se javi!</h2>
+        </div>
+      </Link>
+    </section>
+
   </>
 }
