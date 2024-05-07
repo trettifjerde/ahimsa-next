@@ -1,5 +1,5 @@
-import { fetchData } from "@/utils/clientHelpers";
-import { MouseEventHandler, useEffect, useReducer } from "react";
+import { fetchData, getYearStateKey } from "@/utils/clientHelpers";
+import { MouseEventHandler, useReducer } from "react";
 
 export default function useBatchFetcher<II extends InitInfo , RawItem extends YearItem, Item>({
     initInfo, url, getContentFromInit, getContentFromRaw
@@ -8,8 +8,6 @@ export default function useBatchFetcher<II extends InitInfo , RawItem extends Ye
 }) {
 
     const [state, dispatch] = useReducer(reducer<Item>, {initInfo, getContentFromInit}, initReducer<II, Item>);
-
-    const { hasMore, items } = state.years[state.selectedYear];
 
     const handleFetchMore: MouseEventHandler<HTMLButtonElement> = async (e) => {
         dispatch({ type: 'fetchStart' });
@@ -33,22 +31,13 @@ export default function useBatchFetcher<II extends InitInfo , RawItem extends Ye
             });
     };
 
-    useEffect(() => {
-        dispatch({ type: 'setYear', yearContent: getContentFromInit(initInfo) })
-    }, [initInfo]);
-
-    return { hasMore, items, handleFetchMore, loading: state.loading };
+    return { state, dispatch, handleFetchMore };
 }
 
 export function initReducer<II extends InitInfo, Item>({initInfo, getContentFromInit}: {
     initInfo: II, getContentFromInit: GetContentFromInit<II, Item>}): FetcherState<Item> {
 
-    const yearContent = getContentFromInit(initInfo);
-    const selectedYear = getYearStateKey(yearContent.year);
-
-    const years = {
-        [selectedYear]: yearContent
-    };
+    const {selectedYear, years} = getContentFromInit(initInfo);
 
     return {
         loading: false,
@@ -108,15 +97,13 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
     }
 }
 
-function getYearStateKey(year?: string) {
-    return year || 'all';
-}
-
 export type InitInfo = {batchSize: number};
 
 export type RawInfo<R> = { batchSize: number, entries: R[], year?: string};
 
-export type GetContentFromInit<II, I> = (initInfo: II) => YearContent<I>;
+export type GetContentFromInit<I, T> = (initInfo: I) => {selectedYear: string, years: {
+    [key: string]: YearContent<T>
+}};
 
 export type GetContentFromRaw<R, I> = (info: RawInfo<R>) => YearContent<I>;
 
@@ -131,7 +118,7 @@ export type YearMeta = {
 
 type YearContent<T> = YearMeta & { items: T[] };
 
-type FetcherState<T> = {
+export type FetcherState<T> = {
     errorMsg: string,
     loading: boolean,
     selectedYear: string,
@@ -140,7 +127,7 @@ type FetcherState<T> = {
     },
 }
 
-type FetcherAction<T> = { type: 'fetchStart' } |
+export type FetcherAction<T> = { type: 'fetchStart' } |
 { type: 'addItems', yearContent: YearContent<T>} |
 { type: 'error', message: string } |
 { type: 'setYear', yearContent: YearContent<T> };

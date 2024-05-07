@@ -27,18 +27,3 @@
 .menu li {
     margin-block: 1rem;
 }
-
-.l {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background-image: linear-gradient(90deg, var(--light-shadow) 30%, var(--light-trans) 50%, var(--light-shadow) 70%);
-    background-size: 300% 100%;
-    border-radius: var(--br);
-    animation: shimmer 1s infinite;
-}
-
-@keyframes shimmer {
-    from {background-position-x: 100%;}
-    to {background-position-x: 0%;}
-}

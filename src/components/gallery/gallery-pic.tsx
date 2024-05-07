@@ -1,12 +1,8 @@
-'use client'
-
 import Link from "next/link";
 import Image from "next/image";
-import { getFullImageUrl, getImageUrl } from "@/utils/image-helpers";
-import styles from './gallery-pic.module.css';
-import GalleryPortal from "./gallery-portal";
-import { useState } from "react";
 import { GalleryImage } from "@/sanity/lib/types";
+import { getImageUrl } from "@/utils/image-helpers";
+import styles from './gallery-pic.module.css';
 
 export default function GalleryPic({image, slug, title, select}: {
     image: GalleryImage, slug?: string, title?: string, select: () => void}) {

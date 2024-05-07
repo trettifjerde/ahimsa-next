@@ -1,4 +1,4 @@
-import { GalleryEvent, GalleryEventGallery, GalleryEventPic, GalleryImage } from "@/sanity/lib/types";
+import { GalleryEvent, GalleryEventGallery } from "@/sanity/lib/types";
 import { UDRUGA_START_YEAR } from "./clientHelpers";
 
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
@@ -70,7 +70,7 @@ function getEndDate({ year, lastDate }: { lastDate?: string, year?: string }) {
 
     if (!lastDate) {
 
-        if (!year)
+        if (!year || year === 'all')
             return new Date().toISOString().slice(0, 10);
 
         return new Date(`${year}-12-31`).toISOString().slice(0, 10);

@@ -19,13 +19,18 @@ export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{d
         })
 }
 
+
+export function getYearStateKey(year?: string) {
+    return year || 'all';
+}
+
 export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
 
 export const UDRUGA_ALL_YEARS = (() => {
-    const years : number[] = [];
+    const years : string[] = [];
     const curYear = new Date().getFullYear();
     for (let y = curYear; y >= UDRUGA_START_YEAR; y--) 
-        years.push(y);
+        years.push('' + y);
     return years;
 })();
 

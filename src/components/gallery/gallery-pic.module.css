@@ -1,10 +1,11 @@
 .c {
+    --br: 10% .25rem;
     position: relative;
     aspect-ratio: 1/1;
     transition: transform .4s;
     background-color: var(--light);
     box-shadow: var(--box-shadow);
-    border-radius: 10% .25rem;
+    border-radius: var(--br);
 }
 
 .c img {

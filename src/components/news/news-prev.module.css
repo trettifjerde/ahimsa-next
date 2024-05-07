@@ -1,7 +1,6 @@
 .a {
     width: 100%;
     position: relative;
-    border-radius: 2rem;
     z-index: 0;
 }
 
@@ -21,6 +20,7 @@
 }
 
 .art {
+    --br: 20% 5% 5rem 10%;
     display: grid;
     grid-template-areas: 'h ic'
                          'desc ic';
@@ -30,7 +30,7 @@
     padding: 3rem;
     background-color: var(--light);
     box-shadow: var(--box-shadow);
-    border-radius: 20% 5% 5rem 10%;
+    border-radius: var(--br);
     overflow: hidden;
 }
 
