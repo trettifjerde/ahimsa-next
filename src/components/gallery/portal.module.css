@@ -1,5 +1,7 @@
-
 .p {
+    --fromX: 100%;
+    --toX: 0;
+
     position: fixed;
     inset: 0;
     z-index: 1;
@@ -112,15 +114,24 @@
     transform: scale(1.15);
 }
 
-.slideUp,
-.slideDown{
-    animation-name: slide-up;
+.slideLeftIn,
+.slideRightIn,
+.slideOut {
+    animation-name: slidein;
     animation-duration: .3s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
 }
 
-.slideDown {
+.slideLeftIn {
+    --fromX: 100%;
+}
+
+.slideRightIn {
+    --fromX: -100%;
+}
+
+.slideOut {
     animation-direction: reverse;
 }
 
@@ -138,7 +149,7 @@
     100% {opacity: 1;}
 }
 
-@keyframes slide-up {
-    0% {transform: translateY(3%); opacity: 0;}
-    1000% { transform: translateY(0); opacity: 1}
+@keyframes slidein {
+    0% {transform: translateX(var(--fromX)); opacity: 0;}
+    100% { transform: translateX(0); opacity: 1;}
 }
