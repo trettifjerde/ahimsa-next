@@ -1,3 +1,106 @@
-.menu {
+.nav {
+    --outer-br: 15% 5rem 5rem 10%;
+    --inner-br: 0 30% 4rem 10%;
 
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding-block: 1rem;
+    z-index: 10;
+    background-image: linear-gradient(180deg, var(--green), var(--blue));
+    border-radius: var(--outer-br);
+}
+
+.inner {
+    height: 100%;
+    padding: 2rem 1rem;
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--inner-br);
+    box-shadow: var(--box-shadow);
+}
+
+.burger {
+    display: none;
+}
+
+.menu {
+    text-align: center;
+}
+
+.menu li {
+    margin-block: 2rem;
+}
+
+
+.logo {
+    display: block;
+    line-height: 1;
+}
+
+@media (max-width: 40rem) {
+
+    .nav {
+        --outer-br: 15% 35% 25% 10%;
+        --inner-br: 10% 10% 3rem 2rem;
+        padding: 0.5rem;
+        position: fixed;
+        top: -1px;
+        width: 100%;
+        height: auto;
+        transition: height .3 ease-in-out;
+    }
+
+    .inner {
+        padding: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: space-between;
+    }
+
+    .menu {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        top: 8rem;
+        left: 5vw;
+        right: 5vw;
+        transform: translateX(30%) translateY(-75%) scale(0.5);
+        transition-property: visibility, opacity, transform;
+        transition-duration: .23s;
+        transition-timing-function: ease-in-out;
+        border-radius: 50% 1rem;
+        background-image: linear-gradient(180deg, var(--green), var(--blue));
+        z-index: -1;
+        padding: 0.75rem 0.5rem;
+    }
+
+    .menu ul {
+        padding-block: 2rem;
+        border-radius: var(--inner-br);
+        background-color: var(--light);
+        box-shadow: var(--box-shadow);
+    }
+
+    .menu li {
+        margin-block: 0;
+        padding-block: 1rem;
+    }
+
+    .open .menu {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1);
+    }
+
+    .burger {
+        display: block;
+        position: relative;
+        transform: rotate(90deg);
+        font-weight: 400;
+        font-size: 1.125rem;
+    }
 }

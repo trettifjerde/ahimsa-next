@@ -15,12 +15,8 @@
     margin-block: 1.5rem;
 }
 
-.h h3 {
-    font-size: 2rem;
-    color: var(--cian);
-}
-
-.h span {
+.h h3,
+.h span  {
     color: var(--cian);
 }
 
@@ -144,3 +140,19 @@
     transform: scale(1.1);
 }
 
+@media (max-width: 40rem) {
+    .h h1 {
+        font-size: 4.5rem;
+    }
+
+    .h h5 {
+        top: -30%;
+        left: 80%;
+        text-align: left;
+    }
+
+    .l {
+        font-size: 1rem;
+        padding-inline: 3rem;
+    }
+}

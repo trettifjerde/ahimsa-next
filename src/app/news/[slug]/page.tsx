@@ -30,7 +30,7 @@ export default async function NewsItem({params}: {params: {slug: string}}) {
         </div>
         <PortableText value={news.description} />
 
-        {news.gallery && <GalleryGrid>
+        {news.gallery && <GalleryGrid className={styles.gg}>
             <GalleryViewer pics={makePics(news.gallery)} />
         </GalleryGrid>}
     </article>

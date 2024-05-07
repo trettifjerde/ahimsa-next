@@ -1,3 +1,5 @@
 export default function Team() {
-    return <div>Team</div>
+    return <>
+        <h1>Naš tim</h1>
+    </>
 }

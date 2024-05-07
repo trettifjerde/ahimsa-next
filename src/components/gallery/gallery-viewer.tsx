@@ -1,7 +1,7 @@
 'use client'
 
-import { GalleryEventPic } from "@/sanity/lib/types";
 import { useCallback, useState } from "react";
+import { GalleryEventPic } from "@/sanity/lib/types";
 import GalleryPic from "./gallery-pic";
 import GalleryPortal from "./gallery-portal";
 
@@ -19,6 +19,7 @@ export default function GalleryViewer({ pics, emptyClass }: { pics: GalleryEvent
     return <>
         {pics.map((pic, i) => <GalleryPic key={pic.id} image={pic.image} slug={pic.slug} title={pic.title}
             select={() => setCurI(i)} />)}
+
         {emptyClass && pics.length === 0 && <div className={emptyClass}>Nema objavljenih slika</div>}
 
         <GalleryPortal pic={curI === null ? null : pics[curI]}
