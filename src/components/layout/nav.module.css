@@ -32,7 +32,7 @@
 }
 
 .menu li {
-    margin-block: 2rem;
+    margin-block: var(--gap);
 }
 
 
@@ -47,11 +47,8 @@
         --outer-br: 15% 35% 25% 10%;
         --inner-br: 10% 10% 3rem 2rem;
         padding: 0.5rem;
-        position: fixed;
-        top: -1px;
         width: 100%;
         height: auto;
-        transition: height .3 ease-in-out;
     }
 
     .inner {
@@ -85,10 +82,10 @@
         box-shadow: var(--box-shadow);
     }
 
-    .menu li {
+    /* .menu li {
         margin-block: 0;
         padding-block: 1rem;
-    }
+    } */
 
     .open .menu {
         visibility: visible;

@@ -23,7 +23,7 @@ export default function Navigation() {
             </Link>
             <button className={styles.burger} type="button" onClick={() => setMenu(prev => !prev)}>III</button>
             <div className={styles.menu}>
-                <ul className={`${menuStyles.menu} ${menuStyles.notrans}`}>
+                <ul className={`${menuStyles.menu}`}>
                     {paths.map(p => <Link key={p.url} href={p.url}>
                         <li className={p.url === pathname ? menuStyles.active : ''}>{p.text}</li>
                     </Link>)}
@@ -36,6 +36,6 @@ export default function Navigation() {
 const paths = [
     {url: '/news', text: 'Novosti'},
     {url: '/gallery', text: 'Galerije' },
-    {url: '/team', text: 'O nama'},
+    {url: '/team', text: 'Naš tim'},
     {url: '/volunteer', text: 'Volontiraj'}
 ]

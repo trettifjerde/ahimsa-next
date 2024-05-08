@@ -1,10 +1,17 @@
 .c {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 3rem;
+    gap: var(--main-inline-p);
 }
 
 .g {
     position: relative;
     padding-bottom: 4rem;
+}
+
+@media (max-width: 40rem) {
+    .c {
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }

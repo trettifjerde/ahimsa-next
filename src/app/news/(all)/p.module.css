@@ -1,11 +1,12 @@
 .emp {
     flex-grow: 1;
     align-content: center;
+    padding-block: 15%;
 }
 
 .g {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--gap);
     align-items: center;
 }

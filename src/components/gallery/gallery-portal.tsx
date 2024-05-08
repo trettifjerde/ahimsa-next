@@ -25,7 +25,7 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
     }
 
     useEffect(() => {
-        ref.current = document.getElementById('galleryPortal');
+        ref.current = document.body;
     }, [])
 
 

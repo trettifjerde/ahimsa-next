@@ -26,6 +26,7 @@
                          'desc ic';
     grid-template-columns: 3fr 1fr;
     grid-template-rows: auto 1fr;
+    gap: 0.5rem;
     min-height: 15rem;
     padding: 3rem;
     background-color: var(--light);
@@ -57,4 +58,11 @@
 .desc {
     grid-area: desc;
     align-self: center;
+}
+
+@media (max-width: 40rem) {
+    .art {
+        padding: 2rem;
+        min-height: 12rem;
+    }
 }

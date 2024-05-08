@@ -1,9 +1,11 @@
 .g {
+    --pic-width: 13rem;
+
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 15rem);
+    grid-template-columns: repeat(auto-fit, var(--pic-width));
     grid-auto-rows: min-content;
-    gap: 2rem;
+    gap: var(--gap);
     align-content: center;
     justify-content: center;
 }
@@ -11,4 +13,17 @@
 .emp {
     grid-column: 1/-1;
     text-align: center;
+    padding-block: 15%;
+}
+
+@media (max-width: 40rem) {
+    .g {
+        --pic-width: 7rem;
+    }
+}
+
+@media (max-width: 64rem) {
+    .g {
+        --pic-width: 10rem;
+    }
 }

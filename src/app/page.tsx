@@ -8,7 +8,6 @@ import { getYearNews } from '@/sanity/lib/fetches';
 import NewsItemPreview from '@/components/news/news-prev';
 import { getListQueryParams, makePics } from '@/utils/serverHelpers';
 import Link from 'next/link';
-import GalleryPic from '@/components/gallery/gallery-pic';
 import NewsGrid from '@/components/news/news-grid';
 import GalleryGrid from '@/components/gallery/gallery-grid';
 import GalleryViewer from '@/components/gallery/gallery-viewer';
@@ -28,24 +27,24 @@ export default async function Index() {
     </header>
 
     {landing.text && <>
-      <h2 className={styles.blb}><Link href="/team">tko smo?</Link></h2>
       <section className={styles.s}>
+      <h2 className={styles.blb}><Link href="/team">tko smo?</Link></h2>
         <article className={styles.l}>
           <PortableText value={landing.text} />
         </article>
       </section>
     </>}
 
-    <h2 className={styles.blb}><Link href="/news">što radimo?</Link></h2>
     <section className={styles.s}>
+    <h2 className={styles.blb}><Link href="/news">što radimo?</Link></h2>
       <NewsGrid>
         {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
       </NewsGrid>
     </section>
 
     {landing.images && landing.images.length > 0 && <>
-      <h2 className={styles.blb}><Link href="/gallery">kako to izgleda?</Link></h2>
       <section className={styles.s}>
+      <h2 className={styles.blb}><Link href="/gallery">kako to izgleda?</Link></h2>
         <GalleryGrid>
           <GalleryViewer pics={makePics(landing.images)} />
         </GalleryGrid>
@@ -53,14 +52,15 @@ export default async function Index() {
     </>}
 
 
-    <h3 className={styles.blb}>ako nam se želiš pridružiti</h3>
-    <h3 className={styles.blb}>ili imaš bilo kakvu ideju</h3>
-
-    <Link href="/volunteer">
-      <div className={styles.join}>
-        <h2>Slobodno nam se javi!</h2>
-      </div>
-    </Link>
+    <section className={styles.s}>
+    <h4 className={styles.blb}>ako nam se želiš pridružiti</h4>
+    <h4 className={styles.blb}>ili imaš bilo kakvu ideju</h4>
+      <Link href="/volunteer">
+        <div className={styles.join}>
+          <h2>Slobodno nam se javi!</h2>
+        </div>
+      </Link>
+    </section>
 
   </>
 }

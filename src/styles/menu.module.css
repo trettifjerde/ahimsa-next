@@ -1,12 +1,7 @@
 .menu {
-  --transX: 15%;
   list-style: none;
   font-family: var(--handwritten);
   font-weight: 300;
-}
-
-.menu.notrans {
-    --transX: 0;
 }
 
 .menu li {
@@ -21,7 +16,7 @@
 }
 
 .menu li.active {
-  transform: translateX(var(--transX)) scale(1.2);
+  transform: scale(1.2);
   color: var(--cian);
   font-weight: 400;
   cursor: default;

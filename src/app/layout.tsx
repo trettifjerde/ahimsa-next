@@ -32,7 +32,6 @@ export default function RootLayout({
           </Main>
           <Footer />
         </div>
-          <div id="galleryPortal" />
       </body>
     </html>
   );
