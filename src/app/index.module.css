@@ -57,13 +57,18 @@
 }
 
 .s {
+    --h-br1: 1em 95% 0.25em 50%;
+    --h-inline1: auto 0;
+    --h-br2: 95% 1em 50% 0.25em;
+    --h-inline2: 0 auto;
+    --indent: 8vw;
     position: relative;
-    margin-top: calc(6 * var(--gap));
+    margin-top: calc(1.75 * var(--indent));
 }
 
 .s::before {
-    --inset-block: calc(-1 * var(--main-inline-p));
-    --inset-inline: calc(-2 * var(--main-inline-p));
+    --inset-block: calc(-1 * var(--indent));
+    --inset-inline: calc(-3 * var(--indent));
     content: '';
     position: absolute;
     top: var(--inset-block);
@@ -79,19 +84,25 @@
 .s:nth-of-type(odd) {
     --bg: var(--blue-shadow);
     --color: var(--blue-trans);
-    --out-br: 80% 2% 40% 2%;
-    --rot: -10deg;
-    --h-br: 1em 95% 0.25em 50%;
-    --h-inline: 0 auto;
+    --color-other: var(--green-trans);
+    --out-br: 60% 5% 15% 50%;
+    --rot: -5deg;
+    --h-br: var(--h-br1);
+    --h-inline: var(--h-inline1);
+    --h-br-other: var(--h-br2);
+    --h-inline-other: var(--h-inline2);
 }
 
 .s:nth-of-type(even) {
     --bg: var(--green-shadow);
     --color: var(--green-trans);
-    --out-br: 2% 80% 2% 40%;
-    --rot: 10deg;
-    --h-br: 95% 1em 50% 0.25em;
-    --h-inline: auto 0;
+    --color-other: var(--blue-trans);
+    --out-br: 5% 60% 50% 15%;
+    --rot: 5deg;
+    --h-br: var(--h-br2);
+    --h-inline: var(--h-inline2);
+    --h-br-other: var(--h-br1);
+    --h-inline-other: var(--h-inline1);
 }
 
 .blb {
@@ -109,10 +120,16 @@
     transform: scale(1.1);
 }
 
+.blb:nth-of-type(even) {
+    --h-br: var(--h-br-other);
+    --h-inline: var(--h-inline-other);
+    --color: var(--color-other);
+}
+
 .join {
     width: fit-content;
     margin-inline: auto;
-    margin-block: var(--main-inline-p);
+    margin-block: calc(3 * var(--gap));
     position: relative;
     z-index: 0;
 }
