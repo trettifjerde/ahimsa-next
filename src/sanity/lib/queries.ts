@@ -42,3 +42,14 @@ export const galleryListQuery = groq`
         "slug": slug.current,
         "gallery": gallery[] { asset, hotspot, crop }
 }`;
+
+export const teamQuery = groq`
+    *[_type == "member"]
+    | order(name asc)
+    {
+        name,
+        surname,
+        description,
+        "image": image { asset, crop, hotspot }
+    }
+`

@@ -2,7 +2,7 @@
     position: relative;
     width: fit-content;
     margin-inline: auto;
-    margin-bottom: 10vh;
+    padding-top: 10vh;
 }
 
 .h h1,
@@ -22,7 +22,7 @@
 
 .h h5 {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 90%;
     font-size: 0.75rem;
     text-align: right;
@@ -42,16 +42,6 @@
     font-size: 1.25rem;
 }
 
-.l::before {
-    content: '';
-    position: absolute;
-    inset: -0.5rem;
-    background-image: linear-gradient(to right, var(--green), var(--blue));
-    border-radius: 0.5rem 100%;
-    transform: rotate(1deg);
-    z-index: -1;
-}
-
 .l p {
     margin-block: 1rem;
 }
@@ -63,28 +53,22 @@
     --h-inline2: 0 auto;
     --indent: 8vw;
     position: relative;
-    margin-top: calc(1.75 * var(--indent));
+    margin-top: calc(1.5 * var(--indent));
 }
 
 .s::before {
-    --inset-block: calc(-1 * var(--indent));
-    --inset-inline: calc(-3 * var(--indent));
     content: '';
     position: absolute;
-    top: var(--inset-block);
-    bottom: var(--inset-block);
-    right: var(--inset-inline);
-    left: var(--inset-inline);
+    inset: calc(-0.25 * var(--indent)) calc(-1 * var(--indent));
     background-color: var(--bg);
     border-radius: var(--out-br);
-    transform: rotate(var(--rot));
+    transform: scaleX(1.8) scaleY(1.2) rotate(var(--rot));
     z-index: -2;
 }
 
 .s:nth-of-type(odd) {
     --bg: var(--blue-shadow);
-    --color: var(--blue-trans);
-    --color-other: var(--green-trans);
+    --color: var(--blue);
     --out-br: 60% 5% 15% 50%;
     --rot: -5deg;
     --h-br: var(--h-br1);
@@ -95,8 +79,7 @@
 
 .s:nth-of-type(even) {
     --bg: var(--green-shadow);
-    --color: var(--green-trans);
-    --color-other: var(--blue-trans);
+    --color: var(--green);
     --out-br: 5% 60% 50% 15%;
     --rot: 5deg;
     --h-br: var(--h-br2);
@@ -108,15 +91,21 @@
 .blb {
     width: fit-content;
     padding: 0.25em 0.75em;
-    border: 1px solid var(--color);
+    box-shadow: var(--box-shadow);
     background-color: var(--light);
     margin-inline: var(--h-inline);
     border-radius: var(--h-br);
-    transition: color .2s, background-color .2s, transform .2s;
+    transition: transform .2s, background-position .2s;
+}
+
+.blb:has(a) {
+    background-image: linear-gradient(to right, var(--color) 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position-x: 100%;
 }
 
 .blb:has(a:hover) {
-    background-color: var(--color);
+    background-position-x: 0%;
     transform: scale(1.1);
 }
 
@@ -187,7 +176,7 @@
     }
 
     .h h5 {
-        top: -30%;
+        top: 10%;
         left: 80%;
         text-align: left;
     }
@@ -195,5 +184,9 @@
     .l {
         font-size: 1rem;
         padding-inline: 3rem;
+    }
+
+    .s {
+        --indent: 10vh;
     }
 }

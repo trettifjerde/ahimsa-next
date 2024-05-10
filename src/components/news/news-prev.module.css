@@ -39,6 +39,10 @@
     grid-area: h;
 }
 
+.h h4 {
+    margin-block: 0;
+}
+
 .ic {
     grid-area: ic;
     position: relative;
