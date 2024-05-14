@@ -1,0 +1,54 @@
+.lbl {
+    font-family: var(--handwritten);
+    font-size: 1.125rem;
+    color: var(--cian-dark);
+    font-weight: 500;
+    margin-block: 0.5rem;
+}
+
+.in,
+.ta {
+    width: 100%;
+    font-family: var(--mainFont);
+    font-weight: 300;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 0.25rem 1.25rem;
+    box-shadow: var(--box-shadow);
+    background-color: var(--light);
+}
+
+.in.err,
+.ta.err {
+    box-shadow: 0 0 1px var(--red);
+}
+
+.in {
+    padding: 0.5rem 1.25rem;
+}
+
+.ta {
+    resize: none;
+    min-height: 15rem;
+    padding: 1rem 1.5rem;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-inline: 0.25rem 1rem;
+}
+
+.p {
+    min-height: 1lh;
+    font-size: 0.75rem;
+    color: var(--gray);
+    text-align: right;
+}
+
+.p.err {
+    color: var(--red);
+}

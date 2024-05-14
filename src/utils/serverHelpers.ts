@@ -7,12 +7,12 @@ export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5'
 export function getListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
 
     const start = getStartDate(year);
-    if (start === null)
-        return null;
+    if (start === undefined)
+        return undefined;
 
     const end = getEndDate({ year, lastDate });
     if (!end)
-        return null;
+        return undefined;
 
     const batchSize = NEWS_BATCH_SIZE;
 
@@ -28,7 +28,7 @@ export function getListParamsFromURL(searchParams: URLSearchParams) {
 
     // function is used for loading more news, so lastDate and lastId must be known, as some news are already fetched
     if (!lastDate || !lastId)
-        return null;
+        return undefined;
 
     return getListQueryParams({ lastDate, lastId, year });
 }
@@ -55,14 +55,14 @@ function getStartDate(year?: string) {
         return '';
 
     if (year.length !== 4)
-        return null;
+        return undefined;
 
     const y = parseInt(year);
 
     if (y >= UDRUGA_START_YEAR && y <= new Date().getFullYear())
         return `${year}-01-01`;
 
-    return null;
+    return undefined;
 
 }
 
@@ -77,7 +77,7 @@ function getEndDate({ year, lastDate }: { lastDate?: string, year?: string }) {
     }
 
     if (isNaN(new Date(lastDate).getTime()))
-        return null;
+        return undefined;
 
     return lastDate;
 }

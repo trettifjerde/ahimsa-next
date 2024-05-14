@@ -1,13 +1,7 @@
 .g {
-    padding-block: 10vh;
+    padding-block: 15vh;
     display: grid;
     grid-template-columns: repeat(auto-fit, 12rem);
     justify-content: space-evenly;
-    gap: calc(2 * var(--gap));
-}
-
-@media not (pointer: fine) {
-    .g {
-        gap: 15vh 25vh;
-    }
+    gap: 15vh 25vw;
 }

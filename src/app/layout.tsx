@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hr">
-      <body className={`${mainFont.className} ${handwritten.variable} ${icons.variable}`}>
+      <body className={`${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${icons.variable}`}>
         <Navigation />
         <div id="content">
           <Main>

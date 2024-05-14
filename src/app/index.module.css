@@ -2,7 +2,7 @@
     position: relative;
     width: fit-content;
     margin-inline: auto;
-    padding-top: 10vh;
+    padding-top: 13vh;
 }
 
 .h h1,
@@ -51,18 +51,18 @@
     --h-inline1: auto 0;
     --h-br2: 95% 1em 50% 0.25em;
     --h-inline2: 0 auto;
-    --indent: 8vw;
+    --indent: 15vh;
     position: relative;
-    margin-top: calc(1.5 * var(--indent));
+    margin-top: calc(1.25 * var(--indent));
 }
 
 .s::before {
     content: '';
     position: absolute;
-    inset: calc(-0.25 * var(--indent)) calc(-1 * var(--indent));
+    inset: calc(-0.5 * var(--indent)) calc(-3 * var(--indent));
     background-color: var(--bg);
     border-radius: var(--out-br);
-    transform: scaleX(1.8) scaleY(1.2) rotate(var(--rot));
+    transform: rotate(var(--rot));
     z-index: -2;
 }
 
@@ -70,7 +70,8 @@
     --bg: var(--blue-shadow);
     --color: var(--blue);
     --out-br: 60% 5% 15% 50%;
-    --rot: -5deg;
+    --rot: -3deg;
+    --transX: 5%;
     --h-br: var(--h-br1);
     --h-inline: var(--h-inline1);
     --h-br-other: var(--h-br2);
@@ -81,7 +82,8 @@
     --bg: var(--green-shadow);
     --color: var(--green);
     --out-br: 5% 60% 50% 15%;
-    --rot: 5deg;
+    --rot: 3deg;
+    --transX: -5%;
     --h-br: var(--h-br2);
     --h-inline: var(--h-inline2);
     --h-br-other: var(--h-br1);
@@ -184,9 +186,5 @@
     .l {
         font-size: 1rem;
         padding-inline: 3rem;
-    }
-
-    .s {
-        --indent: 10vh;
     }
 }

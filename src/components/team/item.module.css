@@ -14,14 +14,14 @@
 
 .c:nth-of-type(odd) {
     --bg: var(--green-trans);
-    --shadow: var(--blue-shadow);
+    --shadow: var(--green-shadow);
     --shadow-rot: 20deg;
     --shadow-br: 25% 85% 25% 100%;
 }
 
 .c:nth-of-type(even) {
     --bg: var(--blue-trans);
-    --shadow: var(--green-shadow);
+    --shadow: var(--blue-shadow);
     --shadow-rot: -20deg;
     --shadow-br: 85% 25% 100% 25%;
 }

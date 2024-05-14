@@ -1,20 +1,19 @@
-import { PortableText } from '@portabletext/react'
-import { client } from "@/sanity/lib/client";
-import { landingQuery } from "@/sanity/lib/queries";
-
-import styles from './index.module.css';
-import { LandingQueryResult } from '../../sanity.types';
-import { getYearNews } from '@/sanity/lib/fetches';
-import NewsItemPreview from '@/components/news/news-prev';
-import { getListQueryParams, makePics } from '@/utils/serverHelpers';
 import Link from 'next/link';
+import { PortableText } from '@portabletext/react'
+
+import { getLanding, getYearNews } from '@/sanity/lib/fetches';
+import { makePics } from '@/utils/serverHelpers';
+
 import NewsGrid from '@/components/news/news-grid';
+import NewsItemPreview from '@/components/news/news-prev';
 import GalleryGrid from '@/components/gallery/gallery-grid';
 import GalleryViewer from '@/components/gallery/gallery-viewer';
 
+import styles from './index.module.css';
+
 export default async function Index() {
 
-  const [landing, news] = await Promise.all([client.fetch<LandingQueryResult>(landingQuery), getYearNews(getListQueryParams({})!)]);
+  const [landing, news] = await Promise.all([getLanding(), getYearNews()]);
 
   if (!landing || !news)
     throw new Error('Error fetching landing info');

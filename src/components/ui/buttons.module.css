@@ -1,7 +1,8 @@
 .b {
     border-radius: 2rem 25%;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     font-family: var(--handwritten);
+    font-size: 1rem;
     font-weight: 500;
     background-color: var(--light);
     color: var(--cian);
