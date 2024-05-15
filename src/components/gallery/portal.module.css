@@ -73,36 +73,28 @@
 }
 
 .ribbon {
-    position: absolute;
+    font-size: 1.125rem;
     bottom: 0%;
-    left: 0;
-    right: 0;
     max-width: 50vw;
     margin-inline: auto;
-    z-index: 0;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(100%);
-    transition-property: opacity, transform, visibility;
-    transition-duration: .3s;
-    transition-timing-function: ease-in-out;
 }
 
 .ribbon::before {
-    content: '';
-    position: absolute;
     inset: -1rem;
-    background-image: linear-gradient(to right, var(--green), var(--blue));
     border-radius: 0.125rem 100%;
-    z-index: -1;
-    transition: transform .2s ease-in-out;
+}
+
+.ribbon:hover::before {
+    transform: scale(1.15) rotate(-3deg);
 }
 
 .ribbon div {
     border-radius: 5% 25%;
     padding: 2rem;
-    background-color: var(--light);
-    box-shadow: var(--box-shadow);
+}
+
+.ribbon span {
+    font-size: 0.75rem;
 }
 
 .c:hover .ribbon {
@@ -110,10 +102,6 @@
     opacity: 1;
     cursor: pointer;
     transform: translateY(0);
-}
-
-.c:hover .ribbon:hover {
-    transform: scale(1.15);
 }
 
 .slideLeftIn,

@@ -3,11 +3,11 @@
 import { MouseEvent, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import Link from "next/link";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { GalleryEventPic } from "@/sanity/lib/types";
 import { getFullImageUrl } from "@/utils/image-helpers";
 import styles from './portal.module.css';
+import GalleryRibbon from "./gallery-ribbon";
 
 export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImage }: {
     pic: GalleryEventPic | null, close: () => void, hasPrev: boolean, hasNext: boolean, toggleImage: (n: number) => void
@@ -51,8 +51,7 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
                     </CSSTransition>
                 </SwitchTransition>
 
-                {pic.slug && pic.title && <Link className={styles.ribbon} href={pic.slug!}><div>{pic.title}</div></Link>}
-                {!pic.slug && pic.title && <div className={styles.ribbon}><div>{pic.title}</div></div>}
+                <GalleryRibbon slug={pic.slug} title={pic.title} className={styles.ribbon} />
             </div>}
         </div>
     </CSSTransition >, ref.current) : null;

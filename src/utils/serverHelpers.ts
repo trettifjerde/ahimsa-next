@@ -3,6 +3,7 @@ import { UDRUGA_START_YEAR } from "./clientHelpers";
 
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
+export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5'); 
 
 export function getListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
 

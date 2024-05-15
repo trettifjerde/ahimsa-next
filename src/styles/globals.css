@@ -16,7 +16,7 @@
   --light-trans: rgb(240, 245, 241, 0.75);
   --light-shadow: rgb(240, 245, 241, 0.3);
   --dark: rgb(34, 34, 34);
-  --gray: rgb(124, 124, 124);
+  --gray: #535353;
   --gray-shadow: rgba(143, 148, 144, 0.5);
   --red: rgb(176, 29, 22);
 
@@ -146,17 +146,17 @@ main p {
 .a,
 article a {
   cursor: pointer;
-  color: var(--green-dark);
-  font-weight: 400;
+  color: var(--dark);
   text-decoration: underline;
   transition: color .3s ease;
-  text-decoration-thickness: 0.0625em;
-  text-underline-offset: 0.25lh;
+  text-decoration-thickness: 0.1em;
+  text-decoration-color: var(--cian-dark);
+  text-underline-offset: 0.15lh;
 }
 
 .a:hover,
 article a:hover {
-  color: var(--blue-dark);
+  color: var(--cian);
 }
 
 footer {

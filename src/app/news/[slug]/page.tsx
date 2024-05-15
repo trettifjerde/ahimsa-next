@@ -1,19 +1,16 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { client } from "@/sanity/lib/client";
-import { newsArticleQuery } from "@/sanity/lib/queries";
-import { NewsArticleQueryResult } from "../../../../sanity.types";
 import { PortableText } from "@portabletext/react";
+import { getArtcile } from "@/sanity/lib/fetches";
 import { getImageUrl } from "@/utils/image-helpers";
-import styles from './a.module.css';
-import GalleryGrid from "@/components/gallery/gallery-grid";
-import GalleryPic from "@/components/gallery/gallery-pic";
-import GalleryViewer from "@/components/gallery/gallery-viewer";
 import { makePics } from "@/utils/serverHelpers";
+import GalleryGrid from "@/components/gallery/gallery-grid";
+import GalleryViewer from "@/components/gallery/gallery-viewer";
+import styles from './a.module.css';
 
 export default async function NewsItem({params}: {params: {slug: string}}) {
 
-    const news = await client.fetch<NewsArticleQueryResult>(newsArticleQuery, {slug: params.slug});
+    const news = await getArtcile(params.slug);
     
     if (!news)
         notFound();

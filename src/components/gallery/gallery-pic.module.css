@@ -14,42 +14,29 @@
 
 .ribbon {
     font-size: 0.75rem;
-    position: absolute;
     bottom: -1rem;
-    left: 0;
-    width: 100%;
-    z-index: 0;
-    visibility: hidden;
-    opacity: 0;
     transform: translateY(100%);
-    transition-property: opacity, transform, visibility;
-    transition-duration: .4s;
-    transition-timing-function: ease-in-out;
-
-    border-radius: var(--b-rad);
 }
 
 .ribbon::before {
-    content: '';
-    position: absolute;
     inset: 0 -.25rem;
-    background-image: linear-gradient(to right, var(--c1), var(--c2));
     border-radius: 15%;
-    z-index: -1;
     transform: rotate(-3deg);
+}
+
+.ribbon:hover::before {
+    transform: scale(1.1) rotate(0deg);
 }
 
 .ribbon div {
     border-radius: 10% 10% 20% 20%;
-    padding: 0.75rem;
-    background-color: var(--light);
-    box-shadow: var(--box-shadow);
+    padding: 0.5rem 0.75rem;
 }
 
-.c:nth-of-type(odd) .ribbon {
-    --c1: var(--green);
-    --c2: var(--blue);
+.ribbon span {
+    font-size: 0.5rem;
 }
+
 .c:nth-of-type(even) .ribbon {
     --c1: var(--blue);
     --c2: var(--green);

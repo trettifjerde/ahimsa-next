@@ -1,10 +1,12 @@
 import { client } from "./client";
-import { GalleryListQueryResult, LandingQueryResult, NewsListQueryResult } from "../../../sanity.types";
-import { galleryListQuery, landingQuery, newsListQuery } from "./queries";
-import { YearListQueryParams, getListQueryParams } from "@/utils/serverHelpers";
+import { GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, TeamQueryResult } from "../../../sanity.types";
+import { galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, teamQuery } from "./queries";
+import { REVALIDATE_TIMEOUT, YearListQueryParams, getListQueryParams } from "@/utils/serverHelpers";
+
+const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
 
 export async function getLanding() {
-    return client.fetch<LandingQueryResult>(landingQuery);
+    return client.fetch<LandingQueryResult>(landingQuery, {}, nextParams);
 }
 
 export async function getYearNews(params?: YearListQueryParams) {
@@ -14,7 +16,11 @@ export async function getYearNews(params?: YearListQueryParams) {
     if (!params)
         return null;
 
-    return client.fetch<NewsListQueryResult>(newsListQuery, params);
+    return client.fetch<NewsListQueryResult>(newsListQuery, params, nextParams);
+}
+
+export async function getArtcile(slug: string) {
+    return client.fetch<NewsArticleQueryResult>(newsArticleQuery, {slug});
 }
 
 export async function getYearGallery(params: YearListQueryParams) {
@@ -24,5 +30,9 @@ export async function getYearGallery(params: YearListQueryParams) {
     if (!params)
         return null;
 
-    return client.fetch<GalleryListQueryResult>(galleryListQuery, params);
+    return client.fetch<GalleryListQueryResult>(galleryListQuery, params, nextParams);
+}
+
+export async function getTeam() {
+    return client.fetch<TeamQueryResult>(teamQuery, {}, nextParams);
 }

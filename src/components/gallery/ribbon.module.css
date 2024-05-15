@@ -1,0 +1,38 @@
+.ribbon {
+    --c1: var(--green);
+    --c2: var(--blue);
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+    transition-property: opacity, transform, visibility;
+    transition-duration: .4s;
+    transition-timing-function: ease-in-out;
+}
+
+.ribbon::before {
+    content: '';
+    position: absolute;
+    background-image: linear-gradient(to right, var(--c1), var(--c2));
+    transition: transform .4s ease-in-out;
+    z-index: -1;
+}
+
+.ribbon div {
+    background-color: var(--light);
+    box-shadow: var(--box-shadow);
+}
+
+.ribbon h5 {
+    font-size: inherit;
+    margin-block: 0;
+    transition: color .2s ease-in-out;
+}
+
+.ribbon:hover h5 {
+    color: var(--cian-dark)
+}
