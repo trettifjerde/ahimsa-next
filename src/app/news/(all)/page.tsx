@@ -22,7 +22,7 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
     const lastNews: NewsListPreviewItem | undefined = news[news.length - 1];
 
     return <>
-        {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
+        {news.map(item => <NewsItemPreview key={item.slug} item={item} />)}
 
         {!lastNews && <div className={styles.emp}>No news this year</div>}
 
@@ -31,7 +31,6 @@ export default async function News({ searchParams }: { searchParams?: { year?: s
                 batchSize: NEWS_BATCH_SIZE,
                 hasMore: news.length == NEWS_BATCH_SIZE,
                 lastDate: lastNews?.date || '',
-                lastId: lastNews?._id || '',
                 year
             }} />
     </>

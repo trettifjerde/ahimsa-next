@@ -37,7 +37,6 @@ const getContentFromRaw : GetContentFromRaw<GalleryEvent, GalleryEventPic> = (in
     if (entries.length === 0) 
         return {
             lastDate: '',
-            lastId: '',
             items: [],
             hasMore: false,
             year
@@ -47,7 +46,6 @@ const getContentFromRaw : GetContentFromRaw<GalleryEvent, GalleryEventPic> = (in
 
     return {
         lastDate: lastEntry.date,
-        lastId: lastEntry._id,
         hasMore: entries.length === batchSize,
         year,
         items: entries

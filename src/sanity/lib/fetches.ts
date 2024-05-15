@@ -9,7 +9,7 @@ export async function getLanding() {
     return client.fetch<LandingQueryResult>(landingQuery, {}, nextParams);
 }
 
-export async function getYearNews(params?: YearListQueryParams) {
+export async function getYearNews(params?: YearListQueryParams | null) {
     if (!params)
         params = getListQueryParams({});
 
@@ -23,7 +23,7 @@ export async function getArtcile(slug: string) {
     return client.fetch<NewsArticleQueryResult>(newsArticleQuery, {slug});
 }
 
-export async function getYearGallery(params: YearListQueryParams) {
+export async function getYearGallery(params: YearListQueryParams | null) {
     if (!params)
         params = getListQueryParams({});
 

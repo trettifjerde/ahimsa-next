@@ -24,12 +24,12 @@ export const newsType = defineType({
         }),
         defineField({
             name: 'date',
-            type: 'date',
+            type: 'datetime',
             title: 'Datum',
-            initialValue: (new Date().toISOString().slice(0, 10)),
+            initialValue: (new Date().toISOString()),
             validation: (rule) => rule
-            .required()
-            .error('Obavezno')
+                .required()
+                .error('Obavezno')
         }),
         defineField({
             name: 'description',

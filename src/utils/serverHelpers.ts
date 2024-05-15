@@ -3,35 +3,43 @@ import { UDRUGA_START_YEAR } from "./clientHelpers";
 
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
-export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5'); 
+export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
 
-export function getListQueryParams({ lastDate, year, lastId = '' }: { lastDate?: string, year?: string, lastId?: string }) {
+export function getListQueryParams({ lastDate, year }: { lastDate?: string, year?: string }) {
 
-    const start = getStartDate(year);
-    if (start === undefined)
-        return undefined;
+    try {
+        const currentYear = getYear(year);
 
-    const end = getEndDate({ year, lastDate });
-    if (!end)
-        return undefined;
+        const start = getStartDate(currentYear);
+        const end = getEndDate({ currentYear, lastDate });
 
-    const batchSize = NEWS_BATCH_SIZE;
+        const batchSize = NEWS_BATCH_SIZE;
 
-    return { start, end, lastId, batchSize };
+        return { start, end, batchSize };
+    }
+    catch (error) {
+        console.log(error);
+        return null;
+    }
 }
 
 export type YearListQueryParams = Exclude<ReturnType<typeof getListQueryParams>, null>;
 
 export function getListParamsFromURL(searchParams: URLSearchParams) {
-    const lastDate = searchParams.get('lastDate') || undefined;
-    const lastId = searchParams.get('lastId') || undefined;
-    const year = searchParams.get('year') || undefined;
+    try {
+        const lastDate = searchParams.get('lastDate') || undefined;
+        const year = searchParams.get('year') || undefined;
 
-    // function is used for loading more news, so lastDate and lastId must be known, as some news are already fetched
-    if (!lastDate || !lastId)
-        return undefined;
+        // function is used for loading more news, so lastDate must be known, as some news are already fetched
+        if (!lastDate)
+            throw new Error('lastDate must be provided');
 
-    return getListQueryParams({ lastDate, lastId, year });
+        return getListQueryParams({ lastDate, year });
+    }
+    catch (error) {
+        console.log(error);
+        return null;
+    }
 }
 
 export function makeGalleryPics(entry: GalleryEvent) {
@@ -50,35 +58,41 @@ export function makePics(gallery: GalleryEventGallery) {
     }))
 }
 
-function getStartDate(year?: string) {
+function getStartDate(currentYear: ReturnType<typeof getYear>) {
 
-    if (!year || year === 'all')
+    if (!currentYear)
         return '';
 
+    return `${currentYear - 1}-12-31T23:59:59`;
+}
+
+function getEndDate({ currentYear, lastDate }: { lastDate?: string, currentYear: ReturnType<typeof getYear> }) {
+
+    if (!lastDate) {
+
+        if (!currentYear)
+            return new Date().toISOString();
+
+        return new Date(`${currentYear + 1}-01-01T00:00:00`).toISOString();
+    }
+
+    if (isNaN(new Date(lastDate).getTime()))
+        throw new Error('Invalid lastDate');
+
+    return lastDate;
+}
+
+function getYear(year?: string) {
+    if (!year || year === 'all')
+        return null;
+
     if (year.length !== 4)
-        return undefined;
+        throw new Error('Invalid year');
 
     const y = parseInt(year);
 
     if (y >= UDRUGA_START_YEAR && y <= new Date().getFullYear())
-        return `${year}-01-01`;
+        return y;
 
-    return undefined;
-
-}
-
-function getEndDate({ year, lastDate }: { lastDate?: string, year?: string }) {
-
-    if (!lastDate) {
-
-        if (!year || year === 'all')
-            return new Date().toISOString().slice(0, 10);
-
-        return new Date(`${year}-12-31`).toISOString().slice(0, 10);
-    }
-
-    if (isNaN(new Date(lastDate).getTime()))
-        return undefined;
-
-    return lastDate;
+    throw new Error('Invalid year');
 }

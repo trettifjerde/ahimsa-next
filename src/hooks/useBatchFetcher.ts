@@ -12,9 +12,9 @@ export default function useBatchFetcher<II extends InitInfo , RawItem extends Ye
     const handleFetchMore: MouseEventHandler<HTMLButtonElement> = async (e) => {
         dispatch({ type: 'fetchStart' });
 
-        const { lastDate, lastId, year } = state.years[state.selectedYear];
+        const { lastDate, year } = state.years[state.selectedYear];
 
-        const params = new URLSearchParams({ lastDate, lastId, year: state.selectedYear });
+        const params = new URLSearchParams({ lastDate, year: state.selectedYear });
 
         const res = await fetchData<RawItem[]>(`/api${url}?${params.toString()}`);
 
@@ -69,7 +69,7 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
 
         case 'addItems':
 
-            const {items, year, hasMore, lastDate, lastId} = action.yearContent;
+            const {items, year, hasMore, lastDate} = action.yearContent;
             const curYear = getYearStateKey(year);
             const curYearItems = state.years[curYear].items;
 
@@ -83,7 +83,6 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
                         year,
                         hasMore,
                         lastDate,
-                        lastId,
                         items: items.length === 0 ? curYearItems : [...curYearItems, ...items]
                     }
                 }
@@ -107,13 +106,12 @@ export type GetContentFromInit<I, T> = (initInfo: I) => {selectedYear: string, y
 
 export type GetContentFromRaw<R, I> = (info: RawInfo<R>) => YearContent<I>;
 
-export type YearItem = { _id: string, date: string };
+export type YearItem = { date: string };
 
 export type YearMeta = {
     year?: string,
     hasMore: boolean,
-    lastDate: string,
-    lastId: string,
+    lastDate: string
 };
 
 type YearContent<T> = YearMeta & { items: T[] };

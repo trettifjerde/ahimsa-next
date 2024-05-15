@@ -7,11 +7,10 @@ export const landingQuery = groq`*[_type == "landing"][0]
 }`;
 
 export const newsListQuery = groq`
-    *[_type == "news" && date <= $end && date >= $start && _id > $lastId] 
+    *[_type == "news" && date < $end && date > $start] 
     | order(date desc) 
     [0...$batchSize] 
     { 
-        _id,
         title, 
         "slug": slug.current, 
         "image": mainImage { asset, crop, hotspot },
@@ -31,11 +30,10 @@ export const newsArticleQuery = groq`
     }`;
 
 export const galleryListQuery = groq`
-    *[_type == "news" && defined(gallery) && date <= $end && date >= $start && _id > $lastId] 
+    *[_type == "news" && defined(gallery) && date < $end && date > $start] 
     | order(date desc) 
     [0...$batchSize] 
     {
-        _id,
         _type,
         title,
         date,

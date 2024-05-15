@@ -6,14 +6,16 @@ type ButtonProps = {
     disabled?: boolean,
     className?: string,
     onClick?: MouseEventHandler,
-    children: ReactNode
+    children: ReactNode,
+    isOutlined?: boolean,
+    isSmall?: boolean
 };
 
 type SpinnerButtonProps = ButtonProps & {loading: boolean};
 
-
-export function Button({className, children, type='button', disabled=false, onClick}: ButtonProps) {
-    return <button type={type} className={`${styles.b} ${className || ''}`} disabled={disabled} onClick={onClick}>{children}</button>
+export function Button({className, isOutlined=false, isSmall=false, children, type='button', disabled=false, onClick}: ButtonProps) {
+    const clName = `${styles.b} ${isOutlined ? styles.out : ''} ${isSmall ? styles.sm : ''} ${className || ''}`;
+    return <button type={type} className={clName} disabled={disabled} onClick={onClick}>{children}</button>
 }
 
 export function SpinnerButton({className, type, children, loading, disabled, onClick}: SpinnerButtonProps) {

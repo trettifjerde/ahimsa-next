@@ -37,7 +37,7 @@ export default async function Index() {
     <section className={styles.s}>
     <h2 className={styles.blb}><Link href="/news">što radimo?</Link></h2>
       <NewsGrid>
-        {news.map(item => <NewsItemPreview key={item._id} item={item} />)}
+        {news.map(item => <NewsItemPreview key={item.slug} item={item} />)}
       </NewsGrid>
     </section>
 
