@@ -12,6 +12,7 @@ import GalleryViewer from '@/components/gallery/gallery-viewer';
 
 import styles from './index.module.css';
 import leafStyles from '@/styles/leaf.module.css';
+import MainBlock from '@/components/layout/main-bl';
 
 export default async function Index() {
 
@@ -21,11 +22,14 @@ export default async function Index() {
     throw new Error('Error fetching landing info');
 
   return <>
-    <header className={styles.h}>
-      <h1>Ahimsa<span>*</span></h1>
-      <h5><span>* </span><b>sanskrt</b>: nenasilje, ljubav, suosjećanje</h5>
-      <h3>Udruga mladih</h3>
-    </header>
+    <MainBlock>
+      <header className={styles.h}>
+        <h1>Ahimsa<span>*</span></h1>
+        <h5><span>* </span><b>sanskrt</b>: nenasilje, ljubav, suosjećanje</h5>
+        <h3>Udruga mladih</h3>
+      </header>
+
+    </MainBlock>
 
     {landing.text && <>
       <IndexSection>
@@ -41,7 +45,7 @@ export default async function Index() {
       <NewsGrid>
         {news.map(item => <NewsItemPreview key={item.slug} item={item} />)}
       </NewsGrid>
-      </IndexSection>
+    </IndexSection>
 
     {landing.images && landing.images.length > 0 && <>
       <IndexSection>

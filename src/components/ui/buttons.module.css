@@ -31,7 +31,6 @@
 }
 
 .spb {
-    --inset: 0;
     --br: 2rem 25%;
     display: inline-block;
     border-radius: var(--br);

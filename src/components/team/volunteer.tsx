@@ -9,32 +9,35 @@ import { SpinnerButton } from '../ui/buttons';
 import styles from './form.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 import formStyles from '@/components/ui/form.module.css';
+import MainBlock from '../layout/main-bl';
 
 
 export default function VolunteerForm() {
 
     const formRef = useRef<HTMLFormElement>(null);
     const { state, handleSubmit } = useForm<VolunteerFormErrorLog>(validateVolunteerForm, volunteer, formRef);
-    const {message, errorLog, pending} = state;
+    const { message, errorLog, pending } = state;
 
-    return <div className={`${leafStyles.lf} ${styles.c}`}>
-        <h4>Želiš nam se pridružiti?</h4>
+    return <div className={styles.c}>
+        <MainBlock>
+            <h4>Želiš nam se pridružiti?</h4>
 
-        <form ref={formRef} className={styles.f} onSubmit={handleSubmit}>
-            <p className={`${formStyles.p} ${message.isError ? formStyles.err : ''}`}>{message.text}</p>
-            <div className={styles.fl}>
-                <Input name={NAME} type='text' label="Ime" error={errorLog?.name}
-                    required maxLength={NAME_LIMIT}  />
-                <Input name={SURNAME} type="text" label="Prezime" error={errorLog?.surname}
-                    required maxLength={NAME_LIMIT} />
-            </div>
-            <Input name={EMAIL} type="email" label="Email" error={errorLog?.email}
-                required />
-            <Textarea name={INFO} label='Ispričaj malo o sebi' error={errorLog?.info}
-            required maxLength={INFO_LIMIT} />
-            <div className={styles.btn}>
-                <SpinnerButton type='submit' loading={pending}>Pošalji</SpinnerButton>
-            </div>
-        </form>
+            <form ref={formRef} className={styles.f} onSubmit={handleSubmit}>
+                <p className={`${formStyles.p} ${message.isError ? formStyles.err : ''}`}>{message.text}</p>
+                <div className={styles.fl}>
+                    <Input name={NAME} type='text' label="Ime" error={errorLog?.name}
+                        required maxLength={NAME_LIMIT} />
+                    <Input name={SURNAME} type="text" label="Prezime" error={errorLog?.surname}
+                        required maxLength={NAME_LIMIT} />
+                </div>
+                <Input name={EMAIL} type="email" label="Email" error={errorLog?.email}
+                    required />
+                <Textarea name={INFO} label='Ispričaj malo o sebi' error={errorLog?.info}
+                    required maxLength={INFO_LIMIT} />
+                <div className={styles.btn}>
+                    <SpinnerButton type='submit' loading={pending}>Pošalji</SpinnerButton>
+                </div>
+            </form>
+        </MainBlock>
     </div>
 }

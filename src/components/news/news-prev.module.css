@@ -1,5 +1,5 @@
 .a {
-    --inset: 0;
+    --in-br: 20% 5% 5rem 10%;
     --br: 6rem 75% 15% 75%;
     width: 100%;
 }
@@ -16,17 +16,15 @@
 
 .art {
     display: grid;
-    grid-template-areas: 'h ic'
-                         'desc ic';
-    grid-template-columns: 3fr 1fr;
+    grid-template-areas: 'h h'
+        'ic desc';
+    grid-template-columns: 1fr 2.5fr;
     grid-template-rows: auto 1fr;
-    gap: 0.5rem;
-    min-height: 15rem;
+    gap: 1rem;
     padding: 3rem;
     background-color: var(--light);
     box-shadow: var(--box-shadow);
-    border-radius: 20% 5% 5rem 10%;
-    overflow: hidden;
+    border-radius: var(--in-br);
 }
 
 .h {
@@ -41,7 +39,7 @@
     grid-area: ic;
     position: relative;
     width: 100%;
-    height: 100%;    
+    height: 100%;
 }
 
 .ic img {
@@ -55,12 +53,26 @@
 
 .desc {
     grid-area: desc;
-    align-self: center;
+    min-height: 9.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 60rem) {
     .art {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 'h'
+            'ic'
+            'desc';
         padding: 2rem;
         min-height: 12rem;
+    }
+
+    .ic {
+        aspect-ratio: 1/1;
     }
 }

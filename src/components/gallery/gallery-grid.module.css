@@ -1,5 +1,5 @@
 .g {
-    --pic-width: 13rem;
+    --pic-width: 8rem;
 
     position: relative;
     display: grid;
@@ -16,14 +16,14 @@
     padding-block: 15%;
 }
 
-@media (max-width: 40rem) {
+@media (min-width: 40rem) {
     .g {
-        --pic-width: 7rem;
+        --pic-width: 12rem;
     }
 }
 
-@media (max-width: 64rem) {
+@media (min-width: 64rem) {
     .g {
-        --pic-width: 10rem;
+        --pic-width: 16rem;
     }
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Shantell_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { DESCRIPTION } from "@/utils/data";
@@ -15,8 +15,12 @@ const icons = localFont({ src: '../fonts/icomoon.ttf', variable: '--icons' });
 
 export const metadata: Metadata = {
   title: "Ahimsa",
-  description: DESCRIPTION
+  description: DESCRIPTION,
 };
+
+export const viewport : Viewport = {
+  themeColor: '#a9d3ec'
+}
 
 export default function RootLayout({
   children,
@@ -25,14 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hr">
-      <body className={`${leafStyles.lfa} ${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${icons.variable}`}>
+      <body className={`${leafStyles.lf} ${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${icons.variable}`}>
         <Navigation />
-        <div id="content">
-          <Main>
-            {children}
-          </Main>
-          <Footer />
-        </div>
+        <Main>
+          {children}
+        </Main>
+        <Footer />
       </body>
     </html>
   );

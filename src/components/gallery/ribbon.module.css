@@ -6,9 +6,6 @@
     left: 0;
     right: 0;
     z-index: 0;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(100%);
     transition-property: opacity, transform, visibility;
     transition-duration: .4s;
     transition-timing-function: ease-in-out;
@@ -33,6 +30,15 @@
     transition: color .2s ease-in-out;
 }
 
-.ribbon:hover h5 {
-    color: var(--cian-dark)
+
+@media (hover: hover) {
+    .ribbon {
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    .ribbon:hover h5 {
+        color: var(--cian-dark)
+    }
+
 }

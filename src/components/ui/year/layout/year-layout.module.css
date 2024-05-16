@@ -1,12 +1,14 @@
 .c {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: var(--main-inline-p);
+    gap: var(--main-p);
+    padding-block: var(--main-bottom);
 }
 
 .g {
+    --pb: 4rem !important;
     position: relative;
-    padding-bottom: 4rem;
+    padding-bottom: var(--pb);
 }
 
 @media (max-width: 40rem) {

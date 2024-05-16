@@ -1,18 +1,18 @@
 :root {
-  --cian: rgb(85, 176, 179);
+  --cian: #55b0b3;
   --cian-trans: rgba(85, 176, 179, 0.5);
   --cian-shadow: rgba(85, 176, 179, 0.2);
   --cian-dark: rgb(31, 129, 132);
-  --green: rgb(161, 211, 167);
+  --green: #a1d3a7;
   --green-trans: rgba(64, 183, 95, 0.5);
   --green-shadow: rgba(64, 183, 95, 0.1);
   --green-dark: rgb(61, 164, 72);
-  --blue: rgb(169, 211, 236);
+  --blue: #a9d3ec;
   --blue-trans: rgba(89, 181, 234, 0.5);
   --blue-dark: rgb(89, 181, 234);
   --blue-shadow: rgba(89, 181, 234, 0.1);
   --light: rgb(245, 250, 246);
-  --light-dark: rgb(240, 245, 241);
+  --light-dark: #f0f5f1;
   --light-trans: rgb(240, 245, 241, 0.75);
   --light-shadow: rgb(240, 245, 241, 0.3);
   --dark: rgb(34, 34, 34);
@@ -22,17 +22,17 @@
 
   --max-w: 80rem;
   --nav-w: 10rem;
-  --nav-h: 6rem;
+  --nav-h: 0px;
   --gap: 2rem;
   --top-wing: 40vh;
-  --bottom-wing: 30vh;
-  --main-top: 22vh;
-  --main-bottom: 10vh;
-  --main-inline-p: 3rem;
+  --main-top: 25vh;
+  --main-bottom: 5vh;
+  --main-p: 3rem;
+  --main-pl: calc(var(--nav-w) + var(--main-p));
 
   --box-shadow: 0 0 1px var(--gray-shadow);
 
-  --p-margin: 0.25rem;
+  --p-margin: 0.625em;
 }
 
 * {
@@ -60,7 +60,7 @@ h4,
 h5 {
   font-weight: 400;
   font-family: var(--handwritten);
-  margin-block: 1em;
+  margin-bottom: 1em;
 }
 
 h1 {
@@ -84,53 +84,34 @@ h5 {
 }
 
 body {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: var(--nav-w) auto;
   background-color: var(--light-dark);
   color: var(--dark);
   line-height: 1.35;
   font-weight: 300;
-  overflow: clip auto;
 }
 
 body::before {
   --br: 0 0 100% 0;
-  --inset: 0 0 auto 0;
   background-color: var(--green);
   height: var(--top-wing);
 }
 
-body::after {
-  --br: 0 100% 0 0;
-  --inset: auto 0 0 0;
-  background-color: var(--blue);
-  height: var(--bottom-wing);
-}
-
-#content {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: 100%;
-}
-
-main,
-footer {
-  width: 100%;
-  max-width: var(--max-w);
-  margin-inline: auto;
-  padding-inline: var(--main-inline-p);
-}
-
 main {
+  min-height: 100vh;
   position: relative;
-  margin-top: var(--main-top);
-  margin-bottom: var(--main-bottom);
+  padding-top: calc(var(--nav-h) + var(--main-top));
 }
 
 main p {
   margin-block: var(--p-margin);
-  text-indent: 1rem;
+}
+
+main code {
+  display: block;
+  margin-block: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  background-color: var(--cian-shadow);
 }
 
 .a,
@@ -150,7 +131,10 @@ article a:hover {
 }
 
 footer {
-  padding-bottom: calc(2 * var(--gap));
+  border-radius: 0 100% 0 0;
+  background-color: var(--blue);
+  padding-block: calc(1.5 * var(--main-p));
+  padding-inline: calc(var(--nav-w) + var(--main-p)) var(--main-p);
   font-size: 0.75rem;
   position: relative;
 }
@@ -287,20 +271,14 @@ strong {
 @media (max-width: 40rem) {
 
   :root {
+    --nav-h: 6rem;
+    --nav-w: 0px;
     --main-top: 15vh;
-    --main-bottom: 7vh;
-    --main-inline-p: 2rem;
-    --gap: 1rem;
-  }
-
-  body {
-    grid-template-columns: 100%;
-    grid-template-rows: auto 1fr;
+    --main-p: 2rem;
   }
 
   h1 {
-    font-size: 3rem;
-    margin-block: 3rem;
+    font-size: 2.5rem;
   }
 
   h2 {
@@ -323,11 +301,5 @@ strong {
   footer .info {
     justify-content: flex-start;
     flex-wrap: wrap;
-  }
-}
-
-@media (min-width: 40rem) and (max-width: 60rem) {
-  :root {
-    --gap: 1.5rem;
   }
 }

@@ -1,11 +1,12 @@
 
 import Image from 'next/image';
 import styles from './news-prev.module.css';
+import leafStyles from '@/styles/leaf.module.css';
 import shimmer from '@/styles/shimmer.module.css';
 import { getImageUrl } from '@/utils/image-helpers';
 
 export function NewsSkeletonItem() {
-    return <div className={styles.a}>
+    return <div className={`${leafStyles.lf} ${styles.a}`}>
         <article className={styles.art}>
             <div className={styles.h}>
                 <h4></h4>

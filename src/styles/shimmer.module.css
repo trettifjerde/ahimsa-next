@@ -4,7 +4,7 @@
     z-index: 1;
     background-image: linear-gradient(90deg, var(--light-shadow) 30%, var(--light-trans) 50%, var(--light-shadow) 70%);
     background-size: 300% 100%;
-    border-radius: var(--br);
+    border-radius: var(--in-br);
     animation: shimmer 1s infinite;
 }
 

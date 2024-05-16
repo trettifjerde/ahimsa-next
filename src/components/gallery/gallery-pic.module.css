@@ -42,19 +42,23 @@
     --c2: var(--green);
 }
 
-.c:hover {
-    transform: scale(1.35);
-    z-index: 1;
-    box-shadow: 0 0 5px 0 var(--gray-shadow);
-}
 
-.c:hover img {
-    cursor: zoom-in;
-}
+@media (hover: hover) {
 
-.c:hover .ribbon {
-    visibility: visible;
-    opacity: 1;
-    cursor: pointer;
-    transform: translateY(0);
+    .c:hover {
+        transform: scale(1.35);
+        z-index: 1;
+        box-shadow: 0 0 5px 0 var(--gray-shadow);
+    }
+    
+    .c:hover img {
+        cursor: zoom-in;
+    }
+    
+    .c:hover .ribbon {
+        visibility: visible;
+        opacity: 1;
+        cursor: pointer;
+        transform: translateY(0);
+    }
 }

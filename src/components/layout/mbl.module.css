@@ -1,0 +1,10 @@
+.m {
+    position: relative;
+    padding-left: var(--main-pl);
+    padding-right: var(--main-p);
+}
+
+.m >* {
+    max-width: 70rem;
+    margin-inline: auto;
+}

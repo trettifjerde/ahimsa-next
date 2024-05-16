@@ -1,14 +1,13 @@
 .c {
-    --inset: 0;
-    --br: 65% 25% 60% 25%;
-    max-width: 40rem;
-    margin-inline: auto;
-    margin-block: 5rem;
+    margin-block: calc(1.5 * var(--main-bottom));
+    padding-block: 3rem;
+    border-radius: 50vw 0 35vw 0;
+    background-color: var(--cian-shadow);
 }
 
-.c::before {
-    background-color: var(--cian-shadow);
-    transform: scaleX(1.75) scaleY(1.45) rotate(10deg);
+.c form {
+    max-width: 40rem;
+    margin-inline: auto;
 }
 
 .c h4 {

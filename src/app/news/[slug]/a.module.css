@@ -11,18 +11,39 @@
 .ic {
     position: relative;
     width: 100%;
-    aspect-ratio: 3/1;
+    max-height: 100vh;
 }
 
 .ic img {
-    object-fit: none;
+    object-fit: contain;
 }
 
 .gg {
     padding-block: 3rem;
 }
 
+.t {
+    --br: 5%;
+
+    padding: 5vw;
+    background-color: var(--light);
+    max-width: 60rem;
+    margin-inline: auto;
+    box-shadow: var(--box-shadow);
+    border-radius: 8%;
+    z-index: unset !important;
+}
+
+.t::before {
+    background-image: linear-gradient(135deg, var(--green-trans), var(--blue-trans));
+}
+
+.ic,
+.t {
+    margin-block: var(--main-bottom);
+}
+
 .back {
     position: absolute;
-    top: -5rem;
+    top: calc(-0.5 * var(--main-top));
 }

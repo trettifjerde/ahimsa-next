@@ -23,7 +23,12 @@ export const newsArticleQuery = groq`
     [0] 
     { 
         title, 
-        "image": mainImage { asset, crop, hotspot }, 
+        "image": mainImage { 
+            asset, 
+            crop, 
+            hotspot, 
+            "aspectRatio": asset -> metadata.dimensions.aspectRatio 
+        }, 
         date, 
         description,
         "gallery": gallery[]{ asset, crop, hotspot}

@@ -67,7 +67,7 @@ export const newsType = defineType({
     preview: {
         select: {
           title: 'title',
-          subtitle: 'excerpt',
+          subtitle: 'date',
           media: 'mainImage'
         }
       }

@@ -9,7 +9,7 @@
 .lfa::after {
     content: '';
     position: absolute;
-    inset: var(--inset);
+    inset: 0;
     border-radius: var(--br);
     z-index: -1;
 }
