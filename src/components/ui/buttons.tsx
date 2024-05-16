@@ -1,5 +1,6 @@
 import { MouseEventHandler, ReactNode } from "react";
 import styles from './buttons.module.css';
+import leafStyles from '@/styles/leaf.module.css';
 
 type ButtonProps = {
     type?: 'submit' | 'button',
@@ -19,7 +20,7 @@ export function Button({className, isOutlined=false, isSmall=false, children, ty
 }
 
 export function SpinnerButton({className, type, children, loading, disabled, onClick}: SpinnerButtonProps) {
-    return <span className={`${styles.spb} ${loading? styles.loading: ''} ${className || ''}`}>
+    return <span className={`${leafStyles.lfa} ${styles.spb} ${loading? styles.loading: ''} ${className || ''}`}>
         <Button type={type} className={className} disabled={disabled} onClick={onClick}>{children}</Button>
     </span>
 }

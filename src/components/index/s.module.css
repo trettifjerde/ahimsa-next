@@ -1,0 +1,39 @@
+.s {
+    --h-br1: 1em 95% 0.25em 50%;
+    --h-inline1: auto 0;
+    --h-br2: 95% 1em 50% 0.25em;
+    --h-inline2: 0 auto;
+    --indent: 15vh;
+    --inset: calc(-0.5 * var(--indent)) calc(-3 * var(--indent));
+    
+    margin-top: calc(1.25 * var(--indent));
+}
+
+.s::before {
+    background-color: var(--bg);
+    transform: rotate(var(--rot));
+}
+
+.s:nth-of-type(odd) {
+    --bg: var(--blue-shadow);
+    --color: var(--blue);
+    --br: 60% 5% 15% 50%;
+    --rot: -3deg;
+    --transX: 5%;
+    --h-br: var(--h-br1);
+    --h-inline: var(--h-inline1);
+    --h-br-other: var(--h-br2);
+    --h-inline-other: var(--h-inline2);
+}
+
+.s:nth-of-type(even) {
+    --bg: var(--green-shadow);
+    --color: var(--green);
+    --br: 5% 60% 50% 15%;
+    --rot: 3deg;
+    --transX: -5%;
+    --h-br: var(--h-br2);
+    --h-inline: var(--h-inline2);
+    --h-br-other: var(--h-br1);
+    --h-inline-other: var(--h-inline1);
+}

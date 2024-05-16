@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Poppins, Shantell_Sans } from "next/font/google";
 import localFont from "next/font/local";
-import Navigation from "@/components/layout/nav";
-import Footer from "@/components/layout/footer";
 import { DESCRIPTION } from "@/utils/data";
+import Navigation from "@/components/layout/nav";
+import Main from "@/components/layout/main";
+import Footer from "@/components/layout/footer";
 import "@/styles/globals.css";
 import "@/styles/icons.css";
-import Main from "@/components/layout/main";
+import leafStyles from '@/styles/leaf.module.css';
 
 const mainFont = Poppins({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--mainFont' });
 const handwritten = Shantell_Sans({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--handwritten' });
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hr">
-      <body className={`${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${icons.variable}`}>
+      <body className={`${leafStyles.lfa} ${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${icons.variable}`}>
         <Navigation />
         <div id="content">
           <Main>

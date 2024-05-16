@@ -84,7 +84,6 @@ h5 {
 }
 
 body {
-  position: relative;
   min-height: 100vh;
   display: grid;
   grid-template-columns: var(--nav-w) auto;
@@ -95,26 +94,17 @@ body {
   overflow: clip auto;
 }
 
-body::before,
-body::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-}
-
 body::before {
+  --br: 0 0 100% 0;
+  --inset: 0 0 auto 0;
   background-color: var(--green);
-  border-radius: 0 0 100% 0;
-  top: 0;
   height: var(--top-wing);
 }
 
 body::after {
-  bottom: 0;
+  --br: 0 100% 0 0;
+  --inset: auto 0 0 0;
   background-color: var(--blue);
-  border-radius: 0 100% 0 0;
   height: var(--bottom-wing);
 }
 

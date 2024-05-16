@@ -7,6 +7,7 @@ import { EMAIL, INFO, INFO_LIMIT, NAME, NAME_LIMIT, SURNAME, VolunteerFormErrorL
 import { Input, Textarea } from '../ui/forms';
 import { SpinnerButton } from '../ui/buttons';
 import styles from './form.module.css';
+import leafStyles from '@/styles/leaf.module.css';
 import formStyles from '@/components/ui/form.module.css';
 
 
@@ -16,7 +17,7 @@ export default function VolunteerForm() {
     const { state, handleSubmit } = useForm<VolunteerFormErrorLog>(validateVolunteerForm, volunteer, formRef);
     const {message, errorLog, pending} = state;
 
-    return <div className={styles.c}>
+    return <div className={`${leafStyles.lf} ${styles.c}`}>
         <h4>Želiš nam se pridružiti?</h4>
 
         <form ref={formRef} className={styles.f} onSubmit={handleSubmit}>

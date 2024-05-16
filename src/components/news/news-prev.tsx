@@ -1,15 +1,16 @@
 import Link from "next/link";
-import styles from './news-prev.module.css';
 import Image from "next/image";
-import { getImageUrl } from "@/utils/image-helpers";
 import { NewsListPreviewItem } from "@/sanity/lib/types";
+import { getImageUrl } from "@/utils/image-helpers";
+import styles from './news-prev.module.css';
+import leafStyles from '@/styles/leaf.module.css';
 
 export default function NewsItemPreview({ item }: { item: NewsListPreviewItem }) {
 
     const image = getImageUrl(item.image);
     const date = new Date(item.date).toLocaleString('hr', {dateStyle: 'short', timeStyle: 'short'});
 
-    return <Link className={styles.a} href={`/news/${item.slug}`}>
+    return <Link className={`${leafStyles.lf} ${styles.a}`} href={`/news/${item.slug}`}>
         <article className={styles.art}>
             <div className={styles.h}>
                 <h4>{item.title}</h4>

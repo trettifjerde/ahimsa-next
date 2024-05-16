@@ -1,0 +1,15 @@
+.lf,
+.lfa {
+    position: relative;
+    z-index: 0;
+}
+
+.lf::before,
+.lfa::before,
+.lfa::after {
+    content: '';
+    position: absolute;
+    inset: var(--inset);
+    border-radius: var(--br);
+    z-index: -1;
+}

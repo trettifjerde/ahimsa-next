@@ -13,6 +13,10 @@ export async function GET(req: NextRequest) {
     if (!news)
         return NextResponse.json([])
 
+    const r = await new Promise((res, rej) => {
+        setTimeout(() => res(1), 5000);
+    })
+
     return NextResponse.json(news);
 
 }

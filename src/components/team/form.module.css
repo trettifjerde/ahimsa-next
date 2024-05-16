@@ -1,41 +1,40 @@
 .c {
-    position: relative;
+    --inset: 0;
+    --br: 65% 25% 60% 25%;
     max-width: 40rem;
     margin-inline: auto;
     margin-block: 5rem;
 }
 
 .c::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 65% 25% 60% 25%;
     background-color: var(--cian-shadow);
     transform: scaleX(1.75) scaleY(1.45) rotate(10deg);
-    z-index: -1;
 }
 
 .c h4 {
     text-align: right;
 }
 
-.f {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.btn {
-    text-align: center;
-}
-
+.f,
 .fl {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
+}
+
+.f {
+    flex-direction: column;
+}
+
+
+.fl {
+    flex-wrap: wrap;
 }
 
 .fl > * {
     flex-basis: 15rem;
     flex-grow: 1;
+}
+
+.btn {
+    text-align: center;
 }
