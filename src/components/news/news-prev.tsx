@@ -13,14 +13,16 @@ export default function NewsItemPreview({ item }: { item: NewsListPreviewItem })
     return <Link className={`${leafStyles.lf} ${styles.a}`} href={`/news/${item.slug}`}>
         <article className={styles.art}>
             <div className={styles.h}>
-                <h4>{item.title}</h4>
                 <div className={styles.d}>{date}</div>
+                <h4>{item.title}</h4>
             </div>
             <div className={styles.ic}>
                 <Image src={image} alt="Dekorativna slika" fill />
             </div>
             <div className={styles.desc}>
-                {item.excerpt}
+                <div>
+                    {item.excerpt}
+                </div>
             </div>
         </article>
     </Link>

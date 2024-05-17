@@ -13,9 +13,9 @@
 }
 
 .ribbon {
-    font-size: 0.75rem;
+    --p: 0.5rem 0.75rem;
+    font-size: 0.625rem;
     bottom: -1rem;
-    transform: translateY(100%);
 }
 
 .ribbon::before {
@@ -30,7 +30,7 @@
 
 .ribbon div {
     border-radius: 10% 10% 20% 20%;
-    padding: 0.5rem 0.75rem;
+    padding: var(--p);
 }
 
 .ribbon span {
@@ -42,11 +42,20 @@
     --c2: var(--green);
 }
 
+@media (max-width: 40rem) {
+    .ribbon {
+        --p: 0.25rem 0.5rem;
+    }
+}
 
 @media (hover: hover) {
 
+    .ribbon {
+        transform: translateY(100%);
+    }
+
     .c:hover {
-        transform: scale(1.35);
+        transform: scale(1.3);
         z-index: 1;
         box-shadow: 0 0 5px 0 var(--gray-shadow);
     }

@@ -2,6 +2,7 @@
     --fromX: 100%;
     --toX: 0;
     --m-inline: 2vw;
+    --py: 2vw;
 
     position: fixed;
     top: 0;
@@ -9,11 +10,11 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: var(--light-trans);
+    padding-block: var(--py);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 1rem;
+    background-color: var(--light-trans);
 }
 
 .btn,
@@ -41,8 +42,8 @@
 
 .prev,
 .next {
-    top: 20%;
-    bottom: 0;
+    top: 25%;
+    height: 50%;
     padding-inline: 1rem;
 }
 
@@ -70,8 +71,7 @@
 }
 
 .ribbon {
-    --inset: 1rem;
-    --p: 2rem;
+    --p: 1.5rem 2rem;
 
     font-size: 1.125rem;
     bottom: 0%;
@@ -80,7 +80,7 @@
 }
 
 .ribbon::before {
-    inset: var(--inset);
+    inset: -.5rem;
     border-radius: 0.125rem 100%;
 }
 
@@ -125,6 +125,8 @@
 
 @media (max-width: 40rem) {
     .p {
+        --py: 1rem;
+
         padding-top: calc(var(--nav-h) + 1rem);
         padding-bottom: 1rem;
     }
@@ -135,8 +137,10 @@
 
     .ribbon {
         --inset: -.25rem;
-        --p: 0.125rem 0.75rem;
-        max-width: calc(100% - (4 * var(--m-inline) + 2 * 3rem));
+        --p: 0.125rem 1.75rem;
+        min-width: 75%;
+        width: fit-content;
+        max-width: calc(100% - 2 * var(--m-inline));
     }
 }
 
@@ -157,7 +161,7 @@
     }
 
     .ribbon:hover::before {
-        transform: scale(1.15) rotate(-3deg);
+        transform: scale(1.05) rotate(-1deg);
     }
 }
 

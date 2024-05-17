@@ -15,7 +15,7 @@
     content: '';
     position: absolute;
     background-image: linear-gradient(to right, var(--c1), var(--c2));
-    transition: transform .4s ease-in-out;
+    transition: transform .3s ease-in-out;
     z-index: -1;
 }
 
