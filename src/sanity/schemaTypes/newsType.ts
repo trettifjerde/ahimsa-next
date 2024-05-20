@@ -67,8 +67,15 @@ export const newsType = defineType({
     preview: {
         select: {
           title: 'title',
-          subtitle: 'date',
+          date: 'date',
           media: 'mainImage'
+        },
+        prepare: ({title, date, media}) => {
+            return {
+                title,
+                subtitle: new Date(date).toLocaleString('hr', {dateStyle: 'short', timeStyle: 'short'}),
+                media
+            }
         }
       }
 });

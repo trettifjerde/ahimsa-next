@@ -42,37 +42,10 @@
     font-size: 1.125rem;
 }
 
-.blb {
-    width: fit-content;
-    padding: 0.25em 0.75em;
-    box-shadow: var(--box-shadow);
-    background-color: var(--light);
-    margin-inline: var(--h-inline);
-    border-radius: var(--h-br);
-    transition: transform .2s, background-position .2s;
-}
-
-.blb:has(a) {
-    background-image: linear-gradient(to right, var(--color) 50%, transparent 50%);
-    background-size: 200% 100%;
-    background-position-x: 100%;
-}
-
-.blb:has(a:hover) {
-    background-position-x: 0%;
-    transform: scale(1.1);
-}
-
-.blb:nth-of-type(even) {
-    --h-br: var(--h-br-other);
-    --h-inline: var(--h-inline-other);
-    --color: var(--color-other);
-}
-
 .join {
     width: fit-content;
     margin-inline: auto;
-    margin-block: calc(3 * var(--gap));
+    margin-top: calc(3 * var(--gap));
     padding: 1rem 1.5rem;
 }
 

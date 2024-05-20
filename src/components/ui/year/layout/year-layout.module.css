@@ -6,7 +6,7 @@
 }
 
 .g {
-    --pb: 4rem !important;
+    --pb: 5rem !important;
     position: relative;
     padding-bottom: var(--pb);
 }

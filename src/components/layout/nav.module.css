@@ -91,12 +91,47 @@
     }
 
     .burger {
-        display: block;
         position: relative;
-        transform: rotate(90deg);
-        font-weight: 400;
-        font-size: 1.125rem;
-        padding: 1rem;
+        display: block;
+        width: 3rem;
+        height: 3rem;
         color: var(--dark);
+    }
+
+    .burger::before,
+    .burger::after,
+    .burger span {
+        position: absolute;
+        display: block;
+        height: 0.125rem;
+        left: 1rem;
+        right: 1rem;
+        background-color: var(--cian-dark);
+        transition: transform .2s, opacity .2s;
+    }
+
+    .burger::before,
+    .burger::after {
+        content: '';
+    }
+
+    .burger::before {
+        top: 1.125rem;
+    }
+    .burger span {
+        top: 1.5rem;
+    }
+    .burger::after {
+        top: 1.875rem;
+    }
+
+    .open .burger::before {
+        transform: translateY(0.375rem) rotate(50deg);
+    }
+    .open .burger span {
+        opacity: 0;
+    }
+    .open .burger::after {
+        transform: translateY(-0.375rem) rotate(-50deg);
     }
 }

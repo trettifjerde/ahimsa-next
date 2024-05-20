@@ -20,9 +20,9 @@ export default function NewsItemPreview({ item }: { item: NewsListPreviewItem })
                 <Image src={image} alt="Dekorativna slika" fill />
             </div>
             <div className={styles.desc}>
-                <div>
+                <p>
                     {item.excerpt}
-                </div>
+                </p>
             </div>
         </article>
     </Link>

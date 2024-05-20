@@ -15,19 +15,9 @@
     font-size: 0.75rem;
 }
 
-.b:hover {
-    background-color: var(--cian);
-    color: var(--light);
-}
-
 .b.out {
     background-color: var(--light-shadow);
     color: var(--gray);
-}
-
-.b.out:hover {
-    background-color: var(--light);
-    color: var(--cian);
 }
 
 .spb {
@@ -47,8 +37,22 @@
     background-color: var(--light-trans);
 }
 
-.spb:hover {
-    transform: scale(1.15);
+
+@media (hover:hover) {
+    .b:hover {
+        background-color: var(--cian);
+        color: var(--light);
+    }
+    
+    .b.out:hover {
+        background-color: var(--light);
+        color: var(--cian);
+    }
+
+    .spb:hover {
+        transform: scale(1.15);
+    }
+
 }
 
 @keyframes scale {

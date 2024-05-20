@@ -1,11 +1,14 @@
 .s {
     --h-br1: 1em 95% 0.25em 50%;
     --h-inline1: auto 0;
+    --rot1: -4deg;
     --h-br2: 95% 1em 50% 0.25em;
     --h-inline2: 0 auto;
+    --rot2: 4deg;
+    --shadow-br: 70%;
 
     margin-block: 10vh;
-    padding-block: 2rem;
+    padding-block: 4rem;
 }
 
 .s::before {
@@ -15,23 +18,31 @@
 .s:nth-child(even) {
     --bg: var(--blue-shadow);
     --color: var(--blue);
-    --br: 60% 5% 15% 50%;
-    --rot: -3deg;
+    --br: var(--shadow-br) 5% 20vw 5%;
     --transX: 5%;
     --h-br: var(--h-br1);
     --h-inline: var(--h-inline1);
+    --rot: var(--rot1);
     --h-br-other: var(--h-br2);
     --h-inline-other: var(--h-inline2);
+    --rot-other: var(--rot2);
 }
 
 .s:nth-child(odd) {
     --bg: var(--green-shadow);
     --color: var(--green);
-    --br: 5% 60% 50% 15%;
-    --rot: 3deg;
+    --br: 5% var(--shadow-br) 5% 20vw;
     --transX: -5%;
+    --rot: var(--rot2);
     --h-br: var(--h-br2);
     --h-inline: var(--h-inline2);
     --h-br-other: var(--h-br1);
     --h-inline-other: var(--h-inline1);
+    --rot-other: var(--rot1);
+}
+
+@media (max-width: 65rem) {
+    .s {
+        --shadow-br: 60vw;
+    }
 }

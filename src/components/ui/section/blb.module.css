@@ -1,0 +1,30 @@
+.blb {
+    position: relative;
+    width: fit-content;
+    padding: 0.5em 1em;
+    margin-inline: var(--h-inline);
+    border-radius: var(--h-br);
+}
+
+.blb::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--h-br);
+    box-shadow: var(--box-shadow);
+    background-color: var(--light);
+    transform: rotate(var(--rot));
+    transition: transform .2s;
+    z-index: -1;
+}
+
+.blb:has(a:hover)::before {
+    transform: scale(1.15) rotate(0);
+}
+
+.blb:nth-of-type(even) {
+    --h-br: var(--h-br-other);
+    --h-inline: var(--h-inline-other);
+    --color: var(--color-other);
+    --rot: var(--rot-other);
+}

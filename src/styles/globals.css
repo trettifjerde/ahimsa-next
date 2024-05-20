@@ -1,19 +1,19 @@
 :root {
   --cian: #55b0b3;
   --cian-trans: rgba(85, 176, 179, 0.5);
-  --cian-shadow: rgba(85, 176, 179, 0.2);
+  --cian-shadow: rgba(85, 176, 179, 0.15);
   --cian-dark: rgb(31, 129, 132);
   --green: #a1d3a7;
   --green-trans: rgba(64, 183, 95, 0.5);
-  --green-shadow: rgba(64, 183, 95, 0.1);
+  --green-shadow: rgba(64, 183, 95, 0.15);
   --green-dark: rgb(61, 164, 72);
   --blue: #a9d3ec;
   --blue-trans: rgba(89, 181, 234, 0.5);
   --blue-dark: rgb(89, 181, 234);
-  --blue-shadow: rgba(89, 181, 234, 0.1);
+  --blue-shadow: rgba(89, 181, 234, 0.15);
   --light: rgb(245, 250, 246);
   --light-dark: #f0f5f1;
-  --light-trans: rgb(240, 245, 241, 0.75);
+  --light-trans: rgb(240, 245, 241, 0.85);
   --light-shadow: rgb(240, 245, 241, 0.3);
   --dark: rgb(34, 34, 34);
   --gray: #535353;
@@ -104,6 +104,7 @@ main {
 
 main p {
   margin-block: var(--p-margin);
+  line-height: 1.5;
 }
 
 main code {
@@ -118,8 +119,9 @@ main code {
 article a {
   cursor: pointer;
   color: var(--dark);
+  font-weight: 400;
   text-decoration: underline;
-  transition: color .3s ease;
+  transition: color .2s ease;
   text-decoration-thickness: 0.1em;
   text-decoration-color: var(--cian-dark);
   text-underline-offset: 0.15lh;
@@ -134,7 +136,6 @@ footer {
   border-radius: 0 100% 0 0;
   background-color: var(--blue);
   padding-block: calc(1.5 * var(--main-p));
-  padding-inline: calc(var(--nav-w) + var(--main-p)) var(--main-p);
   font-size: 0.75rem;
   position: relative;
 }
@@ -150,9 +151,8 @@ footer .links {
 
 footer .info {
   display: flex;
-  justify-content: space-around;
   align-items: flex-end;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 footer .info div {

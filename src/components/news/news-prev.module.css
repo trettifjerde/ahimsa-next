@@ -59,7 +59,7 @@
     min-height: 9.45rem;
 }
 
-.desc div {
+.desc p {
     display: -webkit-box;
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;

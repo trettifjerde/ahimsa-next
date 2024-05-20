@@ -37,9 +37,9 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
         }}>
         <div className={styles.p} onClick={close} ref={nodeRef}>
             {pic && <div className={styles.c}>
-                <button type="button" className={styles.btn}>X</button>
-                {hasPrev && <button type="button" className={styles.prev} onClick={(e) => selectNext(-1, e)}>L</button>}
-                {hasNext && <button type="button" className={styles.next} onClick={(e) => selectNext(1, e)}>R</button>}
+                <button type="button" className={styles.btn}>✘</button>
+                {hasPrev && <button type="button" className={styles.prev} onClick={(e) => selectNext(-1, e)}>❮</button>}
+                {hasNext && <button type="button" className={styles.next} onClick={(e) => selectNext(1, e)}>❯</button>}
 
                 <SwitchTransition>
                     <CSSTransition key={pic.id} nodeRef={picRef} classNames={{

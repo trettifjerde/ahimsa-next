@@ -21,7 +21,9 @@ export default function Navigation() {
             <Link href="/" className={styles.logo}>
                 <Logo />
             </Link>
-            <button className={styles.burger} type="button" onClick={() => setMenu(prev => !prev)}>III</button>
+            <button className={styles.burger} type="button" onClick={() => setMenu(prev => !prev)}>
+                <span></span>
+            </button>
             <div className={styles.menu}>
                 <ul className={`${menuStyles.menu}`}>
                     {paths.map(p => <Link key={p.url} href={p.url}>
@@ -37,5 +39,5 @@ const paths = [
     {url: '/news', text: 'Novosti'},
     {url: '/gallery', text: 'Galerije' },
     {url: '/team', text: 'Naš tim'},
-    {url: '/volunteer', text: 'Volontiraj'}
+    {url: '/contact', text: 'Kontakt'}
 ]
