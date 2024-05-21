@@ -2,19 +2,24 @@
 
 import { PointerEventHandler, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { ContactOtherInfo, FooterInfo as FI } from "@/sanity/lib/types";
 
-export default function FooterInfo() {
+type IconFieldType = 'address' | 'email' | 'phone';
+const mainFields : IconFieldType[] = ['address', 'email', 'phone']; 
+
+export default function FooterInfo({info}: {info: FI}) {
+
     const [popup, setPopup] = useState(false);
     const [popupText, setPopupText] = useState('');
     const timer = useRef<any>(null);
     const popupRef = useRef<HTMLDivElement>(null);
 
-    const copyData : PointerEventHandler = async(e) => {
-        if (timer.current) 
+    const copyData: PointerEventHandler = async (e) => {
+        if (timer.current)
             clearTimeout(timer.current);
 
-        const target = e.target as HTMLSpanElement;
-        const text = (e.target as HTMLSpanElement).textContent;
+        const target = e.currentTarget as HTMLSpanElement;
+        const text = (e.currentTarget as HTMLSpanElement).textContent;
 
         if (!text)
             return;
@@ -24,22 +29,12 @@ export default function FooterInfo() {
                 await navigator.clipboard.writeText(text);
                 resolve();
             }
-            catch(err) {
+            catch (err) {
                 reject();
             }
         })
-        .then(() => 'Copied!')
-        .catch(err => {
-            try {
-                const range = document.createRange();
-                range.selectNodeContents(target);
-                getSelection()?.removeAllRanges();
-                getSelection()?.addRange(range);
-            }
-            catch {}
-
-            return 'Failed to copy - do it manually';
-        });
+            .then(() => 'Copied!')
+            .catch(err => 'Failed to copy - do it manually');
 
         popupRef.current?.style.setProperty('top', `${target.offsetTop - 50}px`);
         popupRef.current?.style.setProperty('left', `${target.offsetLeft}px`);
@@ -51,13 +46,14 @@ export default function FooterInfo() {
     return <>
         <div className="info">
             <div>
-                <i className="icon-mail" /><span onPointerDown={copyData}>{process.env.NEXT_PUBLIC_EMAIL}</span>
-                <i className="icon-phone"/><span onPointerDown={copyData}>{process.env.NEXT_PUBLIC_PHONE}</span>
-                <i className="icon-compass"/><span onPointerDown={copyData}>{process.env.NEXT_PUBLIC_ADDRESS}</span>
+                {
+                    mainFields
+                    .filter(field => !!info[field])
+                    .map(type => <FooterIconEntry key={type} type={type} value={info[type] || ''} copyData={copyData} />)
+                }
             </div>
             <div>
-                <b>OIB:</b><span onPointerDown={copyData}>{process.env.NEXT_PUBLIC_OIB}</span>
-                <b>IBAN:</b><span onPointerDown={copyData}>{process.env.NEXT_PUBLIC_IBAN}</span>
+                { info.other.map(info => <FooterTextEntry key={info.name} info={info} copyData={copyData}/> ) }
             </div>
         </div>
         <CSSTransition nodeRef={popupRef} in={popup} timeout={300}>
@@ -65,5 +61,22 @@ export default function FooterInfo() {
                 {popupText}
             </div>
         </CSSTransition>
+    </>
+}
+
+function FooterIconEntry({ type, value, copyData }: { 
+    type: 'address' | 'email' | 'phone', value: string, copyData: PointerEventHandler }) {
+    return <>
+        <i className={`icon-${type}`} />
+        <span onPointerDown={copyData}>
+            {value}
+        </span>
+    </>
+}
+
+function FooterTextEntry({ info, copyData }: { info: ContactOtherInfo, copyData: PointerEventHandler }) {
+    return <>
+        <b>{info.name}</b>
+        <span onPointerDown={copyData}>{info.value}</span>
     </>
 }

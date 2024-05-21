@@ -56,4 +56,15 @@ export const teamQuery = groq`
         description,
         "image": image { asset, crop, hotspot }
     }
-`
+`;
+
+export const contactQuery = groq`
+    *[_type == "contacts"][0] {
+        email,
+        address,
+        phone,
+        facebook,
+        instagram,
+        other
+    }
+`;

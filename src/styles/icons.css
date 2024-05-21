@@ -19,9 +19,9 @@
 .icon-facebook:before {
   content: "\e902";
 }
-.icon-mail:before {
+.icon-email:before {
   content: "\e903";
 }
-.icon-compass:before {
+.icon-address:before {
   content: "\e904";
 }

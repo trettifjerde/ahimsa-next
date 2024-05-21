@@ -179,6 +179,7 @@ footer .info i:has(+span:hover) {
 
 footer .info span {
   cursor: pointer;
+  user-select: all;
 }
 
 .logo {

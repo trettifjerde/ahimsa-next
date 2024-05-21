@@ -42,7 +42,6 @@
     background-color: var(--light);
     border-radius: 5% 25%;
     box-shadow: var(--box-shadow);
-    width: fit-content;
     font-size: 1.125rem;
 }
 

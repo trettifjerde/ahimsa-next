@@ -17,5 +17,10 @@ export const landingType = defineType({
             type: 'array',
             of: [{type: 'image', options: {hotspot: true}}]
         })
-    ]
+    ],
+    preview: {
+        select: {
+            title: 'Naslovna'
+        }
+    }
 });
