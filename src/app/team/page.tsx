@@ -3,6 +3,13 @@ import TeamGrid from "@/components/team/team-grid";
 import TeamItem from "@/components/team/team-item";
 import VolunteerForm from "@/components/team/volunteer";
 import MainBlock from "@/components/layout/main-bl";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: 'Naš tim',
+    description: 'Upoznajte se sa članovima Udruge'
+}
+
 
 export default async function Team() {
     const members = await getTeam();
@@ -14,6 +21,6 @@ export default async function Team() {
                 {members.map(member => <TeamItem key={member.name} member={member} />)}
             </TeamGrid>
         </MainBlock>
-            <VolunteerForm />
+        <VolunteerForm />
     </>
 }

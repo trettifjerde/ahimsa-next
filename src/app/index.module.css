@@ -1,8 +1,11 @@
+.hc {
+    padding-top: 13vh;
+}
+
 .h {
     position: relative;
     width: fit-content;
     margin-inline: auto;
-    padding-top: 13vh;
 }
 
 .h h1,
@@ -23,7 +26,8 @@
 .h h5 {
     position: absolute;
     top: 60%;
-    left: 90%;
+    right: -5%;
+    max-width: 15%;
     font-size: 0.75rem;
     text-align: right;
     line-height: 1;
@@ -99,8 +103,10 @@
     }
 
     .h h5 {
-        top: 10%;
-        left: 80%;
+        top: unset;
+        bottom: 100%;
+        right: 0;
+        max-width: 25%;
         text-align: left;
     }
 

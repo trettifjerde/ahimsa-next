@@ -23,7 +23,7 @@ export default async function Index() {
     throw new Error('Error fetching landing info');
 
   return <>
-    <MainBlock>
+    <MainBlock className={styles.hc}>
       <header className={styles.h}>
         <h1>Ahimsa<span>*</span></h1>
         <h5><span>* </span><b>sanskrt</b>: nenasilje, ljubav, suosjećanje</h5>

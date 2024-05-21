@@ -39,5 +39,5 @@ const paths = [
     {url: '/news', text: 'Novosti'},
     {url: '/gallery', text: 'Galerije' },
     {url: '/team', text: 'Naš tim'},
-    {url: '/contact', text: 'Kontakt'}
+    {url: '/contact', text: 'Kontakti'}
 ]

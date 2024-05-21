@@ -31,6 +31,7 @@ export const newsArticleQuery = groq`
         }, 
         date, 
         description,
+        excerpt,
         "gallery": gallery[]{ asset, crop, hotspot}
     }`;
 

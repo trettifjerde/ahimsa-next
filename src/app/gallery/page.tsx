@@ -1,7 +1,13 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getYearGallery } from "@/sanity/lib/fetches";
 import { GALLERY_BATCH_SIZE, getListQueryParams } from "@/utils/serverHelpers";
 import GalleryFetcher from "@/components/gallery/gallery-fetcher";
+
+export const metadata: Metadata = {
+    title: 'Galerije',
+    description: 'Pogledajte slike Udruge Ahimsa'
+}
 
 export default async function Gallery({ searchParams }: { searchParams?: { year?: string } }) {
     const year = searchParams?.year;
