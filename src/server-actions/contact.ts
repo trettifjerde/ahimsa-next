@@ -1,12 +1,12 @@
 'use server';
 
+import { ContactFormErrorLog, validateContactForm } from "@/utils/contact-form-helpers";
 import { FormServerAction } from "@/utils/types";
-import { VolunteerFormErrorLog, validateVolunteerForm } from "@/utils/volunteer-form-helpers";
 
-const volunteer : FormServerAction<VolunteerFormErrorLog> = async(formData: FormData) => {
+const submitContactForm : FormServerAction<ContactFormErrorLog> = async(formData: FormData) => {
 
     try {
-        const errors = validateVolunteerForm(formData);
+        const errors = validateContactForm(formData);
 
         if (errors)
             return {status: 400, errors};
@@ -23,4 +23,4 @@ const volunteer : FormServerAction<VolunteerFormErrorLog> = async(formData: Form
     }
 }
 
-export default volunteer;
+export default submitContactForm;

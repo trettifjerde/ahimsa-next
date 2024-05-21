@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import useForm from '@/hooks/useForm';
 import volunteer from '@/server-actions/volunteer';
-import { EMAIL, INFO, INFO_LIMIT, NAME, NAME_LIMIT, SURNAME, VolunteerFormErrorLog, validateVolunteerForm } from '@/utils/validators';
+import { VolunteerFormErrorLog, validateVolunteerForm } from '@/utils/volunteer-form-helpers';
+import { EMAIL, MESSAGE, MESSAGE_LIMIT, NAME, NAME_LIMIT, SURNAME } from '@/utils/validators';
 import { Input, Textarea } from '../ui/forms';
 import { SpinnerButton } from '../ui/buttons';
 import ShadowedSection from '../ui/section/section';
@@ -31,8 +32,8 @@ export default function VolunteerForm() {
             </div>
             <Input name={EMAIL} type="email" label="Email" error={errorLog?.email}
                 required />
-            <Textarea name={INFO} label='Ispričaj malo o sebi' error={errorLog?.info}
-                required maxLength={INFO_LIMIT} />
+            <Textarea name={MESSAGE} label='Ispričaj malo o sebi' error={errorLog?.info}
+                required maxLength={MESSAGE_LIMIT} />
             <div className={styles.btn}>
                 <SpinnerButton type='submit' loading={pending}>Pošalji</SpinnerButton>
             </div>

@@ -1,8 +1,8 @@
-import { FooterInfo as FI } from "@/sanity/lib/types";
+import { ContactQueryResult } from "../../../sanity.types";
 import FooterInfo from "./footer-info";
 import MainBlock from "./main-bl";
 
-export default function Footer({ info }: { info: FI }) {
+export default function Footer({ info }: { info: ContactQueryResult }) {
     if (info) {
         const {facebook, instagram} = info;
 

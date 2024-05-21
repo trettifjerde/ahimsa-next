@@ -1,7 +1,7 @@
 import { getTeam } from "@/sanity/lib/fetches";
 import TeamGrid from "@/components/team/team-grid";
 import TeamItem from "@/components/team/team-item";
-import VolunteerForm from "@/components/team/volunteer";
+import VolunteerForm from "@/components/team/volunteer-form";
 import MainBlock from "@/components/layout/main-bl";
 import { Metadata } from "next";
 
