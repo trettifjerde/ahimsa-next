@@ -5,9 +5,7 @@ import { getContacts } from "@/sanity/lib/fetches";
 import { DESCRIPTION } from "@/utils/data";
 import { logo } from "@/utils/image-helpers";
 import Navigation from "@/components/layout/nav";
-import Main from "@/components/layout/main";
 import Footer from "@/components/layout/footer";
-import leafStyles from '@/styles/leaf.module.css';
 import "@/styles/globals.css";
 import "@/styles/icons.css";
 
@@ -44,11 +42,9 @@ export default async function RootLayout({
 
   return (
     <html lang="hr">
-      <body className={`${leafStyles.lf} ${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${faIcons.variable}`}>
+      <body className={`${mainFont.className} ${mainFont.variable} ${handwritten.variable} ${faIcons.variable}`}>
         <Navigation />
-        <Main>
           {children}
-        </Main>
         <Footer info={footerInfo}/>
       </body>
     </html>

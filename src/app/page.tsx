@@ -14,6 +14,7 @@ import ShadowedSection from '@/components/ui/section/section';
 import styles from './index.module.css';
 import buble from '@/components/ui/section/blb.module.css';
 import leafStyles from '@/styles/leaf.module.css';
+import Main from '@/components/layout/main';
 
 export default async function Index() {
 
@@ -22,14 +23,15 @@ export default async function Index() {
   if (!landing || !news)
     throw new Error('Error fetching landing info');
 
-  return <>
-    <MainBlock className={styles.hc}>
-      <header className={styles.h}>
-        <h1>Ahimsa<span>*</span></h1>
-        <h5><span>* </span><b>sanskrt</b>: nenasilje, ljubav, suosjećanje</h5>
-        <h3>Udruga mladih</h3>
-      </header>
-
+  return <Main short>
+    <MainBlock>
+      <div className={styles.hb}>
+        <header className={styles.h}>
+          <h1>Ahimsa</h1>
+          <h5><span>* </span><b>sanskrt</b>: nenasilje, ljubav, suosjećanje</h5>
+          <h3>Udruga mladih</h3>
+        </header>
+      </div>
     </MainBlock>
 
     {landing.text && <>
@@ -57,7 +59,6 @@ export default async function Index() {
       </ShadowedSection>
     </>}
 
-
     <ShadowedSection>
       <h5 className={buble.blb}>ako nam se želiš pridružiti</h5>
       <h5 className={buble.blb}>ili imaš bilo kakvu ideju</h5>
@@ -67,5 +68,5 @@ export default async function Index() {
         </div>
       </Link>
     </ShadowedSection>
-  </>
+  </Main>
 }

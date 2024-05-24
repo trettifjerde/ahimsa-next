@@ -4,13 +4,15 @@ import Image from "next/image";
 import styles from './item.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 
+const sizes = '20rem';
+
 export default function TeamItem({ member }: { member: UdrugaMember }) {
     return <div className={`${leafStyles.lf} ${styles.c}`}>
 
         <div className={styles.d}>{member.description}</div>
         
         <div className={styles.ic}>
-            <Image src={getImageUrl(member.image)} alt={member.name} fill />
+            <Image src={getImageUrl(member.image)} alt={member.name} fill sizes={sizes}/>
         </div>
         <div className={`${leafStyles.lf} ${styles.h}`}>
             <h5>{member.name}</h5>

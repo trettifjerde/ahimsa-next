@@ -67,7 +67,7 @@
     text-overflow: ellipsis;
 }
 
-@media (max-width: 60rem) {
+@media (max-width: 64rem) {
     .art {
         grid-template-columns: 100%;
         grid-template-rows: auto;

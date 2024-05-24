@@ -24,11 +24,8 @@
   --nav-w: 10rem;
   --nav-h: 0px;
   --gap: 2rem;
-  --top-wing: 40vh;
-  --main-top: 25vh;
-  --main-bottom: 5vh;
   --main-p: 3rem;
-  --main-pl: calc(var(--nav-w) + var(--main-p));
+  --main-bottom: 5vh;
 
   --box-shadow: 0 0 1px var(--gray-shadow);
 
@@ -88,31 +85,6 @@ body {
   color: var(--dark);
   line-height: 1.35;
   font-weight: 300;
-}
-
-body::before {
-  --br: 0 0 100% 0;
-  background-color: var(--green);
-  height: var(--top-wing);
-}
-
-main {
-  min-height: 100vh;
-  position: relative;
-  padding-top: calc(var(--nav-h) + var(--main-top));
-}
-
-main p {
-  margin-block: var(--p-margin);
-  line-height: 1.5;
-}
-
-main code {
-  display: block;
-  margin-block: 1rem;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  background-color: var(--cian-shadow);
 }
 
 .a,
@@ -274,7 +246,6 @@ strong {
   :root {
     --nav-h: 6rem;
     --nav-w: 0px;
-    --main-top: 15vh;
     --main-p: 2rem;
   }
 

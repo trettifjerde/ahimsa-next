@@ -1,21 +1,24 @@
-.hc {
-    padding-top: 13vh;
+.hb {
+    background-image: url("/logo.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .h {
     position: relative;
-    width: fit-content;
-    margin-inline: auto;
+    background-image: linear-gradient(transparent 30%, var(--light-trans));
 }
 
 .h h1,
 .h h3 {
     text-align: center;
+    margin-block: 0;
 }
 
 .h h1 {
+    padding-block: 1.25em;
     font-size: 8rem;
-    margin-block: 1.5rem;
 }
 
 .h h3,
@@ -25,9 +28,9 @@
 
 .h h5 {
     position: absolute;
-    top: 60%;
-    right: -5%;
-    max-width: 15%;
+    top: 10%;
+    right: 20%;
+    max-width: 10%;
     font-size: 0.75rem;
     text-align: right;
     line-height: 1;
@@ -43,6 +46,10 @@
     border-radius: 5% 25%;
     box-shadow: var(--box-shadow);
     font-size: 1.125rem;
+}
+
+.fb {
+    margin-top: 0;
 }
 
 .join {
@@ -97,20 +104,25 @@
 }
 
 @media (max-width: 40rem) {
-    .h h1 {
-        font-size: 4.5rem;
-    }
-
-    .h h5 {
-        top: unset;
-        bottom: 100%;
-        right: 0;
-        max-width: 25%;
-        text-align: left;
-    }
 
     .l {
         --p: 2rem;
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 64rem) {
+    .h h1 {
+        font-size: 18vw;
+    }
+
+    .h h3 {
+        font-size: 6vw;
+    }
+
+    .h h5 {
+        top: 1rem;
+        right: 1rem;
+        max-width: 25%;
     }
 }

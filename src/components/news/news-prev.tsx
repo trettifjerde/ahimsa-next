@@ -5,6 +5,8 @@ import { getImageUrl } from "@/utils/image-helpers";
 import styles from './news-prev.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 
+const sizes = '(max-width: 40rem) 100vw, (max-width: 64rem) 60vw, 18rem';
+
 export default function NewsItemPreview({ item }: { item: NewsListPreviewItem }) {
 
     const image = getImageUrl(item.image);
@@ -17,7 +19,7 @@ export default function NewsItemPreview({ item }: { item: NewsListPreviewItem })
                 <h4>{item.title}</h4>
             </div>
             <div className={styles.ic}>
-                <Image src={image} alt="Dekorativna slika" fill />
+                <Image src={image} alt="Dekorativna slika" fill sizes={sizes} />
             </div>
             <div className={styles.desc}>
                 <p>

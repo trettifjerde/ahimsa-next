@@ -4,10 +4,10 @@ import { useRef } from "react";
 import useForm from "@/hooks/useForm";
 import submitContactForm from "@/server-actions/contact";
 import { ContactFormErrorLog, validateContactForm } from "@/utils/contact-form-helpers";
+import { EMAIL, MESSAGE, MESSAGE_LIMIT } from "@/utils/validators";
 import { Input, Textarea } from "../ui/forms";
 import { SpinnerButton } from "../ui/buttons";
-import formStyles from '@/components/ui/form.module.css';
-import { EMAIL, MESSAGE, MESSAGE_LIMIT } from "@/utils/validators";
+import styles from '@/components/ui/form.module.css';
 
 export default function ContactForm() {
     const formRef = useRef<HTMLFormElement>(null);
@@ -15,13 +15,13 @@ export default function ContactForm() {
     const { message, errorLog, pending } = state;
 
 
-    return <form ref={formRef} onSubmit={handleSubmit}>
-        <p className={`${formStyles.p} ${message.isError ? formStyles.err : ''}`}>{message.text}</p>
+    return <form className={styles.f} ref={formRef} onSubmit={handleSubmit}>
+        <p className={`${styles.p} ${message.isError ? styles.err : ''}`}>{message.text}</p>
         <Input name={EMAIL} type="email" label="Email" error={errorLog?.email}
             required />
         <Textarea name={MESSAGE} label='Vaša poruka' error={errorLog?.info}
             required maxLength={MESSAGE_LIMIT} />
-        <div>
+        <div className={styles.btn}>
             <SpinnerButton type='submit' loading={pending}>Pošalji</SpinnerButton>
         </div>
     </form>

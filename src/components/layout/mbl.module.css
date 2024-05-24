@@ -1,6 +1,6 @@
 .m {
     position: relative;
-    padding-left: var(--main-pl);
+    padding-left: calc(var(--nav-w) + var(--main-p));
     padding-right: var(--main-p);
 }
 

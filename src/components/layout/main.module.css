@@ -1,0 +1,40 @@
+.m {
+    --br: 0 0 100% 0;
+    --top-wing: 40vh;
+    --main-top: 25vh;
+
+    min-height: 100vh;
+    position: relative;
+    padding-top: var(--main-top);
+}
+
+.m::before {
+    background-color: var(--green);
+    height: var(--top-wing);
+}
+
+.m p {
+    margin-block: var(--p-margin);
+    line-height: 1.5;
+}
+
+.m code {
+    display: block;
+    margin-block: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    background-color: var(--cian-shadow);
+}
+
+.m.sh {
+    --top-wing: 25vh;
+    --main-top: var(--top-wing);
+}
+
+@media (max-width: 40rem) {
+
+    .m {
+      --top-wing: 30vh;
+      --main-top: 20vh;
+    }
+}

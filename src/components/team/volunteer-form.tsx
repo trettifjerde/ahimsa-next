@@ -8,10 +8,8 @@ import { EMAIL, MESSAGE, MESSAGE_LIMIT, NAME, NAME_LIMIT, SURNAME } from '@/util
 import { Input, Textarea } from '../ui/forms';
 import { SpinnerButton } from '../ui/buttons';
 import ShadowedSection from '../ui/section/section';
-import styles from './form.module.css';
+import styles from '@/components/ui/form.module.css';
 import buble from '@/components/ui/section/blb.module.css';
-import formStyles from '@/components/ui/form.module.css';
-
 
 export default function VolunteerForm() {
 
@@ -23,7 +21,7 @@ export default function VolunteerForm() {
         <h4 className={buble.blb}>Želiš nam se pridružiti?</h4>
 
         <form ref={formRef} className={styles.f} onSubmit={handleSubmit}>
-            <p className={`${formStyles.p} ${message.isError ? formStyles.err : ''}`}>{message.text}</p>
+            <p className={`${styles.p} ${message.isError ? styles.err : ''}`}>{message.text}</p>
             <div className={styles.fl}>
                 <Input name={NAME} type='text' label="Ime" error={errorLog?.name}
                     required maxLength={NAME_LIMIT} />
