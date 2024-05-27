@@ -62,7 +62,7 @@ export default async function Index() {
     <ShadowedSection>
       <h5 className={buble.blb}>ako nam se želiš pridružiti</h5>
       <h5 className={buble.blb}>ili imaš bilo kakvu ideju</h5>
-      <Link href="/volunteer">
+      <Link href="/contact">
         <div className={`${leafStyles.lfa} ${styles.join}`}>
           <h2>Slobodno nam se javi!</h2>
         </div>

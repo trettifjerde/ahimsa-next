@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Shantell_Sans } from "next/font/google";
 import localFont from "next/font/local";
-import { getContacts } from "@/sanity/lib/fetches";
+import { getFooterContacts } from "@/sanity/lib/fetches";
 import { DESCRIPTION } from "@/utils/data";
 import { logo } from "@/utils/image-helpers";
 import Navigation from "@/components/layout/nav";
@@ -38,7 +38,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const footerInfo = await getContacts();
+  const footerInfo = await getFooterContacts();
 
   return (
     <html lang="hr">

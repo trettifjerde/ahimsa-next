@@ -5,7 +5,7 @@
     font-size: 1rem;
     font-weight: 500;
     background-color: var(--light);
-    color: var(--cian);
+    color: var(--cian-dark);
     transition: background-color .2s;
     box-shadow: var(--box-shadow);
 }
@@ -17,7 +17,6 @@
 
 .b.out {
     background-color: var(--light-shadow);
-    color: var(--cian-dark);
 }
 
 .spb {

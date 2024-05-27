@@ -40,16 +40,16 @@
 }
 
 .t {
-    --br: 2rem 75%;
+    --br: 50% 3rem;
     padding: 5vw;
     max-width: 60rem;
     margin-inline: auto;
-    border-radius: 2rem;
+    border-radius: 2rem 7%;
 }
 
 .t::before {
-    background-image: linear-gradient(135deg, var(--green-trans), var(--blue-trans));
-    transform: translate(0.25rem, -0.25rem);
+    background-image: linear-gradient(90deg, var(--green-trans), var(--blue-trans));
+    transform: scale(1.02) rotate(-1deg);
 }
 
 .ic,
@@ -58,6 +58,5 @@
 }
 
 .back {
-    position: absolute;
-    top: calc(-0.5 * var(--main-top));
+    margin-bottom: var(--gap);
 }

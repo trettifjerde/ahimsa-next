@@ -3,5 +3,4 @@
     grid-template-columns: repeat(auto-fit, 20rem);
     justify-content: space-evenly;
     gap: 10vw 15vh;
-    margin-block: calc(1.5 * var(--main-bottom));
 }

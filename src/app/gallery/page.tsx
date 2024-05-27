@@ -1,15 +1,17 @@
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { getYearGallery } from "@/sanity/lib/fetches";
-import { GALLERY_BATCH_SIZE, getListQueryParams } from "@/utils/serverHelpers";
-import GalleryFetcher from "@/components/gallery/gallery-fetcher";
+import { getListQueryParams } from "@/utils/serverHelpers";
+import YearLayout from "@/components/ui/year/layout/year-layout";
+import GalleryGrid from "@/components/gallery/gallery-grid";
+import YearGallery from "@/components/gallery/year-gallery";
+import GalleryLoading from "@/components/gallery/gallery-loading";
 
 export const metadata: Metadata = {
     title: 'Galerije',
     description: 'Pogledajte slike Udruge Ahimsa'
 }
 
-export default async function Gallery({ searchParams }: { searchParams?: { year?: string } }) {
+export default function Gallery({ searchParams }: { searchParams?: { year?: string } }) {
     const year = searchParams?.year;
     const fetchParams = getListQueryParams({ year });
 
@@ -17,10 +19,7 @@ export default async function Gallery({ searchParams }: { searchParams?: { year?
     if (!fetchParams)
         redirect('/gallery');
 
-    const entries = await getYearGallery(fetchParams);
-
-    if (!entries)
-        throw new Error('Failed to fetch gallery');
-
-    return <GalleryFetcher initInfo={{entries, batchSize: GALLERY_BATCH_SIZE, year}}/>
+    return <YearLayout header="Galerije" url="/gallery" GridComponent={GalleryGrid} Fallback={GalleryLoading}>
+        <YearGallery fetchParams={fetchParams} year={year} />
+    </YearLayout>
 }

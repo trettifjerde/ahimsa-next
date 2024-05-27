@@ -1,0 +1,13 @@
+.gr {
+    --br: 5vw 50vw;
+    background-color: var(--light);
+    padding: var(--main-p);
+    border-radius: 5% 25%;
+    box-shadow: var(--box-shadow);
+    z-index: unset !important;
+}
+
+.gr::before {
+    background-image: linear-gradient(140deg, var(--green-trans), var(--blue-trans));
+    transform: scale(1.04) rotate(1deg);
+}

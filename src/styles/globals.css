@@ -30,6 +30,7 @@
   --box-shadow: 0 0 1px var(--gray-shadow);
 
   --p-margin: 0.625em;
+  --p-lh: 1.5;
 }
 
 * {
@@ -57,7 +58,7 @@ h4,
 h5 {
   font-weight: 400;
   font-family: var(--handwritten);
-  margin-bottom: 1em;
+  margin-bottom: 1.75em;
 }
 
 h1 {
@@ -83,7 +84,7 @@ h5 {
 body {
   background-color: var(--light-dark);
   color: var(--dark);
-  line-height: 1.35;
+  line-height: 1.25;
   font-weight: 300;
 }
 
@@ -216,6 +217,11 @@ footer .info span {
 .popup.exit {
   animation-name: popup;
   animation-direction: reverse;
+}
+
+.noscroll {
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 b {

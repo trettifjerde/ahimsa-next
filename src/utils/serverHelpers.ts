@@ -54,7 +54,9 @@ export function makeGalleryPics(entry: GalleryEvent) {
 export function makePics(gallery: GalleryEventGallery) {
     return gallery.map((image, i) => ({
         id: `${i}`,
-        image
+        image,
+        title: '',
+        slug: ''
     }))
 }
 

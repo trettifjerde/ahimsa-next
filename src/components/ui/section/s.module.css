@@ -15,7 +15,8 @@
     background-color: var(--bg);
 }
 
-.s:nth-child(even) {
+.s:nth-of-type(even),
+.s.r:nth-of-type(odd) {
     --bg: var(--blue-shadow);
     --color: var(--blue);
     --br: var(--shadow-br) 5% 20vw 5%;
@@ -28,7 +29,8 @@
     --rot-other: var(--rot2);
 }
 
-.s:nth-child(odd) {
+.s:nth-of-type(odd),
+.s.r:nth-of-type(even) {
     --bg: var(--green-shadow);
     --color: var(--green);
     --br: 5% var(--shadow-br) 5% 20vw;

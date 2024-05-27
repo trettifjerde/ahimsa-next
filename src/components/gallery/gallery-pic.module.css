@@ -13,24 +13,8 @@
 }
 
 .ribbon {
-    --p: 0.5rem 0.75rem;
-    font-size: 0.625rem;
+    font-size: 0.75rem;
     bottom: -1rem;
-}
-
-.ribbon::before {
-    inset: 0 -.25rem;
-    border-radius: 15%;
-    transform: rotate(-3deg);
-}
-
-.ribbon:hover::before {
-    transform: scale(1.1) rotate(0deg);
-}
-
-.ribbon div {
-    border-radius: 10% 10% 20% 20%;
-    padding: var(--p);
 }
 
 .ribbon span {
@@ -40,12 +24,6 @@
 .c:nth-of-type(even) .ribbon {
     --c1: var(--blue);
     --c2: var(--green);
-}
-
-@media (max-width: 40rem) {
-    .ribbon {
-        --p: 0.25rem 0.5rem;
-    }
 }
 
 @media (hover: hover) {

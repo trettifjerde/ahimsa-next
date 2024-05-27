@@ -26,7 +26,7 @@ export default async function NewsItem({ params }: Props) {
 
     const date = new Date(news.date).toLocaleString('hr', { dateStyle: 'full', timeStyle: 'short' });
 
-    return <Main short>
+    return <Main>
         <MainBlock>
             <div className={styles.back}>
                 <NewsBack />

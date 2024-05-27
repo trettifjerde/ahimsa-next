@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: var(--main-p);
-    padding-block: var(--main-bottom);
 }
 
 .g {

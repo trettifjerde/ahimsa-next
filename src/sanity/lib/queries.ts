@@ -44,7 +44,11 @@ export const galleryListQuery = groq`
         title,
         date,
         "slug": slug.current,
-        "gallery": gallery[] { asset, hotspot, crop }
+        "gallery": gallery[] { 
+            asset, 
+            hotspot, 
+            crop
+        }
 }`;
 
 export const teamQuery = groq`
@@ -58,7 +62,7 @@ export const teamQuery = groq`
     }
 `;
 
-export const contactQuery = groq`
+export const footerContactQuery = groq`
     *[_type == "contacts"][0] {
         email,
         address,
@@ -67,4 +71,10 @@ export const contactQuery = groq`
         instagram,
         other
     }
+`;
+
+export const contactQuery = groq`
+    *[_type == "contacts"][0] {
+        greeting
+}
 `;

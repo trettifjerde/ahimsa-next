@@ -6,6 +6,13 @@ export const contactsType = defineType({
     type: 'document',
     fields: [
         defineField({
+            name: 'greeting',
+            title: 'Greeting text',
+            type: 'array',
+            of: [{type: 'block'}],
+            validation: (rule) => rule.required().error('Obavezno')
+        }),
+        defineField({
             name: 'email',
             title: 'Email',
             type: 'string'

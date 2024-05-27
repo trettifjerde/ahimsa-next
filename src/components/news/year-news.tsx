@@ -1,24 +1,14 @@
-import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { getYearNews } from "@/sanity/lib/fetches";
 import { NewsListPreviewItem } from "@/sanity/lib/types";
 import { NEWS_BATCH_SIZE, getListQueryParams } from "@/utils/serverHelpers";
-import NewsItemPreview from "@/components/news/news-prev";
-import NewsFetcher from "@/components/news/news-fetcher";
-import styles from './p.module.css';
+import NewsItemPreview from "./news-prev";
+import NewsFetcher from "./news-fetcher";
+import styles from './year-news.module.css';
 
-export const metadata: Metadata = {
-    title: 'Novosti',
-    description: 'Događanja i aktivnosti Udruge'
-}
-
-export default async function News({ searchParams }: { searchParams?: { year?: string } }) {
-    const year = searchParams?.year;
-    const fetchParams = getListQueryParams({ year });
-
-    // url params provided and invalid
-    if (!fetchParams)
-        redirect('/news');
+export default async function YearNews({fetchParams, year}: {
+    year?: string,
+    fetchParams: Exclude<ReturnType<typeof getListQueryParams>, null>
+}) {
 
     const news = await getYearNews(fetchParams);
 

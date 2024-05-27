@@ -9,8 +9,8 @@ export function NewsSkeletonItem() {
     return <div className={`${leafStyles.lf} ${styles.a}`}>
         <article className={styles.art}>
             <div className={styles.h}>
-                <h4></h4>
                 <div className={styles.d}></div>
+                <h4></h4>
             </div>
             <div className={styles.ic}>
                 <Image src={getImageUrl(null)} alt="Dekorativna slika" fill />

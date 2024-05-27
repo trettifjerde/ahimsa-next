@@ -1,6 +1,7 @@
 .ribbon {
     --c1: var(--green);
     --c2: var(--blue);
+    --p: 0.75rem 1rem;
 
     position: absolute;
     left: 0;
@@ -14,12 +15,17 @@
 .ribbon::before {
     content: '';
     position: absolute;
+    inset: 0 -.25rem;
+    border-radius: 15%;
+    transform: rotate(-2deg);
     background-image: linear-gradient(to right, var(--c1), var(--c2));
     transition: transform .3s ease-in-out;
     z-index: -1;
 }
 
 .ribbon div {
+    border-radius: 10% 10% 20% 20%;
+    padding: var(--p);
     background-color: var(--light);
     box-shadow: var(--box-shadow);
 }
@@ -33,10 +39,16 @@
 
 @media (hover: hover) {
     .ribbon {
+        --p: 0.25rem 0.5rem;
         visibility: hidden;
         opacity: 0;
         transform: translateY(100%);
     }
+
+    .ribbon:hover::before {
+        transform: rotate(2deg);
+    }
+    
     .ribbon:hover h5 {
         color: var(--cian-dark)
     }

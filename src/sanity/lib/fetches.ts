@@ -1,6 +1,6 @@
 import { client } from "./client";
-import { ContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, TeamQueryResult } from "../../../sanity.types";
-import { contactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, teamQuery } from "./queries";
+import { ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, TeamQueryResult } from "../../../sanity.types";
+import { contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, teamQuery } from "./queries";
 import { REVALIDATE_TIMEOUT, YearListQueryParams, getListQueryParams } from "@/utils/serverHelpers";
 
 const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
@@ -16,6 +16,10 @@ export async function getYearNews(params?: YearListQueryParams | null) {
     if (!params)
         return null;
 
+    // await new Promise((res, rej) => {
+    //     setTimeout(() => res(1), 3000);
+    // });
+
     return client.fetch<NewsListQueryResult>(newsListQuery, params, nextParams);
 }
 
@@ -30,11 +34,19 @@ export async function getYearGallery(params: YearListQueryParams | null) {
     if (!params)
         return null;
 
+    // await new Promise((res, rej) => {
+    //     setTimeout(() => res(1), 3000);
+    // });
+
     return client.fetch<GalleryListQueryResult>(galleryListQuery, params, nextParams);
 }
 
 export async function getTeam() {
     return client.fetch<TeamQueryResult>(teamQuery, {}, nextParams);
+}
+
+export async function getFooterContacts() {
+    return client.fetch<FooterContactQueryResult>(footerContactQuery, {}, nextParams);
 }
 
 export async function getContacts() {

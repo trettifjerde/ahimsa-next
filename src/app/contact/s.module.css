@@ -1,9 +1,0 @@
-.s {
-    --bg: var(--cian-shadow) !important;
-}
-
-.s section {
-    --color: var(--cian) !important;
-    max-width: 40rem;
-    margin-inline: auto;
-}

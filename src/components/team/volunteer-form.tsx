@@ -17,7 +17,7 @@ export default function VolunteerForm() {
     const { state, handleSubmit } = useForm<VolunteerFormErrorLog>(validateVolunteerForm, volunteer, formRef);
     const { message, errorLog, pending } = state;
 
-    return <ShadowedSection>
+    return <ShadowedSection reverse>
         <h4 className={buble.blb}>Želiš nam se pridružiti?</h4>
 
         <form ref={formRef} className={styles.f} onSubmit={handleSubmit}>

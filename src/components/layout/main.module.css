@@ -15,7 +15,7 @@
 
 .m p {
     margin-block: var(--p-margin);
-    line-height: 1.5;
+    line-height: var(--p-lh);
 }
 
 .m code {
@@ -29,12 +29,4 @@
 .m.sh {
     --top-wing: 25vh;
     --main-top: var(--top-wing);
-}
-
-@media (max-width: 40rem) {
-
-    .m {
-      --top-wing: 30vh;
-      --main-top: 20vh;
-    }
 }

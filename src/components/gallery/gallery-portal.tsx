@@ -2,12 +2,11 @@
 
 import { MouseEvent, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom";
-import Image from "next/image";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { GalleryEventPic } from "@/sanity/lib/types";
 import { getFullImageUrl } from "@/utils/image-helpers";
-import styles from './portal.module.css';
 import GalleryRibbon from "./gallery-ribbon";
+import styles from './portal.module.css';
 
 export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImage }: {
     pic: GalleryEventPic | null, close: () => void, hasPrev: boolean, hasNext: boolean, toggleImage: (n: number) => void
@@ -26,7 +25,15 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
 
     useEffect(() => {
         ref.current = document.body;
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (pic)
+            document.documentElement?.classList.add('noscroll');
+        else {
+            document.documentElement?.classList.remove('noscroll');
+        }
+    }, [pic]);
 
 
     return ref.current ? createPortal(<CSSTransition in={pic !== null} nodeRef={nodeRef} mountOnEnter unmountOnExit
@@ -41,15 +48,17 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
                 {hasPrev && <button type="button" className={styles.prev} onClick={(e) => selectNext(-1, e)}>❮</button>}
                 {hasNext && <button type="button" className={styles.next} onClick={(e) => selectNext(1, e)}>❯</button>}
 
-                <SwitchTransition>
-                    <CSSTransition key={pic.id} nodeRef={picRef} classNames={{
-                        enter: curDir > 0 ? styles.slideLeftIn : styles.slideRightIn,
-                        exit: styles.slideOut,
-                    }}
-                        addEndListener={(done) => picRef.current?.addEventListener('animationend', done, false)}>
-                        <Image src={getFullImageUrl(pic.image)} fill alt="" ref={picRef} />
-                    </CSSTransition>
-                </SwitchTransition>
+                <div className={styles.ic}>
+                    <SwitchTransition>
+                        <CSSTransition key={pic.id} nodeRef={picRef} classNames={{
+                            enter: curDir > 0 ? styles.slideLeftIn : styles.slideRightIn,
+                            exit: styles.slideOut,
+                        }}
+                            addEndListener={(done) => picRef.current?.addEventListener('animationend', done, false)}>
+                            <img src={getFullImageUrl(pic.image)} ref={picRef} />
+                        </CSSTransition>
+                    </SwitchTransition>
+                </div>
 
                 <GalleryRibbon slug={pic.slug} title={pic.title} className={styles.ribbon} />
             </div>}
