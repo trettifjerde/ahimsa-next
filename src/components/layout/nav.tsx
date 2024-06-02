@@ -27,7 +27,7 @@ export default function Navigation() {
             <div className={styles.menu}>
                 <ul className={`${menuStyles.menu}`}>
                     {paths.map(p => <Link key={p.url} href={p.url}>
-                        <li className={p.url === pathname ? menuStyles.active : ''}>{p.text}</li>
+                        <li className={pathname.startsWith(p.url) ? menuStyles.active : ''}>{p.text}</li>
                     </Link>)}
                 </ul>
             </div>

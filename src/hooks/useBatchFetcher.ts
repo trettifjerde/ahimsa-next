@@ -1,22 +1,22 @@
-import { fetchData, getYearStateKey } from "@/utils/clientHelpers";
 import { MouseEventHandler, useReducer } from "react";
+import { fetchData, getYearStateKey } from "@/utils/clientHelpers";
+import { BatchFetcherResponse, BatchFetcherItem as Item, YearContent, YearMeta } from "@/utils/types";
 
-export default function useBatchFetcher<II extends InitInfo , RawItem extends YearItem, Item>({
-    initInfo, url, getContentFromInit, getContentFromRaw
+export default function useBatchFetcher<R extends Item, I extends Item>({url, prepareItems
 }: { 
-    initInfo: II, url: string, getContentFromInit: GetContentFromInit<II, Item>, getContentFromRaw: GetContentFromRaw<RawItem, Item>
+    url: string, prepareItems: PrepareItems<R, I>
 }) {
 
-    const [state, dispatch] = useReducer(reducer<Item>, {initInfo, getContentFromInit}, initReducer<II, Item>);
+    const [state, dispatch] = useReducer(reducer<I>, null, initBatchFetcherReducer<I>);
 
     const handleFetchMore: MouseEventHandler<HTMLButtonElement> = async (e) => {
         dispatch({ type: 'fetchStart' });
-
+        
         const { lastDate, year } = state.years[state.selectedYear];
 
-        const params = new URLSearchParams({ lastDate, year: state.selectedYear });
+        const params = new URLSearchParams({ lastDate, year: state.selectedYear});
 
-        const res = await fetchData<RawItem[]>(`/api${url}?${params.toString()}`);
+        const res = await fetchData<BatchFetcherResponse<R>>(`/api${url}?${params.toString()}`);
 
         if (res.failed)
             dispatch({ type: 'error', message: res.data })
@@ -24,30 +24,28 @@ export default function useBatchFetcher<II extends InitInfo , RawItem extends Ye
         else 
             dispatch({ 
                 type: 'addItems', 
-                yearContent: getContentFromRaw({
-                    entries: res.data,
-                    batchSize: initInfo.batchSize,
-                    year})
+                yearUpdate: {
+                    items: prepareItems(res.data.items),
+                    hasMore: res.data.hasMore,
+                    year
+                }
             });
     };
 
     return { state, dispatch, handleFetchMore };
 }
 
-export function initReducer<II extends InitInfo, Item>({initInfo, getContentFromInit}: {
-    initInfo: II, getContentFromInit: GetContentFromInit<II, Item>}): FetcherState<Item> {
-
-    const {selectedYear, years} = getContentFromInit(initInfo);
+export function initBatchFetcherReducer<I extends Item>(): FetcherState<I> {
 
     return {
         loading: false,
         errorMsg: '',
-        selectedYear,
-        years
+        selectedYear: '',
+        years: {}
     }
 }
 
-export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
+export function reducer<I extends Item>(state: FetcherState<I>, action: FetcherAction<I>) {
     switch (action.type) {
         case 'setYear':
 
@@ -60,7 +58,9 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
                 selectedYear: yearKey,
                 years: (yearKey in state.years) ? state.years : {
                     ...state.years,
-                    [yearKey] : action.yearContent
+                    [yearKey] : {
+                        ...action.yearContent,
+                    }
                 }
             }
 
@@ -69,9 +69,13 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
 
         case 'addItems':
 
-            const {items, year, hasMore, lastDate} = action.yearContent;
+            const {items, year, hasMore} = action.yearUpdate;
             const curYear = getYearStateKey(year);
-            const curYearItems = state.years[curYear].items;
+            const curYearInfo = state.years[curYear];
+
+            const [updLastDate, updItems] = items.length === 0 ? [curYearInfo.lastDate, curYearInfo.items] : [
+                items[items.length - 1].date, [...curYearInfo.items, ...items]
+            ];
 
             return {
                 ...state,
@@ -82,8 +86,8 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
                     [curYear] : {
                         year,
                         hasMore,
-                        lastDate,
-                        items: items.length === 0 ? curYearItems : [...curYearItems, ...items]
+                        lastDate: updLastDate,
+                        items: updItems
                     }
                 }
             }
@@ -96,36 +100,18 @@ export function reducer<T>(state: FetcherState<T>, action: FetcherAction<T>) {
     }
 }
 
-export type InitInfo = {batchSize: number};
+export type PrepareItems<R extends Item, I extends Item> = (info: R[]) => I[];
 
-export type RawInfo<R> = { batchSize: number, entries: R[], year?: string};
-
-export type GetContentFromInit<I, T> = (initInfo: I) => {selectedYear: string, years: {
-    [key: string]: YearContent<T>
-}};
-
-export type GetContentFromRaw<R, I> = (info: RawInfo<R>) => YearContent<I>;
-
-export type YearItem = { date: string };
-
-export type YearMeta = {
-    year?: string,
-    hasMore: boolean,
-    lastDate: string
-};
-
-type YearContent<T> = YearMeta & { items: T[] };
-
-export type FetcherState<T> = {
+export type FetcherState<I extends Item> = {
     errorMsg: string,
     loading: boolean,
     selectedYear: string,
     years: {
-        [key: string]: YearContent<T>
+        [key: string]: YearContent<I>
     },
 }
 
-export type FetcherAction<T> = { type: 'fetchStart' } |
-{ type: 'addItems', yearContent: YearContent<T>} |
+export type FetcherAction<I extends Item> = { type: 'fetchStart' } |
+{ type: 'addItems', yearUpdate: {items: I[], hasMore: boolean, year: number | null}} |
 { type: 'error', message: string } |
-{ type: 'setYear', yearContent: YearContent<T> };
+{ type: 'setYear', yearContent: YearContent<I> };

@@ -9,9 +9,9 @@ export async function getLanding() {
     return client.fetch<LandingQueryResult>(landingQuery, {}, nextParams);
 }
 
-export async function getYearNews(params?: YearListQueryParams | null) {
+export async function getYearNews(params?: YearListQueryParams) {
     if (!params)
-        params = getListQueryParams({});
+        params = getListQueryParams();
 
     if (!params)
         return null;
@@ -27,9 +27,9 @@ export async function getArtcile(slug: string) {
     return client.fetch<NewsArticleQueryResult>(newsArticleQuery, {slug}, nextParams);
 }
 
-export async function getYearGallery(params: YearListQueryParams | null) {
+export async function getYearGallery(params?: YearListQueryParams) {
     if (!params)
-        params = getListQueryParams({});
+        params = getListQueryParams();
 
     if (!params)
         return null;

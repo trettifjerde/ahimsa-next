@@ -1,8 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { UDRUGA_ALL_YEARS } from "@/utils/clientHelpers";
 import styles from './year-menu.module.css';
 import menuStyles from '@/styles/menu.module.css';
@@ -11,15 +10,16 @@ import shimmerStyles from '@/styles/shimmer.module.css';
 export function YearMenu({url}: {url: string}) {
 
     const router = useRouter();
-    const searchParams = useSearchParams();
+    const {year} = useParams<{year?: string}>();
     const [navigating, setNavigating] = useState(false);
     const [loading, setLoading] = useState(false);
-    
-    const year = searchParams.get('year');
 
-    const goTo = (y: string) => {
+    const goTo = (y?: number) => {
         setNavigating(true);
-        router.push(`${url}?year=${y}`);
+        if (y)
+            router.push(`${url}/${y}`);
+        else 
+            router.push(`${url}`);
     }
 
     useEffect(() => {
@@ -32,12 +32,12 @@ export function YearMenu({url}: {url: string}) {
     useEffect(() => {
         setNavigating(false);
         setLoading(false);
-    }, [searchParams]);
+    }, [year]);
 
     return <div className={styles.menu}>
         <ul className={menuStyles.menu}>
-            <YearLink active={!year || year === 'all'} onClick={() => goTo('all')}>Sve</YearLink>
-            {UDRUGA_ALL_YEARS.map(y => <YearLink key={y} active={y === year} onClick={() => goTo(y)}>{y}</YearLink>)}
+            <YearLink active={!year} onClick={() => goTo()}>Sve</YearLink>
+            {UDRUGA_ALL_YEARS.map(y => <YearLink key={y} active={y.toString() === year} onClick={() => goTo(y)}>{y}</YearLink>)}
             {loading && <div className={shimmerStyles.l}></div>}
         </ul>
     </div>

@@ -4,10 +4,9 @@ import styles from './year-layout.module.css';
 import MainBlock from "@/components/layout/main-bl";
 import Main from "@/components/layout/main";
 
-export default function YearLayout({ header, children, url, GridComponent, Fallback }: {
+export default function YearLayout({ header, children, url, GridComponent }: {
     header: string, children: ReactNode, url: string, 
-    GridComponent: ComponentType<{ children: ReactNode, className?: string }>,
-    Fallback: ComponentType
+    GridComponent: ComponentType<{ children: ReactNode, className?: string }>
 }) {
 
     return <Main>
@@ -15,13 +14,11 @@ export default function YearLayout({ header, children, url, GridComponent, Fallb
             <h1>{header}</h1>
             <div className={styles.c}>
                 <GridComponent className={styles.g}>
-                    <Suspense fallback={<Fallback />}>
-                        {children}
-                    </Suspense>
+                    {children}
                 </GridComponent>
 
                 <Suspense>
-                    <YearMenu url={url} />
+                    <YearMenu url={url}/>
                 </Suspense>
             </div>
         </MainBlock>

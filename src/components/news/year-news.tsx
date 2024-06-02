@@ -1,13 +1,12 @@
 import { getYearNews } from "@/sanity/lib/fetches";
 import { NewsListPreviewItem } from "@/sanity/lib/types";
-import { NEWS_BATCH_SIZE, getListQueryParams } from "@/utils/serverHelpers";
+import { NEWS_BATCH_SIZE, YearListQueryParams } from "@/utils/serverHelpers";
 import NewsItemPreview from "./news-prev";
 import NewsFetcher from "./news-fetcher";
 import styles from './year-news.module.css';
 
-export default async function YearNews({fetchParams, year}: {
-    year?: string,
-    fetchParams: Exclude<ReturnType<typeof getListQueryParams>, null>
+export default async function YearNews({fetchParams}: {
+    fetchParams?: YearListQueryParams
 }) {
 
     const news = await getYearNews(fetchParams);
@@ -24,10 +23,9 @@ export default async function YearNews({fetchParams, year}: {
 
         <NewsFetcher 
             initInfo={{
-                batchSize: NEWS_BATCH_SIZE,
                 hasMore: news.length == NEWS_BATCH_SIZE,
                 lastDate: lastNews?.date || '',
-                year
+                year: fetchParams?.year || null
             }} />
     </>
 }

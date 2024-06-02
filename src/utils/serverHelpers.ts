@@ -5,50 +5,43 @@ export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
 export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
 
-export function getListQueryParams({ lastDate, year }: { lastDate?: string, year?: string }) {
+export function getListQueryParams(info?: { selectedYear?: string, lastDate?: string }) {
 
     try {
-        const currentYear = getYear(year);
+        const {selectedYear, lastDate} = info || {selectedYear: undefined, lastDate: undefined};
+        const year = getYear(selectedYear);
 
-        const start = getStartDate(currentYear);
-        const end = getEndDate({ currentYear, lastDate });
+        const start = getStartDate(year);
+        const end = getEndDate({ year, lastDate });
 
         const batchSize = NEWS_BATCH_SIZE;
 
-        return { start, end, batchSize };
+        return { start, end, batchSize, year };
     }
     catch (error) {
+
         console.log(error);
-        return null;
+        return undefined;
     }
 }
 
-export type YearListQueryParams = Exclude<ReturnType<typeof getListQueryParams>, null>;
+export type YearListQueryParams = ReturnType<typeof getListQueryParams>;
 
 export function getListParamsFromURL(searchParams: URLSearchParams) {
     try {
         const lastDate = searchParams.get('lastDate') || undefined;
-        const year = searchParams.get('year') || undefined;
+        const selectedYear = searchParams.get('year') || undefined;
 
         // function is used for loading more news, so lastDate must be known, as some news are already fetched
         if (!lastDate)
             throw new Error('lastDate must be provided');
 
-        return getListQueryParams({ lastDate, year });
+        return getListQueryParams({ lastDate, selectedYear });
     }
     catch (error) {
         console.log(error);
         return null;
     }
-}
-
-export function makeGalleryPics(entry: GalleryEvent) {
-    return entry.gallery.map((image, i) => ({
-        image,
-        title: entry.title,
-        slug: `/${entry._type}/${entry.slug}`,
-        id: `${entry._type}${entry.slug}${i}`
-    }));
 }
 
 export function makePics(gallery: GalleryEventGallery) {
@@ -56,7 +49,8 @@ export function makePics(gallery: GalleryEventGallery) {
         id: `${i}`,
         image,
         title: '',
-        slug: ''
+        slug: '',
+        date: ''
     }))
 }
 
@@ -68,14 +62,14 @@ function getStartDate(currentYear: ReturnType<typeof getYear>) {
     return `${currentYear - 1}-12-31T23:59:59`;
 }
 
-function getEndDate({ currentYear, lastDate }: { lastDate?: string, currentYear: ReturnType<typeof getYear> }) {
+function getEndDate({ year, lastDate }: { lastDate?: string, year: ReturnType<typeof getYear> }) {
 
     if (!lastDate) {
 
-        if (!currentYear)
+        if (!year)
             return new Date().toISOString();
 
-        return new Date(`${currentYear + 1}-01-01T00:00:00`).toISOString();
+        return new Date(`${year + 1}-01-01T00:00:00`).toISOString();
     }
 
     if (isNaN(new Date(lastDate).getTime()))
