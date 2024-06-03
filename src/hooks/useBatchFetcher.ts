@@ -1,22 +1,23 @@
 import { MouseEventHandler, useReducer } from "react";
 import { fetchData, getYearStateKey } from "@/utils/clientHelpers";
-import { BatchFetcherResponse, BatchFetcherItem as Item, YearContent, YearMeta } from "@/utils/types";
+import { YearContent, YearMeta } from "@/utils/types";
 
-export default function useBatchFetcher<R extends Item, I extends Item>({url, prepareItems
-}: { 
-    url: string, prepareItems: PrepareItems<R, I>
-}) {
+export default function useBatchFetcher<I>(url: string) {
 
     const [state, dispatch] = useReducer(reducer<I>, null, initBatchFetcherReducer<I>);
+
+    const selectYear = (info: YearMeta) => {
+        dispatch({type: 'selectYear', yearMeta: info});
+    };
 
     const handleFetchMore: MouseEventHandler<HTMLButtonElement> = async (e) => {
         dispatch({ type: 'fetchStart' });
         
-        const { lastDate, year } = state.years[state.selectedYear];
+        const { lastDate } = state.years[state.selectedYear];
 
         const params = new URLSearchParams({ lastDate, year: state.selectedYear});
 
-        const res = await fetchData<BatchFetcherResponse<R>>(`/api${url}?${params.toString()}`);
+        const res = await fetchData<YearContent<I>>(`/api${url}?${params.toString()}`);
 
         if (res.failed)
             dispatch({ type: 'error', message: res.data })
@@ -24,18 +25,14 @@ export default function useBatchFetcher<R extends Item, I extends Item>({url, pr
         else 
             dispatch({ 
                 type: 'addItems', 
-                yearUpdate: {
-                    items: prepareItems(res.data.items),
-                    hasMore: res.data.hasMore,
-                    year
-                }
+                yearContent: res.data
             });
     };
 
-    return { state, dispatch, handleFetchMore };
+    return { state, selectYear, handleFetchMore };
 }
 
-export function initBatchFetcherReducer<I extends Item>(): FetcherState<I> {
+export function initBatchFetcherReducer<I>(): FetcherState<I> {
 
     return {
         loading: false,
@@ -45,11 +42,10 @@ export function initBatchFetcherReducer<I extends Item>(): FetcherState<I> {
     }
 }
 
-export function reducer<I extends Item>(state: FetcherState<I>, action: FetcherAction<I>) {
+export function reducer<I>(state: FetcherState<I>, action: FetcherAction<I>) {
     switch (action.type) {
-        case 'setYear':
-
-            const yearKey = getYearStateKey(action.yearContent.year);
+        case 'selectYear':
+            const yearKey = getYearStateKey(action.yearMeta.year);
 
             return {
                 ...state,
@@ -59,7 +55,8 @@ export function reducer<I extends Item>(state: FetcherState<I>, action: FetcherA
                 years: (yearKey in state.years) ? state.years : {
                     ...state.years,
                     [yearKey] : {
-                        ...action.yearContent,
+                        ...action.yearMeta,
+                        items: []
                     }
                 }
             }
@@ -68,14 +65,11 @@ export function reducer<I extends Item>(state: FetcherState<I>, action: FetcherA
             return { ...state, loading: true, errorMsg: '' };
 
         case 'addItems':
-
-            const {items, year, hasMore} = action.yearUpdate;
+            const {items : itemsBatch, year, hasMore, lastDate} = action.yearContent;
             const curYear = getYearStateKey(year);
-            const curYearInfo = state.years[curYear];
+            const curYearInfo = state.years[getYearStateKey(year)];
 
-            const [updLastDate, updItems] = items.length === 0 ? [curYearInfo.lastDate, curYearInfo.items] : [
-                items[items.length - 1].date, [...curYearInfo.items, ...items]
-            ];
+            const items = itemsBatch.length === 0 ? curYearInfo.items : [...curYearInfo.items, ...itemsBatch];
 
             return {
                 ...state,
@@ -86,23 +80,25 @@ export function reducer<I extends Item>(state: FetcherState<I>, action: FetcherA
                     [curYear] : {
                         year,
                         hasMore,
-                        lastDate: updLastDate,
-                        items: updItems
+                        lastDate,
+                        items
                     }
                 }
             }
 
         case 'error':
-            return { ...state, loading: false, errorMsg: action.message };
+            return { 
+                ...state, 
+                loading: false, 
+                errorMsg: action.message 
+            };
 
         default:
             return state;
     }
 }
 
-export type PrepareItems<R extends Item, I extends Item> = (info: R[]) => I[];
-
-export type FetcherState<I extends Item> = {
+export type FetcherState<I> = {
     errorMsg: string,
     loading: boolean,
     selectedYear: string,
@@ -111,7 +107,7 @@ export type FetcherState<I extends Item> = {
     },
 }
 
-export type FetcherAction<I extends Item> = { type: 'fetchStart' } |
-{ type: 'addItems', yearUpdate: {items: I[], hasMore: boolean, year: number | null}} |
+export type FetcherAction<I> = { type: 'fetchStart' } |
+{ type: 'addItems', yearContent: YearContent<I>} |
 { type: 'error', message: string } |
-{ type: 'setYear', yearContent: YearContent<I> };
+{ type: 'selectYear', yearMeta: YearMeta};

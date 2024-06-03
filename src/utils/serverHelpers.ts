@@ -1,15 +1,16 @@
-import { GalleryEvent, GalleryEventGallery } from "@/sanity/lib/types";
+import { GalleryEvent, GalleryEventGallery, GalleryEventPic } from "@/sanity/lib/types";
 import { UDRUGA_START_YEAR } from "./clientHelpers";
+import { YearContent } from "./types";
 
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
 export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
 
-export function getListQueryParams(info?: { selectedYear?: string, lastDate?: string }) {
+export function getGroqBatchParams(info?: { selectedYear?: string, lastDate?: string }) {
 
     try {
         const {selectedYear, lastDate} = info || {selectedYear: undefined, lastDate: undefined};
-        const year = getYear(selectedYear);
+        const year = getYearFromKey(selectedYear);
 
         const start = getStartDate(year);
         const end = getEndDate({ year, lastDate });
@@ -19,28 +20,21 @@ export function getListQueryParams(info?: { selectedYear?: string, lastDate?: st
         return { start, end, batchSize, year };
     }
     catch (error) {
-
         console.log(error);
         return undefined;
     }
 }
 
-export type YearListQueryParams = ReturnType<typeof getListQueryParams>;
-
-export function getListParamsFromURL(searchParams: URLSearchParams) {
+export function getGroqBatchParamsFromUrl(searchParams: URLSearchParams) {
     try {
         const lastDate = searchParams.get('lastDate') || undefined;
         const selectedYear = searchParams.get('year') || undefined;
 
-        // function is used for loading more news, so lastDate must be known, as some news are already fetched
-        if (!lastDate)
-            throw new Error('lastDate must be provided');
-
-        return getListQueryParams({ lastDate, selectedYear });
+        return getGroqBatchParams({ lastDate, selectedYear });
     }
     catch (error) {
         console.log(error);
-        return null;
+        return undefined;
     }
 }
 
@@ -50,11 +44,33 @@ export function makePics(gallery: GalleryEventGallery) {
         image,
         title: '',
         slug: '',
-        date: ''
     }))
 }
 
-function getStartDate(currentYear: ReturnType<typeof getYear>) {
+export function makeGalleryPics(entries: GalleryEvent[]) {
+    return entries.map(entry => entry.gallery
+        .map((image, i) => ({
+            image,
+            title: entry.title,
+            slug: `/${entry._type}/${entry.slug}`,
+            id: `${entry._type}${entry.slug}${i}`
+        }))
+    )
+    .flat()
+}
+
+export function getGalleryYearContent(entries: GalleryEvent[], year: number | null) : YearContent<GalleryEventPic> {
+    const lastEntry : GalleryEvent | undefined = entries[entries.length - 1];
+
+    return {
+        items: makeGalleryPics(entries), 
+        hasMore: entries.length === GALLERY_BATCH_SIZE,
+        lastDate: lastEntry?.date || '',
+        year
+    }
+}
+
+function getStartDate(currentYear: ReturnType<typeof getYearFromKey>) {
 
     if (!currentYear)
         return '';
@@ -62,7 +78,7 @@ function getStartDate(currentYear: ReturnType<typeof getYear>) {
     return `${currentYear - 1}-12-31T23:59:59`;
 }
 
-function getEndDate({ year, lastDate }: { lastDate?: string, year: ReturnType<typeof getYear> }) {
+function getEndDate({ year, lastDate }: { lastDate?: string, year: ReturnType<typeof getYearFromKey> }) {
 
     if (!lastDate) {
 
@@ -78,7 +94,7 @@ function getEndDate({ year, lastDate }: { lastDate?: string, year: ReturnType<ty
     return lastDate;
 }
 
-function getYear(year?: string) {
+function getYearFromKey(year?: string) {
     if (!year || year === 'all')
         return null;
 

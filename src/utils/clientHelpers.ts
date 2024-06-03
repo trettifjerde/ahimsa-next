@@ -1,4 +1,5 @@
-import { GalleryEvent } from "@/sanity/lib/types";
+import { GalleryEventPic } from "@/sanity/lib/types";
+import { YearContent } from "./types";
 
 export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
 
@@ -31,20 +32,11 @@ export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{d
         })
 }
 
+export async function fetchGallery(params: URLSearchParams) {
+    return await fetchData<YearContent<GalleryEventPic>>(`/api/gallery?${params.toString()}`);
+}
+
 
 export function getYearStateKey(year: number | null) {
     return year === null ? 'all' : year.toString();
-}
-
-export function makeGalleryPics(entries: GalleryEvent[]) {
-    return entries.map(entry => entry.gallery
-        .map((image, i) => ({
-            image,
-            title: entry.title,
-            slug: `/${entry._type}/${entry.slug}`,
-            date: entry.date,
-            id: `${entry._type}${entry.slug}${i}`
-        }))
-    )
-    .flat()
 }

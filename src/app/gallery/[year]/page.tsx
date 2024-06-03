@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
-import { getListQueryParams } from "@/utils/serverHelpers";
 import { UDRUGA_ALL_YEARS } from "@/utils/clientHelpers";
 import YearGallery from "@/components/gallery/year-gallery";
+import { getGroqBatchParams } from "@/utils/serverHelpers";
 
 export default function Gallery({ params }: { params?: { year?: string } }) {
-    const fetchParams = getListQueryParams({ selectedYear: params?.year });
+    const fetchParams = getGroqBatchParams({selectedYear: params?.year});
 
     if (!fetchParams)
         redirect('/gallery');

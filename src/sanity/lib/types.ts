@@ -1,4 +1,4 @@
-import { makeGalleryPics } from "@/utils/clientHelpers";
+import { makeGalleryPics } from "@/utils/serverHelpers";
 import { FooterContactQueryResult, GalleryListQueryResult, NewsListQueryResult, TeamQueryResult } from "../../../sanity.types";
 
 export type NewsListPreviewItem = NewsListQueryResult[0];

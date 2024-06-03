@@ -1,26 +1,24 @@
 'use client'
 
-import { Dispatch, MouseEventHandler, ReactNode, createContext } from "react";
-import useBatchFetcher, { FetcherAction, FetcherState, initBatchFetcherReducer } from "@/hooks/useBatchFetcher";
-import { GalleryEvent, GalleryEventPic } from "@/sanity/lib/types";
-import { makeGalleryPics } from "@/utils/clientHelpers";
+import { MouseEventHandler, ReactNode, createContext } from "react";
+import useBatchFetcher, { FetcherState, initBatchFetcherReducer } from "@/hooks/useBatchFetcher";
+import { GalleryEventPic } from "@/sanity/lib/types";
+import { YearMeta } from "@/utils/types";
 
 export const GalleryContext = createContext<{
     state: FetcherState<GalleryEventPic>,
-    dispatch: Dispatch<FetcherAction<GalleryEventPic>>,
+    selectYear: (info: YearMeta) => void,
     handleFetchMore: MouseEventHandler
 }>({
     state: initBatchFetcherReducer(),
-    dispatch: () => { },
+    selectYear: () => {},
     handleFetchMore: () => { }
 });
 
 export default function GalleryContextProvider({ children }: { children: ReactNode }) {
-    const { state, dispatch, handleFetchMore } = useBatchFetcher<GalleryEvent, GalleryEventPic>({
-        url: "/gallery", prepareItems: makeGalleryPics
-    });
+    const { state, selectYear, handleFetchMore } = useBatchFetcher<GalleryEventPic>("/gallery");
 
-    return <GalleryContext.Provider value={{ state, dispatch, handleFetchMore }}>
+    return <GalleryContext.Provider value={{ state, selectYear, handleFetchMore }}>
         {children}
     </GalleryContext.Provider>
 }

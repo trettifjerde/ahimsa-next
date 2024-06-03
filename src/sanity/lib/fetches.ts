@@ -1,7 +1,8 @@
 import { client } from "./client";
 import { ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, TeamQueryResult } from "../../../sanity.types";
 import { contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, teamQuery } from "./queries";
-import { REVALIDATE_TIMEOUT, YearListQueryParams, getListQueryParams } from "@/utils/serverHelpers";
+import { REVALIDATE_TIMEOUT, getGroqBatchParams } from "@/utils/serverHelpers";
+import { YearListQueryParams } from "@/utils/types";
 
 const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
 
@@ -11,7 +12,7 @@ export async function getLanding() {
 
 export async function getYearNews(params?: YearListQueryParams) {
     if (!params)
-        params = getListQueryParams();
+        params = getGroqBatchParams();
 
     if (!params)
         return null;
@@ -29,7 +30,7 @@ export async function getArtcile(slug: string) {
 
 export async function getYearGallery(params?: YearListQueryParams) {
     if (!params)
-        params = getListQueryParams();
+        params = getGroqBatchParams();
 
     if (!params)
         return null;

@@ -69,11 +69,10 @@
 }
 
 .d {
-
     position: relative;
     top: -5%;
-    left: -20%;
-    width: 140%;
+    left: 0;
+    width: 100%;
     padding-block: 1.5rem 1rem;
     padding-inline: 2rem 1rem;
     background-color: var(--light);
@@ -96,8 +95,6 @@
         position: absolute;
         bottom: 100%;
         top: unset;
-        left: -5%;
-        width: 110%;
         transform: translateY(50%) scale(0);
     }
 }

@@ -9,13 +9,12 @@ import fetcherStyles from '@/components/ui/year/layout/year-fetcher.module.css';
 
 export default function NewsFetcher({initInfo}: {initInfo: YearMeta}) {
 
-    const {state, dispatch, handleFetchMore} = useContext(NewsContext);
+    const {state, selectYear, handleFetchMore} = useContext(NewsContext);
 
-    const {items, hasMore} = state.years[state.selectedYear] || {items: [], hasMore: false};
+    const {items, hasMore} = state.years[state.selectedYear] || {items: [], hasMore: initInfo.hasMore};
 
     useEffect(() => {
-        console.log('news fetcher: init info changed');
-        dispatch({type: 'setYear', yearContent: {...initInfo, items: []}})
+        selectYear(initInfo);
     }, [initInfo]);
 
     return <>

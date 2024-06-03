@@ -1,6 +1,6 @@
 .g {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 20rem);
+    grid-template-columns: repeat(auto-fit, minmax(auto, 20rem));
     justify-content: space-evenly;
-    gap: 10vw 15vh;
+    gap: calc(2 * var(--gap));
 }
