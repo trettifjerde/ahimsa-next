@@ -5,9 +5,13 @@
 }
 
 .f {
-    max-width: 40rem;
+    max-width: 45rem;
     margin-inline: auto;
+    padding: 3rem;
     flex-direction: column;
+    background-color: var(--light-dark);
+    box-shadow: var(--box-shadow);
+    border-radius: 1% 25%;
 }
 
 
@@ -21,13 +25,14 @@
 }
 
 .btn {
+    --color: var(--color-dark);
     text-align: center;
 }
 
 .lbl {
     font-family: var(--handwritten);
     font-size: 1.125rem;
-    color: var(--cian-dark);
+    color: var(--color-dark);
     font-weight: 500;
     margin-block: 0.5rem;
 }
@@ -39,10 +44,16 @@
     font-weight: 300;
     font-size: 1rem;
     outline: none;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 0.25rem 1.25rem;
     box-shadow: var(--box-shadow);
     background-color: var(--light);
+    transition: border-color .2s ease-in-out;
+}
+
+.in:focus,
+.ta:focus {
+    border-color: var(--color);
 }
 
 .in.err,
@@ -77,4 +88,10 @@
 
 .p.err {
     color: var(--red);
+}
+
+@media (max-width: 40rem) {
+    .f {
+        padding: 1rem;
+    }
 }

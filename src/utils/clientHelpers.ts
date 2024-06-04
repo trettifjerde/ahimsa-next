@@ -1,15 +1,9 @@
 import { GalleryEventPic } from "@/sanity/lib/types";
-import { YearContent } from "./types";
+import { FetcherEntry } from "./types";
 
-export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
-
-export const UDRUGA_ALL_YEARS = (() => {
-    const years : number[] = [];
-    const curYear = new Date().getFullYear();
-    for (let y = curYear; y >= UDRUGA_START_YEAR; y--) 
-        years.push(y);
-    return years;
-})();
+export function getEntriesKey(key?: string) {
+    return !key ? 'all' : key;
+}
 
 export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{data: T, failed: false} | {data: string, failed: true}>{
     
@@ -33,10 +27,6 @@ export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{d
 }
 
 export async function fetchGallery(params: URLSearchParams) {
-    return await fetchData<YearContent<GalleryEventPic>>(`/api/gallery?${params.toString()}`);
+    return await fetchData<FetcherEntry<GalleryEventPic>>(`/api/gallery?${params.toString()}`);
 }
 
-
-export function getYearStateKey(year: number | null) {
-    return year === null ? 'all' : year.toString();
-}

@@ -78,3 +78,55 @@ export const contactQuery = groq`
         greeting
 }
 `;
+
+export const uncatStoriesQuery = groq`
+    *[_type == "story" && date < $end] 
+    | order(date desc) 
+    [0...$batchSize] 
+    { 
+        title, 
+        "slug": slug.current, 
+        "image": mainImage { asset, crop, hotspot },
+        "categories": categories[] { _ref },
+        date, 
+        excerpt
+}`;
+
+export const catStoriesQuery = groq`
+    *[_type == "story" && $catId in categories && date < $end] 
+    | order(date desc) 
+    [0...$batchSize] 
+    { 
+        title, 
+        "slug": slug.current, 
+        "image": mainImage { asset, crop, hotspot },
+        "categories": categories[] { _ref },
+        date, 
+        excerpt
+}`;
+
+export const storyQuery = groq`
+    *[_type == "story" && slug.current == $slug]
+    [0] 
+    { 
+        title, 
+        "image": mainImage { 
+            asset, 
+            crop, 
+            hotspot, 
+            "aspectRatio": asset -> metadata.dimensions.aspectRatio 
+        }, 
+        date, 
+        description,
+        excerpt,
+        "gallery": gallery[] { asset, crop, hotspot},
+        "categories": categories[] { _ref }
+    }`;
+
+export const storyCategoriesQuery = groq`
+    *[_type == "storyCategory"] {
+        _id,
+        "name": name.current,
+        "color": color.rgb { r, g, b }
+    }
+`;

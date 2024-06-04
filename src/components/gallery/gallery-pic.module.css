@@ -13,6 +13,7 @@
 }
 
 .ribbon {
+    --p: 0.5rem 1.25rem;
     font-size: 0.75rem;
     bottom: -1rem;
 }

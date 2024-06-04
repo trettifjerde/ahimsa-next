@@ -1,8 +1,9 @@
 import { client } from "./client";
-import { ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, TeamQueryResult } from "../../../sanity.types";
-import { contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, teamQuery } from "./queries";
-import { REVALIDATE_TIMEOUT, getGroqBatchParams } from "@/utils/serverHelpers";
-import { YearListQueryParams } from "@/utils/types";
+import { CatStoriesQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
+import { catStoriesQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
+import { REVALIDATE_TIMEOUT, getGroqStoriesParams, getGroqNewsParams, getGroqGalleryParams } from "@/utils/serverHelpers";
+import { StoriesListQueryParams, YearListQueryParams } from "@/utils/types";
+import { StoryCategoryDict } from "./types";
 
 const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
 
@@ -12,7 +13,7 @@ export async function getLanding() {
 
 export async function getYearNews(params?: YearListQueryParams) {
     if (!params)
-        params = getGroqBatchParams();
+        params = getGroqNewsParams();
 
     if (!params)
         return null;
@@ -30,7 +31,7 @@ export async function getArtcile(slug: string) {
 
 export async function getYearGallery(params?: YearListQueryParams) {
     if (!params)
-        params = getGroqBatchParams();
+        params = getGroqGalleryParams();
 
     if (!params)
         return null;
@@ -52,4 +53,37 @@ export async function getFooterContacts() {
 
 export async function getContacts() {
     return client.fetch<ContactQueryResult>(contactQuery, {}, nextParams);
+}
+
+export async function getStory(slug: string) {
+    return client.fetch<StoryQueryResult>(storyQuery, {slug}, nextParams);
+}
+
+export async function getStories(params?: StoriesListQueryParams) {
+    if (!params)
+        params = getGroqStoriesParams();
+
+    if (params.catId)
+        return client.fetch<CatStoriesQueryResult>(catStoriesQuery, params, nextParams);
+        
+    return client.fetch<UncatStoriesQueryResult>(uncatStoriesQuery, params, nextParams);
+}
+
+export async function getCategories() {
+    return client.fetch<StoryCategoriesQueryResult>(storyCategoriesQuery, {}, nextParams);
+}
+
+export async function getCategoriesDict() {
+    return getCategories()
+        .then(cats => {
+            if (!cats)
+                return {};
+
+            return cats.reduce((acc, cat) => {
+                const {_id, name, color } = cat;
+                acc[_id] = {name, color: `${color.r},${color.g},${color.b}`};
+                return acc;
+
+            }, {} as StoryCategoryDict);
+        })
 }

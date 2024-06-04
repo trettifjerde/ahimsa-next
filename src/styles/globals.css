@@ -1,15 +1,16 @@
 :root {
-  --cian: #55b0b3;
+  --cianRgb: 85, 176, 179;
+  --cian: rgb(85, 176, 179);
   --cian-trans: rgba(85, 176, 179, 0.5);
   --cian-shadow: rgba(85, 176, 179, 0.15);
-  --cian-dark: rgb(31, 129, 132);
+  --cian-dark: #1f8184;
   --green: #a1d3a7;
   --green-trans: rgba(64, 183, 95, 0.5);
   --green-shadow: rgba(64, 183, 95, 0.15);
-  --green-dark: rgb(61, 164, 72);
-  --blue: #a9d3ec;
+  --green-dark: rgb(15, 149, 86);
+  --blue: rgb(169, 211, 236);
   --blue-trans: rgba(89, 181, 234, 0.5);
-  --blue-dark: rgb(89, 181, 234);
+  --blue-dark: rgb(46, 137, 191);
   --blue-shadow: rgba(89, 181, 234, 0.15);
   --light: rgb(245, 250, 246);
   --light-dark: #f0f5f1;
@@ -19,6 +20,7 @@
   --gray: #535353;
   --gray-shadow: rgba(143, 148, 144, 0.5);
   --red: rgb(176, 29, 22);
+  --color: var(--cian-dark);
 
   --max-w: 80rem;
   --nav-w: 10rem;

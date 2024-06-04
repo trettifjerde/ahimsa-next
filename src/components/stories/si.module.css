@@ -1,0 +1,40 @@
+.c {
+    --br: 35% 2rem;
+}
+
+.c::before {
+    background-image: linear-gradient(45deg, var(--green), var(--blue));
+    transition: transform .2s ease-in-out;
+}
+
+.ci {
+    border-radius: 7% 3rem;
+    padding: 3rem;
+    background-color: var(--light);
+    box-shadow: var(--box-shadow);
+}
+
+.c h4 {
+    margin-bottom: 0;
+}
+
+.ic {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.ex {
+    padding-block: 2rem;
+}
+
+.ul {
+    width: fit-content;
+    margin-left: auto;
+}
+
+@media (hover: hover) {
+    .c:hover::before {
+        transform: scale(1.05) rotate(-2deg);
+    }
+}

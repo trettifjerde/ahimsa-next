@@ -17,7 +17,7 @@ export default function GalleryViewer({ pics, emptyClass }: { pics: GalleryEvent
     }, []);
 
     return <>
-        {pics.map((pic, i) => <GalleryPic key={pic.id} image={pic.image} slug={pic.slug} title={pic.title}
+        {pics.map((pic, i) => <GalleryPic key={pic.id} pic={pic}
             select={() => setCurI(i)} />)}
 
         {emptyClass && pics.length === 0 && <div className={emptyClass}>Nema objavljenih slika</div>}

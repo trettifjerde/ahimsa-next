@@ -16,7 +16,7 @@ export const newsType = defineType({
         defineField({
             name: 'slug',
             type: 'slug',
-            title: 'Poveznica (samo dio nakon "/news/")',
+            title: 'Poveznica (samo dio koji će biti nakon "/news/article/")',
             options: { source: 'title'},
             validation: (rule) => rule
                 .required()

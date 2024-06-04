@@ -2,32 +2,29 @@
 
 import { useContext, useEffect, useMemo } from "react";
 import { GalleryEventPic } from "@/sanity/lib/types";
-import { YearContent } from "@/utils/types";
-import { SpinnerButton } from "../ui/buttons";
+import { FetcherEntry } from "@/utils/types";
 import GalleryViewer from "./gallery-viewer";
-import { GalleryContext } from "./gallery-context";
-import fetcherStyles from '@/components/ui/year/layout/year-fetcher.module.css';
 import gridStyles from './gallery-grid.module.css';
+import FetchButton from "../ui/list/fetch-button/fetch-button";
+import GalleryContext from "./gallery-context";
 
-export default function GalleryFetcher({ initInfo }: { initInfo: YearContent<GalleryEventPic> }) {
+export default function GalleryFetcher({ initInfo }: { initInfo: FetcherEntry<GalleryEventPic> }) {
 
-    const { state, selectYear, handleFetchMore } = useContext(GalleryContext);
+    const { state, selectKey, handleFetchMore } = useContext(GalleryContext);
 
-    const { hasMore, items } = state.years[state.selectedYear] || {items: [], hasMore: initInfo.hasMore};
+    const { hasMore, items } = state.entries[state.selectedKey] || {items: [], hasMore: initInfo.hasMore};
 
     const pics = useMemo(() => {
         return [...initInfo.items, ...items];
     }, [initInfo, items]);
 
     useEffect(() => {
-        selectYear(initInfo);
+        selectKey(initInfo);
     }, [initInfo]);
 
     return <>
         <GalleryViewer pics={pics} emptyClass={gridStyles.emp} />
 
-        {hasMore && <div className={fetcherStyles.spb}>
-            <SpinnerButton loading={state.loading} onClick={handleFetchMore}>Load more</SpinnerButton>
-        </div>}
+        {hasMore && <FetchButton loading={state.loading} fetchMore={handleFetchMore} />}
     </>
 }

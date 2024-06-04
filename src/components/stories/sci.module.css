@@ -1,0 +1,14 @@
+.i {
+    font-size: 0.75rem;
+}
+
+.i li {
+    width: fit-content;
+    cursor: pointer !important;
+}
+
+@media (hover: hover) {
+    .i:hover li {
+        background-color: rgba(var(--color), 0.75) !important;
+    }
+}

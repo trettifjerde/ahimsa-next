@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getYearNews } from "@/sanity/lib/fetches";
 import { NewsListPreviewItem as News } from "@/sanity/lib/types";
-import { NEWS_BATCH_SIZE, getGroqBatchParamsFromUrl } from "@/utils/serverHelpers";
-import { YearContent } from "@/utils/types";
+import { NEWS_BATCH_SIZE, getGroqNewsParamsFromUrl } from "@/utils/serverHelpers";
+import { BatchFetcherResponse } from "@/utils/types";
 
-export async function GET(req: NextRequest): Promise<NextResponse<{ error: string } | YearContent<News>>> {
-    const params = getGroqBatchParamsFromUrl(req.nextUrl.searchParams);
+export async function GET(req: NextRequest): Promise<NextResponse<{ error: string } | BatchFetcherResponse<News>>> {
+    const params = getGroqNewsParamsFromUrl(req.nextUrl.searchParams);
 
     if (!params)
         return NextResponse.json({ error: 'Invalid params' }, { status: 400 });
@@ -16,8 +16,7 @@ export async function GET(req: NextRequest): Promise<NextResponse<{ error: strin
         return NextResponse.json({
             items: [], 
             hasMore: false, 
-            lastDate: '', 
-            year: params.year
+            lastDate: ''
         });
 
     const lastNews: News | undefined = news[news.length - 1];
@@ -26,7 +25,6 @@ export async function GET(req: NextRequest): Promise<NextResponse<{ error: strin
         items: news,
         hasMore: news.length === NEWS_BATCH_SIZE,
         lastDate: lastNews?.date || '',
-        year: params.year
     });
 
 }

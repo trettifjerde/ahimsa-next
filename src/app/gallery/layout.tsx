@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import GalleryGrid from "@/components/gallery/gallery-grid";
-import YearLayout from "@/components/ui/year/layout/year-layout";
-import GalleryContextProvider from "@/components/gallery/gallery-context";
+import ListLayout from "@/components/ui/list/layout/list-layout";
+import ListContextProvider from "@/components/ui/list/list-context-provider";
+import GalleryContext from "@/components/gallery/gallery-context";
 
 export const metadata: Metadata = {
     title: 'Galerije',
@@ -11,9 +12,12 @@ export const metadata: Metadata = {
 
 export default function GalleryPageLayout({ children }: { children: ReactNode }) {
 
-    return <YearLayout header="Galerije" url="/gallery" GridComponent={GalleryGrid}>
-        <GalleryContextProvider>
+    return <ListLayout header="Galerije" url="/gallery"
+        GridComponent={GalleryGrid}>
+
+        <ListContextProvider url="/gallery" keyName="year" Cont={GalleryContext}>
             {children}
-        </GalleryContextProvider>
-    </YearLayout>
+        </ListContextProvider>
+
+    </ListLayout>
 }

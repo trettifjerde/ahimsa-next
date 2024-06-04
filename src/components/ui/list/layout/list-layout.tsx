@@ -1,10 +1,14 @@
 import { ComponentType, ReactNode, Suspense } from "react";
-import { YearMenu } from "../menu/year-menu";
-import styles from './year-layout.module.css';
+import { UDRUGA_ALL_YEARS } from "@/utils/serverHelpers";
+import { ListMenu } from "../menu/list-menu";
 import MainBlock from "@/components/layout/main-bl";
 import Main from "@/components/layout/main";
+import styles from './layout.module.css';
+import menuStyles from '@/styles/menu.module.css';
 
-export default function YearLayout({ header, children, url, GridComponent }: {
+const list = [{name: 'Sve', url: ''}, ...UDRUGA_ALL_YEARS.map(year => ({name: year, url: year}))];
+
+export default function ListLayout({ header, children, url, GridComponent }: {
     header: string, children: ReactNode, url: string, 
     GridComponent: ComponentType<{ children: ReactNode, className?: string }>
 }) {
@@ -18,7 +22,7 @@ export default function YearLayout({ header, children, url, GridComponent }: {
                 </GridComponent>
 
                 <Suspense>
-                    <YearMenu url={url}/>
+                    <ListMenu url={url} list={list} paramName="year" isSticky isVert />
                 </Suspense>
             </div>
         </MainBlock>

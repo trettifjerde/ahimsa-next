@@ -1,8 +1,7 @@
 .ribbon {
     --c1: var(--green);
     --c2: var(--blue);
-    --p: 0.75rem 1rem;
-
+    
     position: absolute;
     left: 0;
     right: 0;
@@ -39,7 +38,6 @@
 
 @media (hover: hover) {
     .ribbon {
-        --p: 0.25rem 0.5rem;
         visibility: hidden;
         opacity: 0;
         transform: translateY(100%);
@@ -52,5 +50,10 @@
     .ribbon:hover h5 {
         color: var(--cian-dark)
     }
+}
 
+@media (max-width: 40rem) {
+    .ribbon {
+        --p: 0.25rem 0.5rem;
+    }
 }

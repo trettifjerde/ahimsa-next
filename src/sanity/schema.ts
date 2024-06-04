@@ -1,9 +1,11 @@
 import { landingType } from './schemaTypes/landingType'
 import { newsType } from './schemaTypes/newsType'
 import { memberType } from './schemaTypes/memberType'
-import { contactsType } from './schemaTypes/contactType';
+import { contactsType } from './schemaTypes/contactsType';
+import { storyType } from './schemaTypes/storyType';
+import { storyCategory } from './schemaTypes/storyCategory';
 
-export const schemaTypes = [newsType, memberType];
+export const schemaTypes = [newsType, memberType, storyType, storyCategory];
 export const singletonTypes = [landingType, contactsType];
 export const singletonTypeNames = new Set(singletonTypes.map(t => t.name as string));
 

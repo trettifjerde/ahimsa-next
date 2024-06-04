@@ -1,24 +1,8 @@
-'use client'
+'use client';
 
-import { MouseEventHandler, ReactNode, createContext } from "react";
-import useBatchFetcher, { FetcherState, initBatchFetcherReducer } from "@/hooks/useBatchFetcher";
 import { NewsListPreviewItem as News } from "@/sanity/lib/types";
-import { YearMeta } from "@/utils/types";
+import { createListContext } from "../ui/list/list-context-provider";
 
-export const NewsContext = createContext<{
-    state: FetcherState<News>,
-    selectYear: (info: YearMeta) => void,
-    handleFetchMore: MouseEventHandler
-}>({
-    state: initBatchFetcherReducer(),
-    selectYear: () => {},
-    handleFetchMore: () => { }
-});
+const NewsContext = createListContext<News>();
 
-export default function NewsGeneralLayout({ children }: { children: ReactNode }) {
-    const { state, selectYear, handleFetchMore } = useBatchFetcher<News>("/news");
-
-    return <NewsContext.Provider value={{ state, selectYear, handleFetchMore }}>
-        {children}
-    </NewsContext.Provider>
-}
+export default NewsContext;

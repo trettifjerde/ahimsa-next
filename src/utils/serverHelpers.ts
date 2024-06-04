@@ -1,72 +1,118 @@
 import { GalleryEvent, GalleryEventGallery, GalleryEventPic } from "@/sanity/lib/types";
-import { UDRUGA_START_YEAR } from "./clientHelpers";
-import { YearContent } from "./types";
+import { getEntriesKey } from "./clientHelpers";
+import { FetcherEntry } from "./types";
 
+export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
+
+export const UDRUGA_ALL_YEARS = (() => {
+    const years : string[] = [];
+    const curYear = new Date().getFullYear();
+    for (let y = curYear; y >= UDRUGA_START_YEAR; y--) 
+        years.push(y.toString());
+    return years;
+})();
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
+export const STORIES_BATCH_SIZE = parseInt(process.env.STORIES_BATCH_SIZE || '5');
 export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
 
-export function getGroqBatchParams(info?: { selectedYear?: string, lastDate?: string }) {
+export function getGroqStoriesParams(info?: {selectedCat?: string, lastDate?: string}) : {end: string, batchSize: number, catId?: string} {
+    const {selectedCat, lastDate} = info || {selectedCat: undefined, lastDate: undefined};
 
-    try {
-        const {selectedYear, lastDate} = info || {selectedYear: undefined, lastDate: undefined};
-        const year = getYearFromKey(selectedYear);
+    const end = lastDate || new Date().toISOString();
+    const batchSize = STORIES_BATCH_SIZE;
 
-        const start = getStartDate(year);
-        const end = getEndDate({ year, lastDate });
+    if (selectedCat)
+        return { catId: selectedCat, end, batchSize };
 
-        const batchSize = NEWS_BATCH_SIZE;
-
-        return { start, end, batchSize, year };
-    }
-    catch (error) {
-        console.log(error);
-        return undefined;
-    }
+    return {end, batchSize};
 }
 
-export function getGroqBatchParamsFromUrl(searchParams: URLSearchParams) {
-    try {
-        const lastDate = searchParams.get('lastDate') || undefined;
-        const selectedYear = searchParams.get('year') || undefined;
+export function getGroqStoriesParamsFromUrl(searchParams: URLSearchParams) {
+    const lastDate = searchParams.get('lastDate') || undefined;
+    const selectedCat = searchParams.get('cat') || undefined;
 
-        return getGroqBatchParams({ lastDate, selectedYear });
-    }
-    catch (error) {
-        console.log(error);
-        return undefined;
-    }
+    return getGroqStoriesParams({ lastDate, selectedCat });
 }
 
-export function makePics(gallery: GalleryEventGallery) {
+export function getGroqNewsParams(info?: { selectedYear: string, lastDate?: string}) {
+    return getGroqYearParams(NEWS_BATCH_SIZE, info);
+}
+
+export function getGroqNewsParamsFromUrl(searchParams: URLSearchParams) {
+    return getGroqYearParamsFromUrl(NEWS_BATCH_SIZE, searchParams);
+}
+
+export function getGroqGalleryParamsFromUrl(searchParams: URLSearchParams) {
+    return getGroqYearParamsFromUrl(GALLERY_BATCH_SIZE, searchParams);
+}
+
+export function getGroqGalleryParams(info?: { selectedYear: string, lastDate?: string}) {
+    return getGroqYearParams(GALLERY_BATCH_SIZE, info);
+}
+
+export function makePics(gallery: GalleryEventGallery) : GalleryEventPic[] {
     return gallery.map((image, i) => ({
         id: `${i}`,
-        image,
-        title: '',
-        slug: '',
+        image
     }))
 }
 
-export function makeGalleryPics(entries: GalleryEvent[]) {
+export function makeGalleryPics(entries: GalleryEvent[]) : GalleryEventPic[] {
     return entries.map(entry => entry.gallery
         .map((image, i) => ({
             image,
             title: entry.title,
-            slug: `/${entry._type}/${entry.slug}`,
+            slug: `/${entry._type}/article/${entry.slug}`,
             id: `${entry._type}${entry.slug}${i}`
         }))
     )
     .flat()
 }
 
-export function getGalleryYearContent(entries: GalleryEvent[], year: number | null) : YearContent<GalleryEventPic> {
+export function getGalleryFetcherEntry(entries: GalleryEvent[]) : Omit<FetcherEntry<GalleryEventPic>, 'key'> {
     const lastEntry : GalleryEvent | undefined = entries[entries.length - 1];
 
     return {
         items: makeGalleryPics(entries), 
         hasMore: entries.length === GALLERY_BATCH_SIZE,
         lastDate: lastEntry?.date || '',
-        year
+    }
+}
+
+export function getGroqYearParams(batchSize: number, info?: { selectedYear: string, lastDate?: string }) {
+
+    try {
+        const {selectedYear, lastDate} = info || {selectedYear: getEntriesKey(), lastDate: undefined};
+        const year = getYearFromKey(selectedYear);
+
+        const start = getStartDate(year);
+        const end = getEndDate({ year, lastDate });
+
+        return { start, end, batchSize };
+    }
+    catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+function getGroqYearParamsFromUrl(batchSize: number, searchParams: URLSearchParams) {
+    try {
+        const selectedYear = searchParams.get('year');
+        const lastDate = searchParams.get('lastDate');
+
+        // functions is used when fetching more entries, so both params must be provided
+        if (!selectedYear)
+            throw new Error('Year is undefined');
+        if (!lastDate)
+            throw new Error('lastDate is undefined');
+
+        return getGroqYearParams(batchSize, { lastDate, selectedYear });
+    }
+    catch (error) {
+        console.log(error);
+        return undefined;
     }
 }
 

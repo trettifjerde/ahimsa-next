@@ -3,7 +3,7 @@
 
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, var(--pic-width));
+    grid-template-columns: repeat(auto-fill, var(--pic-width));
     grid-auto-rows: min-content;
     gap: var(--gap);
     align-content: center;

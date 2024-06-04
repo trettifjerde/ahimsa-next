@@ -1,11 +1,13 @@
 
 import { getYearGallery } from "@/sanity/lib/fetches";
-import { getGalleryYearContent } from "@/utils/serverHelpers";
+import { getGalleryFetcherEntry } from "@/utils/serverHelpers";
 import { YearListQueryParams } from "@/utils/types";
 import GalleryFetcher from "./gallery-fetcher";
+import { getEntriesKey } from "@/utils/clientHelpers";
 
-export default async function YearGallery({ fetchParams }: {
-    fetchParams?: YearListQueryParams
+export default async function YearGallery({ fetchParams, yearKey }: {
+    fetchParams?: YearListQueryParams,
+    yearKey?: string
 }) {
 
     const entries = await getYearGallery(fetchParams);
@@ -13,7 +15,7 @@ export default async function YearGallery({ fetchParams }: {
     if (!entries)
         throw new Error('Failed to fetch gallery');
 
-    const initInfo = getGalleryYearContent(entries, fetchParams?.year || null);
+    const initInfo = {...getGalleryFetcherEntry(entries), key: getEntriesKey(yearKey)};
 
     return <GalleryFetcher initInfo={initInfo} />
 }

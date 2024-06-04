@@ -32,9 +32,8 @@
 }
 
 .menu li {
-    margin-block: var(--gap);
+    margin-block: 1rem;
 }
-
 
 .logo {
     display: block;
@@ -82,6 +81,10 @@
         border-radius: var(--inner-br);
         background-color: var(--light);
         box-shadow: var(--box-shadow);
+    }
+    .menu ul li {
+        max-width: 75%;
+        margin-inline: auto;
     }
 
     .open .menu {

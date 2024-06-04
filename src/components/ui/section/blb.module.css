@@ -25,6 +25,5 @@
 .blb:nth-of-type(even) {
     --h-br: var(--h-br-other);
     --h-inline: var(--h-inline-other);
-    --color: var(--color-other);
     --rot: var(--rot-other);
 }

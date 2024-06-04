@@ -1,0 +1,12 @@
+.g {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 25rem));
+    justify-content: center;
+    gap: var(--gap);
+    padding-block: var(--gap);
+}
+
+.emp {
+    text-align: center;
+    padding-block: 15vh;
+}

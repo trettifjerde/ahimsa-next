@@ -25,7 +25,7 @@ export default function Navigation() {
                 <span></span>
             </button>
             <div className={styles.menu}>
-                <ul className={`${menuStyles.menu}`}>
+                <ul className={`${menuStyles.ul}`}>
                     {paths.map(p => <Link key={p.url} href={p.url}>
                         <li className={pathname.startsWith(p.url) ? menuStyles.active : ''}>{p.text}</li>
                     </Link>)}
@@ -38,6 +38,7 @@ export default function Navigation() {
 const paths = [
     {url: '/news', text: 'Novosti'},
     {url: '/gallery', text: 'Galerije' },
-    {url: '/team', text: 'Naš tim'},
-    {url: '/contact', text: 'Kontakti'}
+    {url: '/stories', text: 'Naše priče'},
+    {url: '/team', text: 'Ekipa'},
+    {url: '/contact', text: 'Kontakti'},
 ]

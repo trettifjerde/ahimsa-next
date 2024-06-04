@@ -5,9 +5,11 @@ import { YearListQueryParams } from "@/utils/types";
 import NewsItemPreview from "./news-prev";
 import NewsFetcher from "./news-fetcher";
 import styles from './year-news.module.css';
+import { getEntriesKey } from "@/utils/clientHelpers";
 
-export default async function YearNews({fetchParams}: {
-    fetchParams?: YearListQueryParams
+export default async function YearNews({fetchParams, yearKey}: {
+    fetchParams?: YearListQueryParams,
+    yearKey?: string
 }) {
 
     const news = await getYearNews(fetchParams);
@@ -26,7 +28,7 @@ export default async function YearNews({fetchParams}: {
             initInfo={{
                 hasMore: news.length === NEWS_BATCH_SIZE,
                 lastDate: lastNews?.date || '',
-                year: fetchParams?.year || null
+                key: getEntriesKey(yearKey)
             }} />
     </>
 }

@@ -1,23 +1,28 @@
-.menu {
+.ul {
   list-style: none;
-  font-family: var(--handwritten);
   font-weight: 300;
+  font-family: var(--handwritten);
 }
 
-.menu li {
-  transform: translateX(0) scale(1);
-  color: var(--dark);
-  transition: transform .2s ease, color .2s ease;
+.ul li {
+  --color: var(--cianRgb);
+  border-radius: 2rem 25%;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
+  background-color: transparent;
+  text-align: center;
+  transition: padding .2s ease-in-out, background-color .2s ease-out, color .3s ease-in, transform .2s ease-in-out;
 }
 
-.menu li:hover {
-  color: var(--cian);
-}
-
-.menu li.active {
-  transform: scale(1.2);
-  color: var(--cian);
-  font-weight: 400;
+.ul li.active {
+  background-color: rgba(var(--color), 1);
+  color: var(--light);
+  font-weight: 600 !important;
   cursor: default;
+}
+
+@media (hover: hover) {
+  .ul li:not(.active):hover {
+      background-color: rgba(var(--color), 0.5);
+  }
 }

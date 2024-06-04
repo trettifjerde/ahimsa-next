@@ -19,6 +19,7 @@
 .s.r:nth-of-type(odd) {
     --bg: var(--blue-shadow);
     --color: var(--blue);
+    --color-dark: var(--blue-dark);
     --br: var(--shadow-br) 5% 20vw 5%;
     --transX: 5%;
     --h-br: var(--h-br1);
@@ -33,6 +34,7 @@
 .s.r:nth-of-type(even) {
     --bg: var(--green-shadow);
     --color: var(--green);
+    --color-dark: var(--green-dark);
     --br: 5% var(--shadow-br) 5% 20vw;
     --transX: -5%;
     --rot: var(--rot2);

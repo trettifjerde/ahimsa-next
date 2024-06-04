@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import NewsGeneralLayout from "@/components/news/news-context";
+import ListContextProvider from "@/components/ui/list/list-context-provider";
+import NewsContext from "@/components/news/news-context";
 
 export const metadata: Metadata = {
     title: 'Novosti',
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default function NewsStoreLayout({ children }: { children: ReactNode }) {
-    return <NewsGeneralLayout>
+    return <ListContextProvider url="/news" keyName="year" Cont={NewsContext} >
         {children}
-    </NewsGeneralLayout>
+    </ListContextProvider>
 }
