@@ -1,3 +1,5 @@
+'use client';
+
 import { MouseEventHandler, useReducer } from "react";
 import { fetchData, getEntriesKey } from "@/utils/clientHelpers";
 import { BatchFetcherResponse, FetcherEntry, FetcherEntryMeta} from "@/utils/types";

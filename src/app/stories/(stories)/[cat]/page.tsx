@@ -3,7 +3,11 @@ import { getCategories } from "@/sanity/lib/fetches";
 import { getGroqStoriesParams } from "@/utils/serverHelpers";
 
 export default async function StoriesPage({params}: {params: {cat: string}}) {
-    const fetchParams = getGroqStoriesParams({selectedCat: params.cat});
+    const fetchParams = await getGroqStoriesParams({selectedCat: params.cat});
+
+    if (!fetchParams)
+        throw new Error('Invalid category');
+
     return <StoriesGrid fetchParams={fetchParams}/>
 }
 

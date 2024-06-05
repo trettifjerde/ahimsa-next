@@ -13,7 +13,7 @@ export default async function NewsItem({ params }: Props) {
     if (!news)
         notFound();
 
-    return <Article article={news} backBtnText="back to news" />
+    return <Article article={news} backBtnText="back to news" backUrl="/news" />
 }
 
 export async function generateMetadata(

@@ -1,8 +1,10 @@
 'use client';
 
-import useBatchFetcher, { FetcherState, initBatchFetcherReducer } from "@/hooks/useBatchFetcher";
-import { FetcherEntryMeta } from "@/utils/types";
 import { MouseEventHandler, ReactNode, createContext } from "react";
+import { FetcherEntryMeta } from "@/utils/types";
+import useBatchFetcher, { FetcherState, initBatchFetcherReducer } from "@/hooks/useBatchFetcher";
+
+export type ListContext<T> = ReturnType<typeof createListContext<T>>;
 
 export function createListContext<T>() {
     return createContext<{
@@ -16,7 +18,6 @@ export function createListContext<T>() {
     });    
 };
 
-type ListContext<T> = ReturnType<typeof createListContext<T>>;
 
 export default function ListContextProvider<I>({Cont, children, url, keyName }: { 
     Cont: ListContext<I>,
@@ -26,7 +27,11 @@ export default function ListContextProvider<I>({Cont, children, url, keyName }: 
 }) {
     const { state, selectKey, handleFetchMore } = useBatchFetcher<I>(url, keyName);
 
-    return <Cont.Provider value={{ state, selectKey, handleFetchMore }}>
+    return <Cont.Provider value={{ 
+        state, 
+        selectKey, 
+        handleFetchMore 
+    }}>
         {children}
     </Cont.Provider>
 }

@@ -130,3 +130,9 @@ export const storyCategoriesQuery = groq`
         "color": color.rgb { r, g, b }
     }
 `;
+
+export const categoryIdQuery = groq`
+    *[_type == "storyCategory" && name.current == $name]
+    [0]
+    { _id }
+`;

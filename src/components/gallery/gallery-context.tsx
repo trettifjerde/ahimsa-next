@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { GalleryEventPic } from "@/sanity/lib/types";
 import { createListContext } from "../ui/list/list-context-provider";
 

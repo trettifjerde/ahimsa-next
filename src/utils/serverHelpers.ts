@@ -1,6 +1,7 @@
 import { GalleryEvent, GalleryEventGallery, GalleryEventPic } from "@/sanity/lib/types";
 import { getEntriesKey } from "./clientHelpers";
 import { FetcherEntry } from "./types";
+import { getCategoryId } from "@/sanity/lib/fetches";
 
 export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
 
@@ -16,16 +17,26 @@ export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5'
 export const STORIES_BATCH_SIZE = parseInt(process.env.STORIES_BATCH_SIZE || '5');
 export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
 
-export function getGroqStoriesParams(info?: {selectedCat?: string, lastDate?: string}) : {end: string, batchSize: number, catId?: string} {
+export type GroqStoriesParams = {end: string, batchSize: number, catId?: string};
+
+export async function getGroqStoriesParams(info?: {selectedCat?: string, lastDate?: string}) {
     const {selectedCat, lastDate} = info || {selectedCat: undefined, lastDate: undefined};
+    
+    const params : GroqStoriesParams = {
+        end: lastDate || new Date().toISOString(),
+        batchSize: STORIES_BATCH_SIZE
+    };
 
-    const end = lastDate || new Date().toISOString();
-    const batchSize = STORIES_BATCH_SIZE;
+    if (selectedCat) {
+        const catId = await getCategoryId(selectedCat);
 
-    if (selectedCat)
-        return { catId: selectedCat, end, batchSize };
+        if (!catId)
+            return undefined;
 
-    return {end, batchSize};
+        params.catId = catId._id;
+    }
+
+    return params;
 }
 
 export function getGroqStoriesParamsFromUrl(searchParams: URLSearchParams) {

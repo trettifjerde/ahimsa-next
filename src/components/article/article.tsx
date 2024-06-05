@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
-import { NewsArticle, StoryArticle } from '@/sanity/lib/types';
 import { getFullImageUrl } from '@/utils/image-helpers';
 import { makePics } from '@/utils/serverHelpers';
 import Main from '../layout/main';
@@ -10,17 +9,24 @@ import GalleryGrid from '../gallery/gallery-grid';
 import BackButton from './back-button';
 import styles from './a.module.css';
 import leafStyles from '@/styles/leaf.module.css';
+import { ArticleType } from '@/utils/types';
 
 const sizes = '(max-width: 40rem) 100vw, (max-width: 64rem) 50rem, 70rem';
 
-export default function Article({article, backBtnText}: {article: NewsArticle | StoryArticle , backBtnText: string}) {
+export default function Article({
+    article, backBtnText, backUrl
+}: {
+    article: ArticleType, 
+    backBtnText: string,
+    backUrl: string
+}) {
 
     const date = new Date(article.date).toLocaleString('hr', { dateStyle: 'full', timeStyle: 'short' });
 
     return <Main>
         <MainBlock>
             <div className={styles.back}>
-                <BackButton text={backBtnText} />
+                <BackButton text={backBtnText} url={backUrl} />
             </div>
             <article>
                 <div className={`${leafStyles.lf} ${styles.h}`}>

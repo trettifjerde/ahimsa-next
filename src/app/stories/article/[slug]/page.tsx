@@ -9,7 +9,7 @@ export default async function StoryPage({ params }: { params: { slug: string } }
     if (!story)
         notFound();
 
-    return <Article article={story} backBtnText="back to stories" />
+    return <Article article={story} backBtnText="back to stories" backUrl="/stories" />
 }
 
 export async function generateStaticParams() {

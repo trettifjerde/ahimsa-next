@@ -1,8 +1,8 @@
 import { client } from "./client";
-import { CatStoriesQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
-import { catStoriesQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
-import { REVALIDATE_TIMEOUT, getGroqStoriesParams, getGroqNewsParams, getGroqGalleryParams } from "@/utils/serverHelpers";
-import { StoriesListQueryParams, YearListQueryParams } from "@/utils/types";
+import { CatStoriesQueryResult, CategoryIdQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
+import { catStoriesQuery, categoryIdQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
+import { REVALIDATE_TIMEOUT, getGroqStoriesParams, getGroqNewsParams, getGroqGalleryParams, GroqStoriesParams } from "@/utils/serverHelpers";
+import { YearListQueryParams } from "@/utils/types";
 import { StoryCategoryDict } from "./types";
 
 const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
@@ -59,9 +59,16 @@ export async function getStory(slug: string) {
     return client.fetch<StoryQueryResult>(storyQuery, {slug}, nextParams);
 }
 
-export async function getStories(params?: StoriesListQueryParams) {
+export async function getCategoryId(name: string) {
+    return client.fetch<CategoryIdQueryResult>(categoryIdQuery, {name}, nextParams);
+}
+
+export async function getStories(params?: GroqStoriesParams) {
     if (!params)
-        params = getGroqStoriesParams();
+        params = await getGroqStoriesParams();
+
+    if (params === undefined)
+        return null;
 
     if (params.catId)
         return client.fetch<CatStoriesQueryResult>(catStoriesQuery, params, nextParams);
