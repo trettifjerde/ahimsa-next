@@ -1,14 +1,10 @@
-import { urlForFullImage, urlForImage } from '@/sanity/lib/image';
-import { SanityImageObject } from '@sanity/image-url/lib/types/types';
-import { GalleryImage } from '@/sanity/lib/types';
+import { ImageInfo } from "@/sanity/lib/types";
+import getSanityImageUrl from "./image-loader";
 
-export const logo = new URL('/logo.svg', process.env.NEXT_PUBLIC_URL).toString();
-
-export function getImageUrl(source: SanityImageObject | GalleryImage | null) {
-
-    return source ? urlForImage(source) : logo;
+export function getLogoUrl() {
+    return `${process.env.NEXT_PUBLIC_URL}/images/logo.svg`;
 }
 
-export function getFullImageUrl(source: GalleryImage | null) {
-    return (source && source.asset) ? urlForFullImage(source.asset) : logo;
+export function getMetaImageUrl(source: ImageInfo) {
+    return source ? getSanityImageUrl({source, full: false, width: 200, quality: 85, square: true}) : getLogoUrl();
 }

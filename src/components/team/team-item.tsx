@@ -1,10 +1,9 @@
 import { UdrugaMember } from "@/sanity/lib/types";
-import { getImageUrl } from "@/utils/image-helpers";
-import Image from "next/image";
 import styles from './item.module.css';
 import leafStyles from '@/styles/leaf.module.css';
+import CustomImage from "../ui/image/customImage";
 
-const sizes = '20rem';
+const sizes = '14rem';
 
 export default function TeamItem({ member }: { member: UdrugaMember }) {
     return <div className={`${leafStyles.lf} ${styles.c}`}>
@@ -12,7 +11,7 @@ export default function TeamItem({ member }: { member: UdrugaMember }) {
         <div className={styles.d}>{member.description}</div>
         
         <div className={styles.ic}>
-            <Image src={getImageUrl(member.image)} alt={member.name} fill sizes={sizes}/>
+            <CustomImage source={member.image} sizes={sizes}/>
         </div>
         <div className={`${leafStyles.lf} ${styles.h}`}>
             <h5>{member.name}</h5>

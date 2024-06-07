@@ -1,8 +1,8 @@
 'use client';
 
 import { MouseEventHandler, useReducer } from "react";
-import { fetchData, getEntriesKey } from "@/utils/clientHelpers";
-import { BatchFetcherResponse, FetcherEntry, FetcherEntryMeta} from "@/utils/types";
+import { fetchData } from "@/utils/clientHelpers";
+import { FetcherEntry, FetcherEntryMeta} from "@/utils/types";
 
 export default function useBatchFetcher<I>(url: string, keyName: string) {
 
@@ -18,8 +18,12 @@ export default function useBatchFetcher<I>(url: string, keyName: string) {
         const selKey = state.selectedKey;
         const { lastDate } = state.entries[selKey];
 
-        const params = new URLSearchParams({ lastDate, [keyName]: selKey});
-        const res = await fetchData<BatchFetcherResponse<I>>(`/api${url}?${params.toString()}`);
+        const params = new URLSearchParams({ lastDate });
+
+        if (selKey !== 'all') 
+            params.set(keyName, selKey);
+
+        const res = await fetchData<FetcherEntry<I>>(`/api${url}?${params.toString()}`);
 
         if (res.failed)
             dispatch({ type: 'error', message: res.data })
@@ -27,7 +31,8 @@ export default function useBatchFetcher<I>(url: string, keyName: string) {
         else 
             dispatch({ 
                 type: 'addItems', 
-                entries: {...res.data, key: selKey}
+                entries: res.data, 
+                key: selKey
             });
     };
 
@@ -47,17 +52,17 @@ export function initBatchFetcherReducer<I>(): FetcherState<I> {
 export function reducer<I>(state: FetcherState<I>, action: FetcherAction<I>) {
     switch (action.type) {
         case 'selectKey':
-            const enK = getEntriesKey(action.entriesMeta.key);
+            const meta = action.entriesMeta;
 
             return {
                 ...state,
                 loading: false,
                 errorMsg: '',
-                selectedKey: enK,
-                entries: (enK in state.entries) ? state.entries : {
+                selectedKey: meta.key,
+                entries: (meta.key in state.entries) ? state.entries : {
                     ...state.entries,
-                    [enK] : {
-                        ...action.entriesMeta,
+                    [meta.key] : {
+                        ...meta,
                         items: []
                     }
                 }
@@ -67,9 +72,9 @@ export function reducer<I>(state: FetcherState<I>, action: FetcherAction<I>) {
             return { ...state, loading: true, errorMsg: '' };
 
         case 'addItems':
-            const {items : itemsBatch, key, hasMore, lastDate} = action.entries;
-            const curKey = getEntriesKey(key);
-            const curYearInfo = state.entries[curKey];
+            const {entries, key} = action;
+            const {items: itemsBatch, lastDate} = entries;
+            const curYearInfo = state.entries[key];
 
             const items = itemsBatch.length === 0 ? curYearInfo.items : [...curYearInfo.items, ...itemsBatch];
 
@@ -79,9 +84,7 @@ export function reducer<I>(state: FetcherState<I>, action: FetcherAction<I>) {
                 errorMsg: '',
                 entries: {
                     ...state.entries,
-                    [curKey] : {
-                        key,
-                        hasMore,
+                    [key] : {
                         lastDate,
                         items
                     }
@@ -110,6 +113,6 @@ export type FetcherState<I> = {
 }
 
 export type FetcherAction<I> = { type: 'fetchStart' } |
-{ type: 'addItems', entries: FetcherEntry<I>} |
+{ type: 'addItems', entries: FetcherEntry<I>, key: string} |
 { type: 'error', message: string } |
 { type: 'selectKey', entriesMeta: FetcherEntryMeta};

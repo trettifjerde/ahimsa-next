@@ -1,13 +1,11 @@
 
 import { getYearGallery } from "@/sanity/lib/fetches";
-import { getGalleryFetcherEntry } from "@/utils/serverHelpers";
-import { YearListQueryParams } from "@/utils/types";
+import { GALLERY_BATCH_SIZE, makeFetcherInitInfo, makeGalleryPics } from "@/utils/serverHelpers";
 import GalleryFetcher from "./gallery-fetcher";
-import { getEntriesKey } from "@/utils/clientHelpers";
+import { GroqYearParams } from "@/utils/types";
 
-export default async function YearGallery({ fetchParams, yearKey }: {
-    fetchParams?: YearListQueryParams,
-    yearKey?: string
+export default async function YearGallery({ fetchParams }: {
+    fetchParams?: GroqYearParams,
 }) {
 
     const entries = await getYearGallery(fetchParams);
@@ -15,7 +13,8 @@ export default async function YearGallery({ fetchParams, yearKey }: {
     if (!entries)
         throw new Error('Failed to fetch gallery');
 
-    const initInfo = {...getGalleryFetcherEntry(entries), key: getEntriesKey(yearKey)};
-
-    return <GalleryFetcher initInfo={initInfo} />
+    return <GalleryFetcher 
+        initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams?.start)}
+        initItems={makeGalleryPics(entries)} 
+    />
 }

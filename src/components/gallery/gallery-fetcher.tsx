@@ -1,21 +1,24 @@
 'use client'
 
 import { useMemo } from "react";
-import { GalleryEventPic } from "@/sanity/lib/types";
-import { FetcherEntry } from "@/utils/types";
+import { GalleryEntryPic } from "@/sanity/lib/types";
+import { FetcherEntryMeta } from "@/utils/types";
 import GalleryViewer from "./gallery-viewer";
 import gridStyles from './gallery-grid.module.css';
 import FetchButton from "../ui/list/fetch-button/fetch-button";
 import GalleryContext from "./gallery-context";
 import useFetcherContextConsumer from "@/hooks/useContextConsumer";
 
-export default function GalleryFetcher({ initInfo }: { initInfo: FetcherEntry<GalleryEventPic> }) {
+export default function GalleryFetcher({ initInfo, initItems }: { 
+    initInfo: FetcherEntryMeta, 
+    initItems: GalleryEntryPic[] 
+}) {
 
     const { state, handleFetchMore } = useFetcherContextConsumer(GalleryContext, initInfo);
     const { loading, errorMsg, items, hasMore } = state;
 
     const pics = useMemo(() => {
-        return [...initInfo.items, ...items];
+        return [...initItems, ...items];
     }, [items]);
 
     return <>

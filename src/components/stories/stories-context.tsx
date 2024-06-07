@@ -10,7 +10,7 @@ export const StoriesContext = createListContext<StoryPreview>();
 export default function StoriesContextProvider({children, categories}: {categories: StoryCategoryDict, children: ReactNode}) {
 
     return <CategoriesContext.Provider value={categories}>
-        <ListContextProvider url="/stories" keyName="cat" Cont={StoriesContext}>
+        <ListContextProvider url="/stories" keyName="catId" Cont={StoriesContext}>
             {children}
         </ListContextProvider>
     </CategoriesContext.Provider>

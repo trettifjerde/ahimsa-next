@@ -9,7 +9,8 @@ export const landingType = defineType({
             name: 'text',
             type: 'array',
             title: 'Glavni tekst',
-            of: [{type: 'block'}]
+            of: [{type: 'block'}],
+            validation: (rule) => rule.required().error('Obavezno')
         }),
         defineField({
             name: 'images',

@@ -1,11 +1,11 @@
 'use client'
 
 import { useCallback, useState } from "react";
-import { GalleryEventPic } from "@/sanity/lib/types";
+import { GalleryEntryPic } from "@/sanity/lib/types";
 import GalleryPic from "./gallery-pic";
 import GalleryPortal from "./gallery-portal";
 
-export default function GalleryViewer({ pics, emptyClass }: { pics: GalleryEventPic[], emptyClass?: string }) {
+export default function GalleryViewer({ pics, emptyClass }: { pics: GalleryEntryPic[], emptyClass?: string }) {
     const [curI, setCurI] = useState<number | null>(null);
 
     const toggleImage = useCallback((n: number) => {

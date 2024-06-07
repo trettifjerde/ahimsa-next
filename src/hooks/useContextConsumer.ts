@@ -20,12 +20,12 @@ export default function useFetcherContextConsumer<T>(context: ListContext<T>, in
 
 function extractInfoFromState<I>(state: FetcherState<I>, initInfo: FetcherEntryMeta) {
     const {loading, errorMsg, selectedKey} = state;
-    const {items, hasMore} = selectedKey ? state.entries[selectedKey] : {items: [], hasMore: null};
+    const {items, lastDate} = selectedKey ? state.entries[selectedKey] : {items: [], lastDate: null};
 
     return { 
         loading, 
         errorMsg, 
         items, 
-        hasMore: hasMore !== null ? hasMore : initInfo.hasMore 
+        hasMore: lastDate !== null ? !!lastDate : !!initInfo.lastDate 
     };
 }

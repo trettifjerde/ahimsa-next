@@ -9,7 +9,8 @@
 }
 
 .c img {
-    object-fit: scale-down;
+    border-radius: var(--br);
+    object-fit: cover;
 }
 
 .ribbon {

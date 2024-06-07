@@ -1,19 +1,18 @@
 import { NewsArticle, StoryArticle } from "@/sanity/lib/types";
-import { getGroqYearParams } from "./serverHelpers";
 
 export type FormErrorLog<EL> = EL | null;
 export type FormValidator<EL> = (formData: FormData) => FormErrorLog<EL>;
 export type FormActionResponse<EL> = {status: 200} | {status: 400, errors: FormErrorLog<EL>} | {status: 500};
 export type FormServerAction<EL> = (formData: FormData) => Promise<FormActionResponse<EL>>;
 
-export type YearListQueryParams = ReturnType<typeof getGroqYearParams>;
+export type GroqYearParams = {end: string, batchSize: number, start: string};
+export type GroqStoriesParams = {end: string, batchSize: number, catId?: string};
 
 export type FetcherEntryMeta = {
     key: string,
-    hasMore: boolean,
     lastDate: string
 };
-export type FetcherEntry<I> = FetcherEntryMeta & {items: I[] };
-export type BatchFetcherResponse<I> = Omit<FetcherEntry<I>, 'key'>;
+export type FetcherEntry<I> = {items: I[], lastDate: string};
+export type BatchFetcherBody<I> = { error: string } | FetcherEntry<I>;
 
 export type ArticleType = NewsArticle & {categories?: StoryArticle['categories']};

@@ -1,5 +1,5 @@
 .p {
-    --fromX: 100%;
+    --fromX: 30%;
     --toX: 0;
     --m-inline: 2vw;
     --py: 2vw;
@@ -69,14 +69,10 @@
 }
 
 .ic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 }
 
 .ic img {
-    width: 100%;
-    max-height: 100%;
     object-fit: scale-down;
 }
 
@@ -106,11 +102,11 @@
 }
 
 .slideLeftIn {
-    --fromX: 100%;
+    --fromX: 30%;
 }
 
 .slideRightIn {
-    --fromX: -100%;
+    --fromX: -30%;
 }
 
 .slideOut {

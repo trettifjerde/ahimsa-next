@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getYearGallery } from "@/sanity/lib/fetches";
-import { GalleryEventPic as GP } from "@/sanity/lib/types";
-import { getGalleryFetcherEntry, getGroqGalleryParamsFromUrl } from "@/utils/serverHelpers";
-import { BatchFetcherResponse } from "@/utils/types";
+import { GalleryEntryPic as GP } from "@/sanity/lib/types";
+import { GALLERY_BATCH_SIZE, getYearFetchGroqParams, makeFetcherBody, makeGalleryPics } from "@/utils/serverHelpers";
+import { BatchFetcherBody } from "@/utils/types";
 
-export async function GET(req: NextRequest) : Promise<NextResponse<{error: string} | BatchFetcherResponse<GP>>> {
+export async function GET(req: NextRequest) : Promise<NextResponse<BatchFetcherBody<GP>>>{
 
-    const params = getGroqGalleryParamsFromUrl(req.nextUrl.searchParams);
-    
-    if (!params)
-        return NextResponse.json({error: 'Invalid params'}, {status: 400});
+    const params = getYearFetchGroqParams(GALLERY_BATCH_SIZE, req.nextUrl.searchParams);
 
-    const entries = await getYearGallery(params);
+    if (params) {
+        const entries = await getYearGallery(params);
 
-    if (!entries)
-        return NextResponse.json(getGalleryFetcherEntry([]));
+        if (entries) {
+            const fb = makeFetcherBody(entries, GALLERY_BATCH_SIZE);
 
-    // const r = await new Promise((res, rej) => {
-    //     setTimeout(() => res(1), 5000);
-    // })
+            return NextResponse.json({
+                ...fb,
+                items: makeGalleryPics(entries)
+            });
+        }
+    }
 
-    return NextResponse.json(getGalleryFetcherEntry(entries));
+    return NextResponse.json({error: 'Invalid params'}, {status: 400});
 }

@@ -3,7 +3,12 @@ import { groq } from "next-sanity";
 export const landingQuery = groq`*[_type == "landing"][0] 
 { 
     text, 
-    "images": images[] { asset, crop, hotspot }
+    "images": images[] { 
+        "_ref": asset._ref, 
+        crop, 
+        hotspot,
+        "lqip": asset -> metadata.lqip 
+    }
 }`;
 
 export const newsListQuery = groq`
@@ -13,7 +18,12 @@ export const newsListQuery = groq`
     { 
         title, 
         "slug": slug.current, 
-        "image": mainImage { asset, crop, hotspot },
+        "image": mainImage.image { 
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip 
+        },
         date, 
         excerpt
     }`;
@@ -23,31 +33,47 @@ export const newsArticleQuery = groq`
     [0] 
     { 
         title, 
-        "image": mainImage { 
-            asset, 
+        "image": mainImage.image {
+            "_ref": asset._ref, 
             crop, 
             hotspot, 
-            "aspectRatio": asset -> metadata.dimensions.aspectRatio 
+            ...(
+                asset -> metadata {
+                    "width": dimensions.width,
+                    lqip
+                }
+            )
         }, 
         date, 
         description,
         excerpt,
-        "gallery": gallery[]{ asset, crop, hotspot}
+        "gallery": gallery[].image { 
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip
+        }
     }`;
 
 export const galleryListQuery = groq`
-    *[_type == "news" && defined(gallery) && date < $end && date > $start] 
+    *[_type in ["news", "story"] && (mainImage.isGalleryImage || count(gallery[isGalleryImage]) > 0) && date < $end && date > $start] 
     | order(date desc) 
     [0...$batchSize] 
     {
-        _type,
+        "slug": "/" + _type + "/article/" + slug.current,
         title,
         date,
-        "slug": slug.current,
-        "gallery": gallery[] { 
-            asset, 
+        "mainImage": mainImage.image {
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip
+        },
+        "gallery": gallery[isGalleryImage].image { 
+            "_ref": asset._ref, 
             hotspot, 
-            crop
+            crop,
+            "lqip": asset -> metadata.lqip
         }
 }`;
 
@@ -58,7 +84,12 @@ export const teamQuery = groq`
         name,
         surname,
         description,
-        "image": image { asset, crop, hotspot }
+        "image": image { 
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip
+        }
     }
 `;
 
@@ -86,21 +117,31 @@ export const uncatStoriesQuery = groq`
     { 
         title, 
         "slug": slug.current, 
-        "image": mainImage { asset, crop, hotspot },
-        "categories": categories[] { _ref },
+        "image": mainImage.image { 
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip
+        },
+        "categories": categories[]._ref,
         date, 
         excerpt
 }`;
 
 export const catStoriesQuery = groq`
-    *[_type == "story" && $catId in categories && date < $end] 
+    *[_type == "story" && references($catId) && date < $end] 
     | order(date desc) 
     [0...$batchSize] 
     { 
         title, 
         "slug": slug.current, 
-        "image": mainImage { asset, crop, hotspot },
-        "categories": categories[] { _ref },
+        "image": mainImage.image { 
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip 
+        },
+        "categories": categories[]._ref,
         date, 
         excerpt
 }`;
@@ -110,17 +151,25 @@ export const storyQuery = groq`
     [0] 
     { 
         title, 
-        "image": mainImage { 
-            asset, 
+        "image": mainImage.image { 
+            "_ref": asset._ref, 
             crop, 
             hotspot, 
-            "aspectRatio": asset -> metadata.dimensions.aspectRatio 
+            ...(asset -> metadata {
+                "width": dimensions.width,
+                lqip
+            })
         }, 
         date, 
         description,
         excerpt,
-        "gallery": gallery[] { asset, crop, hotspot},
-        "categories": categories[] { _ref }
+        "gallery": gallery[].image { 
+            "_ref": asset._ref, 
+            crop, 
+            hotspot,
+            "lqip": asset -> metadata.lqip
+        },
+        "categories": categories[]._ref
     }`;
 
 export const storyCategoriesQuery = groq`
@@ -132,7 +181,5 @@ export const storyCategoriesQuery = groq`
 `;
 
 export const categoryIdQuery = groq`
-    *[_type == "storyCategory" && name.current == $name]
-    [0]
-    { _id }
+    *[_type == "storyCategory" && name.current == $name][0]._id
 `;

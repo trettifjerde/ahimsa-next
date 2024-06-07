@@ -1,28 +1,39 @@
+import Link from "next/link";
 import { StoryPreview } from "@/sanity/lib/types";
 import StoryCategoryItem from "./story-cat";
+import CustomImage from "../ui/image/customImage";
 import styles from './si.module.css';
-import Image from "next/image";
-import { getImageUrl } from "@/utils/image-helpers";
 import menuStyles from '@/styles/menu.module.css';
-import Link from "next/link";
 import leafStyles from '@/styles/leaf.module.css';
+import listItemStyles from '@/styles/list-item.module.css';
+
+const sizes = '16rem';
 
 export default function StoryItem({ story }: { story: StoryPreview }) {
-    return <div className={`${styles.c} ${leafStyles.lf}`}>
-        <div className={styles.ci}>
-            <Link href={`/stories/article/${story.slug}`}>
+    const date = new Date(story.date).toLocaleDateString('hr', { dateStyle: 'long' });
+    
+    return <div className={`${leafStyles.lf} ${listItemStyles.c} ${styles.c}`}>
+        <div className={`${listItemStyles.ci} ${styles.fl}`}>
+            <Link className={styles.fl} href={`/stories/article/${story.slug}`}>
 
-                <div className={styles.ic}>
-                    <Image src={getImageUrl(story.image)} fill alt="Dekorativna slika" />
+                <div className={listItemStyles.ic}>
+                    <CustomImage source={story.image} sizes={sizes}/>
                 </div>
 
-                <h4>{story.title}</h4>
+                <div>
+                    <div className={listItemStyles.d}>{date}</div>
+                    <h4>{story.title}</h4>
+                </div>
 
-                <div className={styles.ex}>{story.excerpt}</div>
+                <div className={listItemStyles.desc}>
+                    <p>
+                        {story.excerpt}
+                    </p>
+                </div>
             </Link>
 
             <ul className={`${menuStyles.ul} ${styles.ul}`}>
-                {story.categories.map(cat => <StoryCategoryItem key={cat._ref} id={cat._ref} />)}
+                {story.categories.map(cat => <StoryCategoryItem key={cat} id={cat} />)}
             </ul>
         </div>
     </div>

@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getArtcile } from "@/sanity/lib/fetches";
-import { getImageUrl } from "@/utils/image-helpers";
 import Article from "@/components/article/article";
+import { getMetaImageUrl } from "@/utils/image-helpers";
 
 type Props = { params: { slug: string } };
 
@@ -27,7 +27,7 @@ export async function generateMetadata(
             title: news.title,
             description: news.excerpt,
             openGraph: {
-                images: [getImageUrl(news.image)],
+                images: [getMetaImageUrl(news.image)],
             },
         }
 

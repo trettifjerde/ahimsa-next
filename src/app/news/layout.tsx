@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default function NewsStoreLayout({ children }: { children: ReactNode }) {
-    return <ListContextProvider url="/news" keyName="year" Cont={NewsContext} >
+    return <ListContextProvider url="/news" keyName="start" Cont={NewsContext} >
         {children}
     </ListContextProvider>
 }

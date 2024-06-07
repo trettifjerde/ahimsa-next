@@ -1,15 +1,14 @@
 import { redirect } from "next/navigation";
 import YearGallery from "@/components/gallery/year-gallery";
-import { UDRUGA_ALL_YEARS, getGroqGalleryParams } from "@/utils/serverHelpers";
+import { GALLERY_BATCH_SIZE, UDRUGA_ALL_YEARS, getYearFromString, getYearPageGroqParams } from "@/utils/serverHelpers";
 
 export default function Gallery({ params }: { params: { year: string } }) {
-    const year = params.year;
-    const fetchParams = getGroqGalleryParams({selectedYear: year});
+    const year = getYearFromString(params.year);
 
-    if (!fetchParams)
+    if (!year)
         redirect('/gallery');
 
-    return <YearGallery fetchParams={fetchParams} yearKey={year} />
+    return <YearGallery fetchParams={getYearPageGroqParams(GALLERY_BATCH_SIZE, year)} />
 }
 
 export async function generateStaticParams() {

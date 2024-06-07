@@ -10,6 +10,7 @@ import {structureTool} from 'sanity/structure'
 import {apiVersion, dataset, projectId} from './src/sanity/env'
 import { schemaTypes, singletonActions, singletonTypeNames, singletonTypes } from '@/sanity/schema'
 import { colorInput } from '@sanity/color-input'
+import { ahimsaImageType } from '@/sanity/schemaTypes/imageType'
 
 export default defineConfig({
   basePath: '/content',
@@ -17,7 +18,7 @@ export default defineConfig({
   dataset,
   // Add and edit the content schema in the './sanity/schema' folder
   schema: {
-    types: [...schemaTypes, ...singletonTypes],
+    types: [...schemaTypes, ...singletonTypes, ahimsaImageType],
     templates: (templates) => 
         templates.filter(({ schemaType }) => {
           return !singletonTypeNames.has(schemaType)

@@ -1,4 +1,3 @@
-import { makeGalleryPics, makePics } from "@/utils/serverHelpers";
 import { CatStoriesQueryResult, FooterContactQueryResult, GalleryListQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult } from "../../../sanity.types";
 
 export type NewsListPreviewItem = NewsListQueryResult[0];
@@ -7,11 +6,11 @@ export type NewsArticle = Exclude<NewsArticleQueryResult, null>;
 export type StoryArticle = Exclude<StoryQueryResult, null>;
 export type StoryPreview = CatStoriesQueryResult[0];
 
-export type GalleryEvent = GalleryListQueryResult[0];
-export type GalleryEventGallery = GalleryEvent['gallery'];
-export type GalleryImage = GalleryEventGallery[0];
-export type GalleryAsset = Exclude<GalleryImage['asset'], null>;
-export type GalleryEventPic = {image: GalleryImage, title?: string, slug?: string, id: string};
+export type GalleryEntry = GalleryListQueryResult[0];
+export type NewsEntryGallery = Exclude<NewsArticle['gallery'], null>;
+export type ImageInfo = GalleryEntry['mainImage'];
+export type NotNullImageInfo = Exclude<ImageInfo, null>;
+export type GalleryEntryPic = {image: ImageInfo, title?: string, slug?: string, id: string};
 
 export type UdrugaMember = TeamQueryResult[0];
 

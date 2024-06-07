@@ -3,11 +3,11 @@ import { Poppins, Shantell_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { getFooterContacts } from "@/sanity/lib/fetches";
 import { DESCRIPTION } from "@/utils/data";
-import { logo } from "@/utils/image-helpers";
 import Navigation from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import "@/styles/globals.css";
 import "@/styles/icons.css";
+import { getMetaImageUrl } from "@/utils/image-helpers";
 
 const mainFont = Poppins({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--mainFont' });
 const handwritten = Shantell_Sans({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--handwritten' });
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: 'hr_HR',
     siteName: 'Ahimsa',
     url: process.env.NEXT_PUBLIC_URL,
-    images: logo
+    images: getMetaImageUrl(null)
   }
 };
 

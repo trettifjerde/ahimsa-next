@@ -1,15 +1,15 @@
 import { redirect } from "next/navigation";
 import YearNews from "@/components/news/year-news";
-import { UDRUGA_ALL_YEARS, getGroqNewsParams } from "@/utils/serverHelpers";
+import { UDRUGA_ALL_YEARS, getYearFromString } from "@/utils/serverHelpers";
 
 export default function News({ params }: { params: { year: string } }) {
-    const key = params.year;
-    const fetchParams = getGroqNewsParams({selectedYear: key});
 
-    if (!fetchParams)
+    const year = getYearFromString(params.year);
+
+    if (!year)
         redirect('/news');
 
-    return <YearNews fetchParams={fetchParams} yearKey={key} />
+    return <YearNews year={year}/>
 }
 
 export async function generateStaticParams() {

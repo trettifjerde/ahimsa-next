@@ -1,9 +1,7 @@
-
-import Image from 'next/image';
 import styles from './news-prev.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 import shimmer from '@/styles/shimmer.module.css';
-import { getImageUrl } from '@/utils/image-helpers';
+import { getLogoUrl } from '@/utils/image-helpers';
 
 export function NewsSkeletonItem() {
     return <div className={`${leafStyles.lf} ${styles.a}`}>
@@ -13,7 +11,7 @@ export function NewsSkeletonItem() {
                 <h4></h4>
             </div>
             <div className={styles.ic}>
-                <Image src={getImageUrl(null)} alt="Dekorativna slika" fill />
+                <img src={getLogoUrl()}/>
             </div>
             <div className={styles.desc}></div>
             <div className={shimmer.l}></div>

@@ -1,9 +1,9 @@
 import { client } from "./client";
 import { CatStoriesQueryResult, CategoryIdQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
 import { catStoriesQuery, categoryIdQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
-import { REVALIDATE_TIMEOUT, getGroqStoriesParams, getGroqNewsParams, getGroqGalleryParams, GroqStoriesParams } from "@/utils/serverHelpers";
-import { YearListQueryParams } from "@/utils/types";
+import { GALLERY_BATCH_SIZE, NEWS_BATCH_SIZE, REVALIDATE_TIMEOUT, getStoriesPageGroqParams, getYearPageGroqParams } from "@/utils/serverHelpers";
 import { StoryCategoryDict } from "./types";
+import { GroqStoriesParams, GroqYearParams } from "@/utils/types";
 
 const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
 
@@ -11,9 +11,9 @@ export async function getLanding() {
     return client.fetch<LandingQueryResult>(landingQuery, {}, nextParams);
 }
 
-export async function getYearNews(params?: YearListQueryParams) {
+export async function getYearNews(params?: GroqYearParams) {
     if (!params)
-        params = getGroqNewsParams();
+        params = getYearPageGroqParams(NEWS_BATCH_SIZE);
 
     if (!params)
         return null;
@@ -29,9 +29,9 @@ export async function getArtcile(slug: string) {
     return client.fetch<NewsArticleQueryResult>(newsArticleQuery, {slug}, nextParams);
 }
 
-export async function getYearGallery(params?: YearListQueryParams) {
+export async function getYearGallery(params?: GroqYearParams) {
     if (!params)
-        params = getGroqGalleryParams();
+        params = getYearPageGroqParams(GALLERY_BATCH_SIZE);
 
     if (!params)
         return null;
@@ -65,7 +65,7 @@ export async function getCategoryId(name: string) {
 
 export async function getStories(params?: GroqStoriesParams) {
     if (!params)
-        params = await getGroqStoriesParams();
+        params = await getStoriesPageGroqParams();
 
     if (params === undefined)
         return null;

@@ -1,9 +1,10 @@
 .g {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(auto, 25rem));
+    grid-template-columns: repeat(auto-fill, minmax(auto, 22rem));
     justify-content: center;
     gap: var(--gap);
-    padding-block: var(--gap);
+    padding-block: var(--gap) calc(3rem + var(--gap));
 }
 
 .emp {

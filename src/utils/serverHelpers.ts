@@ -1,167 +1,152 @@
-import { GalleryEvent, GalleryEventGallery, GalleryEventPic } from "@/sanity/lib/types";
-import { getEntriesKey } from "./clientHelpers";
-import { FetcherEntry } from "./types";
+import { GalleryEntry, GalleryEntryPic, NewsEntryGallery } from "@/sanity/lib/types";
+import { BatchFetcherBody, FetcherEntryMeta, GroqStoriesParams, GroqYearParams } from "./types";
 import { getCategoryId } from "@/sanity/lib/fetches";
 
 export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
 
 export const UDRUGA_ALL_YEARS = (() => {
-    const years : string[] = [];
+    const years: string[] = [];
     const curYear = new Date().getFullYear();
-    for (let y = curYear; y >= UDRUGA_START_YEAR; y--) 
+    for (let y = curYear; y >= UDRUGA_START_YEAR; y--)
         years.push(y.toString());
     return years;
 })();
+
 export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
 export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
 export const STORIES_BATCH_SIZE = parseInt(process.env.STORIES_BATCH_SIZE || '5');
 export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
 
-export type GroqStoriesParams = {end: string, batchSize: number, catId?: string};
+export function makeFetcherInitInfo<I extends { date: string }>(items: I[], batchSize: number, key?: string): FetcherEntryMeta {
+    const lastItem: I | undefined = items[items.length - 1];
 
-export async function getGroqStoriesParams(info?: {selectedCat?: string, lastDate?: string}) {
-    const {selectedCat, lastDate} = info || {selectedCat: undefined, lastDate: undefined};
+    return {
+        key: key || 'all',
+        lastDate: (items.length === batchSize && lastItem?.date) || ''
+    }
+}
+
+export function makeFetcherBody<I extends { date: string }>(items: Array<I>, batchSize: number): BatchFetcherBody<I> {
+    const lastItem: I | undefined = items[items.length - 1];
+    return {
+        lastDate: (items.length === batchSize && lastItem?.date) || '',
+        items
+    }
+}
+
+export function makePics(gallery: NewsEntryGallery) : GalleryEntryPic[] {
     
-    const params : GroqStoriesParams = {
-        end: lastDate || new Date().toISOString(),
+    return gallery.map((image, i) => {
+        return {
+            id: `${i}`,
+            image
+        }
+    })
+}
+
+export function makeGalleryPics(entries: GalleryEntry[]): GalleryEntryPic[] {
+    return entries
+        .map(entry => {
+            const pics: GalleryEntryPic[] = [];
+
+            if (entry.mainImage) {
+                pics.push({
+                    image: entry.mainImage,
+                    title: entry.title,
+                    slug: entry.slug,
+                    id: `${entry.slug}-main`
+                })
+            }
+            entry.gallery?.forEach((image, i) => pics.push({
+                image,
+                title: entry.title,
+                slug: entry.slug,
+                id: `${entry.slug}${i}`
+            }));
+            
+            return pics;
+        })
+        .flat()
+}
+
+export async function getStoriesPageGroqParams(catName?: string) {
+
+    const params: GroqStoriesParams = {
+        end: new Date().toISOString(),
         batchSize: STORIES_BATCH_SIZE
     };
 
-    if (selectedCat) {
-        const catId = await getCategoryId(selectedCat);
+    if (catName) {
+        const catId = await getCategoryId(catName);
 
         if (!catId)
             return undefined;
 
-        params.catId = catId._id;
+        params.catId = catId;
     }
 
     return params;
 }
 
-export function getGroqStoriesParamsFromUrl(searchParams: URLSearchParams) {
+export function getStoriesFetchGroqParams(searchParams: URLSearchParams) {
     const lastDate = searchParams.get('lastDate') || undefined;
-    const selectedCat = searchParams.get('cat') || undefined;
+    const selectedCat = searchParams.get('catId') || undefined;
 
-    return getGroqStoriesParams({ lastDate, selectedCat });
-}
-
-export function getGroqNewsParams(info?: { selectedYear: string, lastDate?: string}) {
-    return getGroqYearParams(NEWS_BATCH_SIZE, info);
-}
-
-export function getGroqNewsParamsFromUrl(searchParams: URLSearchParams) {
-    return getGroqYearParamsFromUrl(NEWS_BATCH_SIZE, searchParams);
-}
-
-export function getGroqGalleryParamsFromUrl(searchParams: URLSearchParams) {
-    return getGroqYearParamsFromUrl(GALLERY_BATCH_SIZE, searchParams);
-}
-
-export function getGroqGalleryParams(info?: { selectedYear: string, lastDate?: string}) {
-    return getGroqYearParams(GALLERY_BATCH_SIZE, info);
-}
-
-export function makePics(gallery: GalleryEventGallery) : GalleryEventPic[] {
-    return gallery.map((image, i) => ({
-        id: `${i}`,
-        image
-    }))
-}
-
-export function makeGalleryPics(entries: GalleryEvent[]) : GalleryEventPic[] {
-    return entries.map(entry => entry.gallery
-        .map((image, i) => ({
-            image,
-            title: entry.title,
-            slug: `/${entry._type}/article/${entry.slug}`,
-            id: `${entry._type}${entry.slug}${i}`
-        }))
-    )
-    .flat()
-}
-
-export function getGalleryFetcherEntry(entries: GalleryEvent[]) : Omit<FetcherEntry<GalleryEventPic>, 'key'> {
-    const lastEntry : GalleryEvent | undefined = entries[entries.length - 1];
-
-    return {
-        items: makeGalleryPics(entries), 
-        hasMore: entries.length === GALLERY_BATCH_SIZE,
-        lastDate: lastEntry?.date || '',
-    }
-}
-
-export function getGroqYearParams(batchSize: number, info?: { selectedYear: string, lastDate?: string }) {
-
-    try {
-        const {selectedYear, lastDate} = info || {selectedYear: getEntriesKey(), lastDate: undefined};
-        const year = getYearFromKey(selectedYear);
-
-        const start = getStartDate(year);
-        const end = getEndDate({ year, lastDate });
-
-        return { start, end, batchSize };
-    }
-    catch (error) {
-        console.log(error);
+    // must be provided
+    if (!lastDate)
         return undefined;
-    }
+
+    const params: GroqStoriesParams = { end: lastDate, batchSize: STORIES_BATCH_SIZE };
+
+    if (selectedCat)
+        params.catId = selectedCat;
+
+    return params;
 }
 
-function getGroqYearParamsFromUrl(batchSize: number, searchParams: URLSearchParams) {
-    try {
-        const selectedYear = searchParams.get('year');
-        const lastDate = searchParams.get('lastDate');
+export function getYearPageGroqParams(batchSize: number, selectedYear?: number) {
 
-        // functions is used when fetching more entries, so both params must be provided
-        if (!selectedYear)
-            throw new Error('Year is undefined');
-        if (!lastDate)
-            throw new Error('lastDate is undefined');
+    const params: GroqYearParams = {
+        batchSize,
+        end: getYearGroqEndParam(selectedYear),
+        start: getYearGroqStartParam(selectedYear)
+    };
 
-        return getGroqYearParams(batchSize, { lastDate, selectedYear });
-    }
-    catch (error) {
-        console.log(error);
-        return undefined;
-    }
+    return params;
 }
 
-function getStartDate(currentYear: ReturnType<typeof getYearFromKey>) {
+export function getYearFetchGroqParams(batchSize: number, searchParams: URLSearchParams) {
 
-    if (!currentYear)
-        return '';
+    const lastDate = searchParams.get('lastDate');
+    const start = searchParams.get('start');
 
-    return `${currentYear - 1}-12-31T23:59:59`;
-}
+    if (lastDate) {
+        const params: GroqYearParams = {
+            batchSize,
+            end: lastDate,
+            start: start || getYearGroqStartParam()
+        };
 
-function getEndDate({ year, lastDate }: { lastDate?: string, year: ReturnType<typeof getYearFromKey> }) {
-
-    if (!lastDate) {
-
-        if (!year)
-            return new Date().toISOString();
-
-        return new Date(`${year + 1}-01-01T00:00:00`).toISOString();
+        return params;
     }
 
-    if (isNaN(new Date(lastDate).getTime()))
-        throw new Error('Invalid lastDate');
-
-    return lastDate;
+    return null;
 }
 
-function getYearFromKey(year?: string) {
-    if (!year || year === 'all')
-        return null;
+export function getYearFromString(year?: string) {
+    if (year && year.length === 4) {
+        const y = parseInt(year);
 
-    if (year.length !== 4)
-        throw new Error('Invalid year');
+        if (y >= UDRUGA_START_YEAR && y <= new Date().getFullYear())
+            return y;
+    }
+    return undefined;
+}
 
-    const y = parseInt(year);
+function getYearGroqStartParam(year?: number) {
+    return year ? `${year - 1}-12-31T23:59:59` : '';
+}
 
-    if (y >= UDRUGA_START_YEAR && y <= new Date().getFullYear())
-        return y;
-
-    throw new Error('Invalid year');
+function getYearGroqEndParam(year?: number) {
+    return year ? `${year + 1}-01-01T00:00:00` : new Date().toISOString();
 }

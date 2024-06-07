@@ -1,7 +1,12 @@
 .g {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: var(--gap);
-    width: 100%;
+    align-items: stretch;
+}
+
+@media (max-width: 40rem) {
+    .g {
+        align-items: center;
+    }
 }

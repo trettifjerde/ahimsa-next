@@ -3,21 +3,20 @@
 import { MouseEvent, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import { GalleryEventPic } from "@/sanity/lib/types";
-import { getFullImageUrl } from "@/utils/image-helpers";
+import { GalleryEntryPic } from "@/sanity/lib/types";
 import GalleryRibbon from "./gallery-ribbon";
 import styles from './portal.module.css';
+import CustomImage from "../ui/image/customImage";
 
 export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImage }: {
-    pic: GalleryEventPic | null, close: () => void, hasPrev: boolean, hasNext: boolean, toggleImage: (n: number) => void
+    pic: GalleryEntryPic | null, close: () => void, hasPrev: boolean, hasNext: boolean, toggleImage: (n: number) => void
 }) {
     const ref = useRef<Element | null>(null);
     const nodeRef = useRef<HTMLDivElement>(null);
-    const picRef = useRef<HTMLImageElement>(null);
     const [curDir, setCurDir] = useState(1);
 
-    const selectNext  = (n: number, e: MouseEvent) => {
-        nodeRef.current?.style.setProperty('--fromX', `${-100 * n}%`);
+    const selectNext = (n: number, e: MouseEvent) => {
+        nodeRef.current?.style.setProperty('--fromX', `${-30 * n}%`);
         e.stopPropagation();
         setCurDir(n);
         toggleImage(n);
@@ -50,12 +49,14 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
 
                 <div className={styles.ic}>
                     <SwitchTransition>
-                        <CSSTransition key={pic.id} nodeRef={picRef} classNames={{
+                        <CSSTransition key={pic.id} classNames={{
                             enter: curDir > 0 ? styles.slideLeftIn : styles.slideRightIn,
                             exit: styles.slideOut,
                         }}
-                            addEndListener={(done) => picRef.current?.addEventListener('animationend', done, false)}>
-                            <img src={getFullImageUrl(pic.image)} ref={picRef} />
+                            addEndListener={(node, done) => node.addEventListener('animationend', done, false)}>
+                            
+                            <CustomImage source={pic.image} full unoptimized />
+
                         </CSSTransition>
                     </SwitchTransition>
                 </div>

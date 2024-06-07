@@ -1,9 +1,5 @@
-import { GalleryEventPic } from "@/sanity/lib/types";
+import { GalleryEntryPic } from "@/sanity/lib/types";
 import { FetcherEntry } from "./types";
-
-export function getEntriesKey(key?: string) {
-    return !key ? 'all' : key;
-}
 
 export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{data: T, failed: false} | {data: string, failed: true}>{
     
@@ -27,6 +23,5 @@ export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{d
 }
 
 export async function fetchGallery(params: URLSearchParams) {
-    return await fetchData<FetcherEntry<GalleryEventPic>>(`/api/gallery?${params.toString()}`);
+    return await fetchData<FetcherEntry<GalleryEntryPic>>(`/api/gallery?${params.toString()}`);
 }
-

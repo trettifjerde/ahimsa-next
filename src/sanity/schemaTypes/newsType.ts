@@ -51,24 +51,20 @@ export const newsType = defineType({
         defineField({
             name: 'mainImage',
             title: 'Naslovna slika',
-            type: 'image',
-            options: {
-                hotspot: true
-            }
-
+            type: 'ahimsaImage',
         }),
         defineField({
             name: 'gallery',
             title: 'Dodatne slike',
             type: 'array',
-            of: [{type: 'image', options: {hotspot: true}}]
+            of: [{type: 'ahimsaImage'}]
         }),
     ],
     preview: {
         select: {
           title: 'title',
           date: 'date',
-          media: 'mainImage'
+          media: 'mainImage.image'
         },
         prepare: ({title, date, media}) => {
             return {
