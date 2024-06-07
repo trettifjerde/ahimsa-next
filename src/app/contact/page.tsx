@@ -8,6 +8,7 @@ import ContactForm from "@/components/contact/form";
 import styles from './c.module.css';
 import blb from '@/components/ui/section/blb.module.css';
 import leafStylef from '@/styles/leaf.module.css';
+import listItemStyles from '@/styles/list-item.module.css';
 
 export const metadata: Metadata = {
     title: 'Kontakti',
@@ -28,7 +29,7 @@ export default async function Contact() {
 
         </MainBlock>
 
-        <ShadowedSection>
+        <ShadowedSection className={listItemStyles.c}>
             <h4 className={blb.blb}>Kontaktiraj nas!</h4>
             <ContactForm />
         </ShadowedSection>

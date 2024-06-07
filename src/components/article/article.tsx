@@ -9,8 +9,9 @@ import styles from './a.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 import { ArticleType } from '@/utils/types';
 import CustomImage from '../ui/image/customImage';
+import { CSSProperties } from 'react';
 
-const sizes = '(max-width: 40rem) 100vw, (max-width: 64rem) 50rem, 70rem';
+const sizes = '(max-width: 40rem) 95vw, (max-width: 64rem) 48rem, 70rem';
 
 export default function Article({
     article, backBtnText, backUrl
@@ -21,6 +22,7 @@ export default function Article({
 }) {
 
     const date = new Date(article.date).toLocaleString('hr', { dateStyle: 'full', timeStyle: 'short' });
+    const imgContStyles = getImgContStyleProps(article);
 
     return <Main>
         <MainBlock>
@@ -33,7 +35,7 @@ export default function Article({
                     <div className={styles.date}>{date}</div>
                 </div>
 
-                <div className={styles.ic}>
+                <div className={styles.ic} style={imgContStyles}>
                     <CustomImage source={article.image} full sizes={sizes} />
                 </div>
 
@@ -47,4 +49,31 @@ export default function Article({
             </article>
         </MainBlock>
     </Main>
+}
+
+function getImgContStyleProps(art: ArticleType) {
+    const props: CSSProperties = {aspectRatio: 1};
+
+    if (art.image) {
+        const {width, aspectRatio} = art.image;
+        console.log(width, aspectRatio);
+
+        if (aspectRatio) {
+            props.aspectRatio = aspectRatio;
+
+            if (width) {
+                if (aspectRatio >= 1) {
+                    props.maxWidth = `${width}px`;
+                }
+                else {
+                    props.width = `${width}px`;
+                    props.maxWidth = '100%';
+                    props.maxHeight = '85vh';
+                }
+            }
+        }
+    }
+
+    return props;
+
 }

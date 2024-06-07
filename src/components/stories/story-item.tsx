@@ -12,12 +12,12 @@ const sizes = '16rem';
 export default function StoryItem({ story }: { story: StoryPreview }) {
     const date = new Date(story.date).toLocaleDateString('hr', { dateStyle: 'long' });
     
-    return <div className={`${leafStyles.lf} ${listItemStyles.c} ${styles.c}`}>
+    return <div className={`${leafStyles.lf} ${listItemStyles.clf} ${listItemStyles.c} ${styles.c}`}>
         <div className={`${listItemStyles.ci} ${styles.fl}`}>
             <Link className={styles.fl} href={`/stories/article/${story.slug}`}>
 
                 <div className={listItemStyles.ic}>
-                    <CustomImage source={story.image} sizes={sizes}/>
+                    <CustomImage source={story.image} square sizes={sizes}/>
                 </div>
 
                 <div>

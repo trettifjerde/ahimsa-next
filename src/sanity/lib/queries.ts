@@ -40,6 +40,7 @@ export const newsArticleQuery = groq`
             ...(
                 asset -> metadata {
                     "width": dimensions.width,
+                    "aspectRatio": dimensions.aspectRatio,
                     lqip
                 }
             )
@@ -156,8 +157,9 @@ export const storyQuery = groq`
             crop, 
             hotspot, 
             ...(asset -> metadata {
-                "width": dimensions.width,
-                lqip
+                    "width": dimensions.width,
+                    "aspectRatio": dimensions.aspectRatio,
+                    lqip
             })
         }, 
         date, 

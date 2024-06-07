@@ -15,6 +15,7 @@ export default function getSanityImageUrl({ source, full, quality=95, width, squ
 
     let b = imageBuilder?.image((full && source._ref) ? source._ref : source)
         .auto('format')
+        .fit('max')
         .quality(quality)
 
     if (width) {

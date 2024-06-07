@@ -27,14 +27,12 @@
 
 .ic {
     position: relative;
-    width: 100%;
-    height: 75vh;
+    margin-inline: auto;
 }
 
 .ic img {
     object-fit: scale-down;
 }
-
 .gg {
     padding-block: 3rem;
 }

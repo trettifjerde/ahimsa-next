@@ -8,8 +8,10 @@ export type StoryPreview = CatStoriesQueryResult[0];
 
 export type GalleryEntry = GalleryListQueryResult[0];
 export type NewsEntryGallery = Exclude<NewsArticle['gallery'], null>;
-export type ImageInfo = GalleryEntry['mainImage'];
-export type NotNullImageInfo = Exclude<ImageInfo, null>;
+export type ImageInfo = null | Omit<Exclude<NewsArticle['image'], null>, 'width'|'aspectRatio'> & {
+    width?: number | null, 
+    aspectRatio?: number | null
+};
 export type GalleryEntryPic = {image: ImageInfo, title?: string, slug?: string, id: string};
 
 export type UdrugaMember = TeamQueryResult[0];

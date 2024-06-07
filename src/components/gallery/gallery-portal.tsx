@@ -16,7 +16,7 @@ export default function GalleryPortal({ pic, close, hasPrev, hasNext, toggleImag
     const [curDir, setCurDir] = useState(1);
 
     const selectNext = (n: number, e: MouseEvent) => {
-        nodeRef.current?.style.setProperty('--fromX', `${-30 * n}%`);
+        nodeRef.current?.style.setProperty('--fromX', `${-50 * n}%`);
         e.stopPropagation();
         setCurDir(n);
         toggleImage(n);

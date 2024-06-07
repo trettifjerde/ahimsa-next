@@ -16,9 +16,7 @@ export default function CustomImage({source, full=false, square, ...props}: Prop
     if (source) {
 
         if (props.unoptimized) 
-
-            return <Image src={getSanityImageUrl({source, full})} alt="" fill {...props} 
-                placeholder="blur" blurDataURL={source.lqip || ''}/>
+            return <Image src={getSanityImageUrl({source, full})} alt="" fill {...props} />
 
         return <Image src="meow" alt="" fill {...props} placeholder="blur" blurDataURL={source.lqip || ''}
             loader={({width, quality}) => getSanityImageUrl({source, full, width, quality, square})} />

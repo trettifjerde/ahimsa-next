@@ -8,6 +8,7 @@ import { EMAIL, MESSAGE, MESSAGE_LIMIT } from "@/utils/validators";
 import { Input, Textarea } from "../ui/forms";
 import { SpinnerButton } from "../ui/buttons";
 import styles from '@/components/ui/form.module.css';
+import listItemStyles from '@/styles/list-item.module.css';
 
 export default function ContactForm() {
     const formRef = useRef<HTMLFormElement>(null);
@@ -15,7 +16,7 @@ export default function ContactForm() {
     const { message, errorLog, pending } = state;
 
 
-    return <form className={styles.f} ref={formRef} onSubmit={handleSubmit}>
+    return <form className={`${styles.f} ${listItemStyles.ci}`} ref={formRef} onSubmit={handleSubmit}>
         <p className={`${styles.p} ${message.isError ? styles.err : ''}`}>{message.text}</p>
         <Input name={EMAIL} type="email" label="Email" error={errorLog?.email}
             required />

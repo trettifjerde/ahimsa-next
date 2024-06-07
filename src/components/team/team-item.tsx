@@ -11,7 +11,7 @@ export default function TeamItem({ member }: { member: UdrugaMember }) {
         <div className={styles.d}>{member.description}</div>
         
         <div className={styles.ic}>
-            <CustomImage source={member.image} sizes={sizes}/>
+            <CustomImage source={member.image} square sizes={sizes}/>
         </div>
         <div className={`${leafStyles.lf} ${styles.h}`}>
             <h5>{member.name}</h5>

@@ -11,7 +11,7 @@ export default function NewsItemPreview({ item }: { item: NewsListPreviewItem })
 
     const date = new Date(item.date).toLocaleString('hr', { dateStyle: 'short', timeStyle: 'short' });
 
-    return <Link className={`${leafStyles.lf} ${listItemStyles.c} ${styles.c}`} href={`/news/article/${item.slug}`}>
+    return <Link className={`${leafStyles.lf} ${listItemStyles.c} ${styles.c} ${listItemStyles.clf}`} href={`/news/article/${item.slug}`}>
         <article className={`${listItemStyles.ci} ${styles.ci}`}>
             <div className={styles.h}>
                 <div className={listItemStyles.d}>{date}</div>

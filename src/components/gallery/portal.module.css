@@ -1,5 +1,5 @@
 .p {
-    --fromX: 30%;
+    --fromX: 50%;
     --toX: 0;
     --m-inline: 2vw;
     --py: 2vw;
@@ -65,7 +65,7 @@
 
 .c {
     position: relative;
-    padding-inline: var(--btn-w);
+    padding-inline: calc(var(--btn-w) + 0.5rem);
 }
 
 .ic {
@@ -102,11 +102,11 @@
 }
 
 .slideLeftIn {
-    --fromX: 30%;
+    --fromX: 50%;
 }
 
 .slideRightIn {
-    --fromX: -30%;
+    --fromX: -50%;
 }
 
 .slideOut {

@@ -5,13 +5,11 @@
 }
 
 .f {
+    --in-br: 1% 25%;
+    --ci-bg: var(--light-dark);
     max-width: 45rem;
     margin-inline: auto;
-    padding: 3rem;
     flex-direction: column;
-    background-color: var(--light-dark);
-    box-shadow: var(--box-shadow);
-    border-radius: 1% 25%;
 }
 
 
@@ -88,10 +86,4 @@
 
 .p.err {
     color: var(--red);
-}
-
-@media (max-width: 40rem) {
-    .f {
-        padding: 1rem;
-    }
 }

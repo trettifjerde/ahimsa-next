@@ -10,6 +10,7 @@ import { SpinnerButton } from '../ui/buttons';
 import ShadowedSection from '../ui/section/section';
 import styles from '@/components/ui/form.module.css';
 import buble from '@/components/ui/section/blb.module.css';
+import listItemStyles from '@/styles/list-item.module.css';
 
 export default function VolunteerForm() {
 
@@ -17,10 +18,10 @@ export default function VolunteerForm() {
     const { state, handleSubmit } = useForm<VolunteerFormErrorLog>(validateVolunteerForm, volunteer, formRef);
     const { message, errorLog, pending } = state;
 
-    return <ShadowedSection reverse>
+    return <ShadowedSection className={listItemStyles.c} reverse>
         <h4 className={buble.blb}>Želiš nam se pridružiti?</h4>
 
-        <form ref={formRef} className={styles.f} onSubmit={handleSubmit}>
+        <form ref={formRef} className={`${styles.f} ${listItemStyles.ci}`} onSubmit={handleSubmit}>
             <p className={`${styles.p} ${message.isError ? styles.err : ''}`}>{message.text}</p>
             <div className={styles.fl}>
                 <Input name={NAME} type='text' label="Ime" error={errorLog?.name}

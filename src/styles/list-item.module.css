@@ -1,15 +1,16 @@
 .c {
     --padding: 3rem;
+    --ci-bg: var(--light);
 }
 
-.c::before {
+.clf::before {
     background-image: linear-gradient(90deg, var(--green), var(--blue));
     transition: transform .2s ease-in-out;
 }
 
 .ci {
     padding: var(--padding);
-    background-color: var(--light);
+    background-color: var(--ci-bg);
     box-shadow: var(--box-shadow);
     border-radius: var(--in-br);
 }
@@ -26,6 +27,7 @@
     margin-inline: auto;
     aspect-ratio: 1/1;
     border-radius: var(--in-br);
+    box-shadow: var(--box-shadow);
     overflow: hidden;
 }
 
@@ -55,7 +57,7 @@
 }
 
 @media (hover: hover) {
-    .c:hover::before {
+    .clf:hover::before {
         transform: scale(1.05) rotate(-2deg);
     }
 }
