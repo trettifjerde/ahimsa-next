@@ -9,6 +9,10 @@
     justify-content: center;
 }
 
+.g h1 {
+    grid-column: 1/-1;
+}
+
 .emp {
     grid-column: 1/-1;
     text-align: center;

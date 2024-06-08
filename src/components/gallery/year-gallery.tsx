@@ -13,8 +13,11 @@ export default async function YearGallery({ fetchParams }: {
     if (!entries)
         throw new Error('Failed to fetch gallery');
 
-    return <GalleryFetcher 
-        initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams?.start)}
-        initItems={makeGalleryPics(entries)} 
-    />
+    return <>
+        <h1>Galerije</h1>
+        <GalleryFetcher 
+            initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams?.start)}
+            initItems={makeGalleryPics(entries)} 
+        />
+    </>
 }

@@ -4,18 +4,16 @@ import { ListMenu } from "../menu/list-menu";
 import MainBlock from "@/components/layout/main-bl";
 import Main from "@/components/layout/main";
 import styles from './layout.module.css';
-import menuStyles from '@/styles/menu.module.css';
 
 const list = [{name: 'Sve', url: ''}, ...UDRUGA_ALL_YEARS.map(year => ({name: year, url: year}))];
 
-export default function ListLayout({ header, children, url, GridComponent }: {
-    header: string, children: ReactNode, url: string, 
+export default function ListLayout({ children, url, GridComponent }: {
+    children: ReactNode, url: string, 
     GridComponent: ComponentType<{ children: ReactNode, className?: string }>
 }) {
 
-    return <Main>
+    return <Main shortPadding>
         <MainBlock>
-            <h1>{header}</h1>
             <div className={styles.c}>
                 <GridComponent className={styles.g}>
                     {children}

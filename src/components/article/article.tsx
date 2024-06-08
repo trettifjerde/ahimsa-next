@@ -55,21 +55,18 @@ function getImgContStyleProps(art: ArticleType) {
     const props: CSSProperties = {aspectRatio: 1};
 
     if (art.image) {
-        const {width, aspectRatio} = art.image;
-        console.log(width, aspectRatio);
+        const {width, height} = art.image;
 
-        if (aspectRatio) {
-            props.aspectRatio = aspectRatio;
+        if (width && height) {
+            props.aspectRatio = width / height;
 
-            if (width) {
-                if (aspectRatio >= 1) {
-                    props.maxWidth = `${width}px`;
-                }
-                else {
-                    props.width = `${width}px`;
-                    props.maxWidth = '100%';
-                    props.maxHeight = '85vh';
-                }
+            if (props.aspectRatio >= 1) {
+                props.maxWidth = `${width}px`;
+            }
+            else {
+                props.width = `${width}px`;
+                props.maxWidth = '100%';
+                props.maxHeight = '85vh';
             }
         }
     }

@@ -30,3 +30,10 @@
     --top-wing: 25vh;
     --main-top: var(--top-wing);
 }
+
+@media (max-width: 40rem) {
+    .m.shp {
+        --top-wing: 50vh;
+        --main-top: 15vh;
+    }
+}

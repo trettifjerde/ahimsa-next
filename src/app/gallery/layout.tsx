@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function GalleryPageLayout({ children }: { children: ReactNode }) {
 
-    return <ListLayout header="Galerije" url="/gallery"
+    return <ListLayout url="/gallery"
         GridComponent={GalleryGrid}>
 
         <ListContextProvider url="/gallery" keyName="start" Cont={GalleryContext}>

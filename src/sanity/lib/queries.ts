@@ -7,7 +7,13 @@ export const landingQuery = groq`*[_type == "landing"][0]
         "_ref": asset._ref, 
         crop, 
         hotspot,
-        "lqip": asset -> metadata.lqip 
+        ...(
+            asset -> metadata {
+                "width": dimensions.width,
+                "height": dimensions.height,
+                lqip
+            }
+        ) 
     }
 }`;
 
@@ -40,7 +46,7 @@ export const newsArticleQuery = groq`
             ...(
                 asset -> metadata {
                     "width": dimensions.width,
-                    "aspectRatio": dimensions.aspectRatio,
+                    "height": dimensions.height,
                     lqip
                 }
             )
@@ -52,7 +58,13 @@ export const newsArticleQuery = groq`
             "_ref": asset._ref, 
             crop, 
             hotspot,
-            "lqip": asset -> metadata.lqip
+            ...(
+                asset -> metadata {
+                    "width": dimensions.width,
+                    "height": dimensions.height,
+                    lqip
+                }
+            ) 
         }
     }`;
 
@@ -68,13 +80,25 @@ export const galleryListQuery = groq`
             "_ref": asset._ref, 
             crop, 
             hotspot,
-            "lqip": asset -> metadata.lqip
+            ...(
+                asset -> metadata {
+                    "width": dimensions.width,
+                    "height": dimensions.height,
+                    lqip
+                }
+            )
         },
         "gallery": gallery[isGalleryImage].image { 
             "_ref": asset._ref, 
             hotspot, 
             crop,
-            "lqip": asset -> metadata.lqip
+            ...(
+                asset -> metadata {
+                    "width": dimensions.width,
+                    "height": dimensions.height,
+                    lqip
+                }
+            )
         }
 }`;
 
@@ -157,9 +181,9 @@ export const storyQuery = groq`
             crop, 
             hotspot, 
             ...(asset -> metadata {
-                    "width": dimensions.width,
-                    "aspectRatio": dimensions.aspectRatio,
-                    lqip
+                "width": dimensions.width,
+                "height": dimensions.height,
+                lqip
             })
         }, 
         date, 
@@ -169,7 +193,13 @@ export const storyQuery = groq`
             "_ref": asset._ref, 
             crop, 
             hotspot,
-            "lqip": asset -> metadata.lqip
+            ...(
+                asset -> metadata {
+                    "width": dimensions.width,
+                    "height": dimensions.height,
+                    lqip
+                }
+            ) 
         },
         "categories": categories[]._ref
     }`;

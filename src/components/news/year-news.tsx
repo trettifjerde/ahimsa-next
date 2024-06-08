@@ -4,7 +4,7 @@ import NewsItemPreview from "./news-prev";
 import NewsFetcher from "./news-fetcher";
 import styles from './year-news.module.css';
 
-export default async function YearNews({year}: {
+export default async function YearNews({ year }: {
     year?: number
 }) {
 
@@ -15,6 +15,8 @@ export default async function YearNews({year}: {
         throw new Error('Failed to fetch news');
 
     return <>
+        <h1>Novosti</h1>
+        
         {news.map(item => <NewsItemPreview key={item.slug} item={item} />)}
 
         {news.length === 0 && <div className={styles.emp}>No news this year</div>}

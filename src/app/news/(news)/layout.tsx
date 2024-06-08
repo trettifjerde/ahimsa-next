@@ -3,7 +3,7 @@ import ListLayout from "@/components/ui/list/layout/list-layout";
 import { ReactNode } from "react";
 
 export default function NewsLayo({children}: {children: ReactNode}) {
-    return <ListLayout header="Novosti" url="/news" GridComponent={NewsGrid}>
+    return <ListLayout url="/news" GridComponent={NewsGrid}>
         {children}
     </ListLayout>
 }
