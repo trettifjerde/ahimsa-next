@@ -1,6 +1,7 @@
-import { GalleryEntry, GalleryEntryPic, NewsEntryGallery } from "@/sanity/lib/types";
+import { GalleryEntry, GalleryEntryPic, ImageInfo, NewsEntryGallery } from "@/sanity/lib/types";
 import { BatchFetcherBody, FetcherEntryMeta, GroqStoriesParams, GroqYearParams } from "./types";
 import { getCategoryId } from "@/sanity/lib/fetches";
+import { getMetaImageUrl } from "./image-helpers";
 
 export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
 
@@ -141,6 +142,16 @@ export function getYearFromString(year?: string) {
             return y;
     }
     return undefined;
+}
+
+export function getPageOGMeta(img: ImageInfo) {
+    return {
+        type: 'website',
+        locale: 'hr_HR',
+        siteName: 'Ahimsa',
+        url: process.env.NEXT_PUBLIC_URL,
+        images: getMetaImageUrl(img)
+    }
 }
 
 function getYearGroqStartParam(year?: number) {

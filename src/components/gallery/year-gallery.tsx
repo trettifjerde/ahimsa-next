@@ -3,6 +3,7 @@ import { getYearGallery } from "@/sanity/lib/fetches";
 import { GALLERY_BATCH_SIZE, makeFetcherInitInfo, makeGalleryPics } from "@/utils/serverHelpers";
 import GalleryFetcher from "./gallery-fetcher";
 import { GroqYearParams } from "@/utils/types";
+import GalleryGrid from "./gallery-grid";
 
 export default async function YearGallery({ fetchParams }: {
     fetchParams?: GroqYearParams,
@@ -15,9 +16,11 @@ export default async function YearGallery({ fetchParams }: {
 
     return <>
         <h1>Galerije</h1>
-        <GalleryFetcher 
-            initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams?.start)}
-            initItems={makeGalleryPics(entries)} 
-        />
+        <GalleryGrid>
+            <GalleryFetcher 
+                initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams?.start)}
+                initItems={makeGalleryPics(entries)} 
+            />
+        </GalleryGrid>
     </>
 }

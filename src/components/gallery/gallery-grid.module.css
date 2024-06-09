@@ -1,16 +1,11 @@
 .g {
     --pic-width: 8rem;
 
-    position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--pic-width));
     grid-auto-rows: min-content;
     gap: var(--gap);
     justify-content: center;
-}
-
-.g h1 {
-    grid-column: 1/-1;
 }
 
 .emp {

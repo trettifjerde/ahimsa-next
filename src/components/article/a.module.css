@@ -34,6 +34,10 @@
     margin-inline: auto;
 }
 
+.ic img {
+    object-fit: contain;
+}
+
 .gg {
     padding-block: 3rem;
 }
@@ -54,10 +58,6 @@
 .ic,
 .t {
     margin-block: var(--main-bottom);
-}
-
-.back {
-    margin-bottom: var(--gap);
 }
 
 .cats {

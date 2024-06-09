@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getArtcile } from "@/sanity/lib/fetches";
 import Article from "@/components/article/article";
 import { getMetaImageUrl } from "@/utils/image-helpers";
+import { getPageOGMeta } from "@/utils/serverHelpers";
 
 type Props = { params: { slug: string } };
 
@@ -13,7 +14,7 @@ export default async function NewsItem({ params }: Props) {
     if (!news)
         notFound();
 
-    return <Article article={news} backBtnText="back to news" backUrl="/news" />
+    return <Article article={news} />
 }
 
 export async function generateMetadata(
@@ -24,11 +25,9 @@ export async function generateMetadata(
     if (news)
 
         return {
-            title: news.title,
+            title: `${news.title} | Ahimsa`,
             description: news.excerpt,
-            openGraph: {
-                images: [getMetaImageUrl(news.image)],
-            },
+            openGraph: getPageOGMeta(news.image),
         }
 
     else {

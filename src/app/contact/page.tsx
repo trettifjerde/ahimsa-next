@@ -12,7 +12,7 @@ import listItemStyles from '@/styles/list-item.module.css';
 
 export const metadata: Metadata = {
     title: 'Kontakti',
-    description: 'Pošaljite Udruzi poruku'
+    description: 'Pošaljite poruku Udruzi Ahimsa'
 }
 
 export default async function Contact() {

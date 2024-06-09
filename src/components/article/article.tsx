@@ -1,65 +1,59 @@
 import { PortableText } from '@portabletext/react';
 import { makePics } from '@/utils/serverHelpers';
-import Main from '../layout/main';
-import MainBlock from '../layout/main-bl';
 import GalleryViewer from '../gallery/gallery-viewer';
 import GalleryGrid from '../gallery/gallery-grid';
-import BackButton from './back-button';
 import styles from './a.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 import { ArticleType } from '@/utils/types';
-import CustomImage from '../ui/image/customImage';
-import { CSSProperties } from 'react';
 import StoryCategoriesGrid from '../stories/story-cats';
+import { CSSProperties } from 'react';
+import CustomImage from '../ui/image/customImage';
+import { ImageFullInfo } from '@/sanity/lib/types';
 
 const sizes = '(max-width: 40rem) 95vw, (max-width: 64rem) 48rem, 70rem';
 
-export default function Article({
-    article, backBtnText, backUrl
-}: {
-    article: ArticleType, 
-    backBtnText: string,
-    backUrl: string
-}) {
+export default function Article({article}: {article: ArticleType}) {
 
     const date = new Date(article.date).toLocaleString('hr', { dateStyle: 'full', timeStyle: 'short' });
-    const imgContStyles = getImgContStyleProps(article);
+    const imgContStyles = getImgContStyleProps(article.image);
 
-    return <Main>
-        <MainBlock>
-            <div className={styles.back}>
-                <BackButton text={backBtnText} url={backUrl} />
-            </div>
-            <article className={styles.a}>
-                <div className={`${leafStyles.lf} ${styles.h}`}>
-                    <h1>{article.title}</h1>
-                    <div className={styles.date}>{date}</div>
-                    {article.categories && <StoryCategoriesGrid categoryIds={article.categories} className={styles.cats} />}
-                </div>
+    return <article className={styles.a}>
+        <div className={`${leafStyles.lf} ${styles.h}`}>
+            <h1>{article.title}</h1>
+            <div className={styles.date}>{date}</div>
+            {article.categories && <StoryCategoriesGrid categoryIds={article.categories} className={styles.cats} />}
+        </div>
 
+        <div className={styles.ic} style={imgContStyles}>
+            <CustomImage source={article.image} full sizes={sizes} />
+        </div>
 
-                <div className={styles.ic} style={imgContStyles}>
-                    <CustomImage source={article.image} full sizes={sizes} />
-                </div>
+        <div className={`${leafStyles.lf} ${styles.t}`}>
+            <PortableText value={article.description} />
+        </div>
 
-                <div className={`${leafStyles.lf} ${styles.t}`}>
-                    <PortableText value={article.description} />
-                </div>
-
-                {article.gallery && <GalleryGrid className={styles.gg}>
-                    <GalleryViewer pics={makePics(article.gallery)} />
-                </GalleryGrid>}
-            </article>
-        </MainBlock>
-    </Main>
+        {article.gallery && <GalleryGrid className={styles.gg}>
+            <GalleryViewer pics={makePics(article.gallery)} />
+        </GalleryGrid>}
+    </article>
 }
 
-function getImgContStyleProps(art: ArticleType) {
+export function Article404({text}: {text: string}) {
 
-    if (art.image) {
-        
-        const {width, height} = art.image;
-        
+    return <article className={styles.a}>
+        <div className={`${leafStyles.lf} ${styles.h}`}>
+            <h1>{text}</h1>
+            <div className={styles.date}>Pogreška 404</div>
+        </div>
+    </article>
+}
+
+function getImgContStyleProps(img: ImageFullInfo) {
+
+    if (img) {
+
+        const { width, height } = img;
+
         if (width && height) {
 
             const props: CSSProperties = {};
@@ -78,6 +72,6 @@ function getImgContStyleProps(art: ArticleType) {
         }
     }
 
-    return {aspectRatio: 1, maxWidth: '85%', maxHeight: '45vh'} as CSSProperties;
+    return { aspectRatio: 1, maxWidth: '85%', maxHeight: '45vh' } as CSSProperties;
 
 }

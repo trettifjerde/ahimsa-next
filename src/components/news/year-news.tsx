@@ -3,6 +3,7 @@ import { NEWS_BATCH_SIZE, getYearPageGroqParams, makeFetcherInitInfo } from "@/u
 import NewsItemPreview from "./news-prev";
 import NewsFetcher from "./news-fetcher";
 import styles from './year-news.module.css';
+import NewsGrid from "./news-grid";
 
 export default async function YearNews({ year }: {
     year?: number
@@ -17,10 +18,12 @@ export default async function YearNews({ year }: {
     return <>
         <h1>Novosti</h1>
         
-        {news.map(item => <NewsItemPreview key={item.slug} item={item} />)}
+        <NewsGrid>
+            {news.map(item => <NewsItemPreview key={item.slug} item={item} />)}
+            <NewsFetcher initInfo={makeFetcherInitInfo(news, NEWS_BATCH_SIZE, fetchParams?.start)} />
+        </NewsGrid>
 
         {news.length === 0 && <div className={styles.emp}>No news this year</div>}
 
-        <NewsFetcher initInfo={makeFetcherInitInfo(news, NEWS_BATCH_SIZE, fetchParams?.start)} />
     </>
 }

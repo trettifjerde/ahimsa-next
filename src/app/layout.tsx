@@ -8,6 +8,7 @@ import Footer from "@/components/layout/footer";
 import "@/styles/globals.css";
 import "@/styles/icons.css";
 import { getMetaImageUrl } from "@/utils/image-helpers";
+import { getPageOGMeta } from "@/utils/serverHelpers";
 
 const mainFont = Poppins({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--mainFont' });
 const handwritten = Shantell_Sans({ subsets: ["latin-ext"], weight: ["300", "400", "500", "600"], variable: '--handwritten' });
@@ -19,13 +20,7 @@ export const metadata: Metadata = {
     default: 'Ahimsa'
   },
   description: DESCRIPTION,
-  openGraph: {
-    type: 'website',
-    locale: 'hr_HR',
-    siteName: 'Ahimsa',
-    url: process.env.NEXT_PUBLIC_URL,
-    images: getMetaImageUrl(null)
-  }
+  openGraph: getPageOGMeta(null)
 };
 
 export const viewport : Viewport = {

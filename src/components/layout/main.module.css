@@ -3,7 +3,6 @@
     --top-wing: 40vh;
     --main-top: 25vh;
 
-    min-height: 100vh;
     position: relative;
     padding-top: var(--main-top);
 }
@@ -33,7 +32,6 @@
 
 @media (max-width: 40rem) {
     .m.shp {
-        --top-wing: 50vh;
         --main-top: 15vh;
     }
 }

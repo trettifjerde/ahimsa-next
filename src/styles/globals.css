@@ -84,6 +84,10 @@ h5 {
 }
 
 body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 1fr auto;
   background-color: var(--light-dark);
   color: var(--dark);
   line-height: 1.25;

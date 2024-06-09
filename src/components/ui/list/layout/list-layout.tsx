@@ -7,17 +7,16 @@ import styles from './layout.module.css';
 
 const list = [{name: 'Sve', url: ''}, ...UDRUGA_ALL_YEARS.map(year => ({name: year, url: year}))];
 
-export default function ListLayout({ children, url, GridComponent }: {
-    children: ReactNode, url: string, 
-    GridComponent: ComponentType<{ children: ReactNode, className?: string }>
+export default function ListLayout({ children, url }: {
+    children: ReactNode, url: string,
 }) {
 
     return <Main shortPadding>
         <MainBlock>
             <div className={styles.c}>
-                <GridComponent className={styles.g}>
+                <div className={styles.g}>
                     {children}
-                </GridComponent>
+                </div>
 
                 <Suspense>
                     <ListMenu url={url} list={list} paramName="year" isSticky isVert />

@@ -1,6 +1,6 @@
 'use client'
 
-import { MouseEvent, MouseEventHandler, useEffect, useRef, useState } from "react"
+import { MouseEvent, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { GalleryEntryPic, ImageFullInfo } from "@/sanity/lib/types";

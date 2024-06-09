@@ -8,7 +8,19 @@ export default function Main({ shortPadding, short, className, children }: {
     className?: string, 
     children: ReactNode 
 }) {
-    return <main className={`${leafStyles.lf} ${styles.m} ${short ? styles.sh : ''} ${shortPadding ? styles.shp : ''} ${className || ''}`}>
+
+    const classNames = [leafStyles.lf, styles.m];
+
+    if (short)
+        classNames.push(styles.sh);
+
+    if (shortPadding)
+        classNames.push(styles.shp);
+
+    if (className)
+        classNames.push(className);
+    
+    return <main className={classNames.join(' ')}>
         {children}
     </main>
 }
