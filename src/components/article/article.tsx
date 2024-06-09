@@ -55,12 +55,14 @@ export default function Article({
 }
 
 function getImgContStyleProps(art: ArticleType) {
-    const props: CSSProperties = {aspectRatio: 1};
 
     if (art.image) {
+        
         const {width, height} = art.image;
-
+        
         if (width && height) {
+
+            const props: CSSProperties = {};
             props.aspectRatio = width / height;
 
             if (props.aspectRatio >= 1) {
@@ -71,9 +73,11 @@ function getImgContStyleProps(art: ArticleType) {
                 props.maxWidth = '100%';
                 props.maxHeight = '85vh';
             }
+
+            return props;
         }
     }
 
-    return props;
+    return {aspectRatio: 1, maxWidth: '85%', maxHeight: '45vh'} as CSSProperties;
 
 }
