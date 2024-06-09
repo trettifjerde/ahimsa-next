@@ -29,7 +29,6 @@
 
 .ic img {
     border-radius: var(--br);
-    object-fit: scale-down;
 }
 
 .ic::after {

@@ -1,0 +1,8 @@
+.ul {
+    width: fit-content;
+    margin-left: auto;
+}
+
+.ul a {
+    text-decoration: none;
+}

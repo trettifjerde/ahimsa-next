@@ -10,6 +10,7 @@ import leafStyles from '@/styles/leaf.module.css';
 import { ArticleType } from '@/utils/types';
 import CustomImage from '../ui/image/customImage';
 import { CSSProperties } from 'react';
+import StoryCategoriesGrid from '../stories/story-cats';
 
 const sizes = '(max-width: 40rem) 95vw, (max-width: 64rem) 48rem, 70rem';
 
@@ -29,11 +30,13 @@ export default function Article({
             <div className={styles.back}>
                 <BackButton text={backBtnText} url={backUrl} />
             </div>
-            <article>
+            <article className={styles.a}>
                 <div className={`${leafStyles.lf} ${styles.h}`}>
                     <h1>{article.title}</h1>
                     <div className={styles.date}>{date}</div>
+                    {article.categories && <StoryCategoriesGrid categoryIds={article.categories} className={styles.cats} />}
                 </div>
+
 
                 <div className={styles.ic} style={imgContStyles}>
                     <CustomImage source={article.image} full sizes={sizes} />

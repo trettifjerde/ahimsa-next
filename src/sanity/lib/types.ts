@@ -19,4 +19,5 @@ export type FooterInfo = Exclude<FooterContactQueryResult, null>;
 export type ContactOtherInfo = FooterInfo['other'][0];
 
 export type StoryCategory = StoryCategoriesQueryResult[0];
+export type StoryCategoriesIds = StoryArticle['categories'];
 export type StoryCategoryDict = {[key: string]: {name: string, color: string}};

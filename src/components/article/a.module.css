@@ -1,3 +1,7 @@
+.a {
+    --cont-p: 5vh 5vw;
+}
+
 .h, .t {
     z-index: unset !important;
     background-color: var(--light);
@@ -6,7 +10,7 @@
 
 .h {
     --br: 10%;
-    padding: 3rem 2rem;
+    padding: var(--cont-p);
     border-radius: 3rem 15%;
 }
 
@@ -30,16 +34,13 @@
     margin-inline: auto;
 }
 
-.ic img {
-    object-fit: scale-down;
-}
 .gg {
     padding-block: 3rem;
 }
 
 .t {
     --br: 50% 3rem;
-    padding: 5vw;
+    padding: var(--cont-p);
     max-width: 60rem;
     margin-inline: auto;
     border-radius: 2rem 7%;
@@ -57,4 +58,8 @@
 
 .back {
     margin-bottom: var(--gap);
+}
+
+.cats {
+    margin-top: 1rem;
 }

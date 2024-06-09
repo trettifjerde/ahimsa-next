@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { StoryPreview } from "@/sanity/lib/types";
-import StoryCategoryItem from "./story-cat";
 import CustomImage from "../ui/image/customImage";
 import styles from './si.module.css';
-import menuStyles from '@/styles/menu.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 import listItemStyles from '@/styles/list-item.module.css';
+import StoryCategoriesGrid from "./story-cats";
 
 const sizes = '16rem';
 
@@ -32,9 +31,7 @@ export default function StoryItem({ story }: { story: StoryPreview }) {
                 </div>
             </Link>
 
-            <ul className={`${menuStyles.ul} ${styles.ul}`}>
-                {story.categories.map(cat => <StoryCategoryItem key={cat} id={cat} />)}
-            </ul>
+            <StoryCategoriesGrid categoryIds={story.categories} />
         </div>
     </div>
 }

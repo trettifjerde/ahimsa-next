@@ -10,8 +10,3 @@
     flex-direction: column;
     gap: calc(0.5 * var(--padding));
 }
-
-.ul {
-    width: fit-content;
-    margin-left: auto;
-}

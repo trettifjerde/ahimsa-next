@@ -1,13 +1,13 @@
 .c {
     --in-br: 20% 5% 5rem 10%;
     --br: 6rem 75% 15% 75%;
-    --desc-line-n: 8;
+    --desc-line-n: 7;
     --pic-w: 16rem;
 }
 
 .ci {
     display: grid;
-    grid-template-areas: 'h h'
+    grid-template-areas: 'ic h'
         'ic desc';
     grid-template-columns: var(--pic-w) auto;
     grid-template-rows: auto 1fr;
@@ -18,12 +18,9 @@
     grid-area: h;
 }
 
-.h h4 {
-    margin-left: calc(0.5 * var(--padding));
-}
-
 .ic {
     grid-area: ic;
+    align-self: center;
 }
 
 .desc {
@@ -38,6 +35,10 @@
             'ic'
             'desc';
         gap: calc(0.75 * var(--padding));
+    }
+
+    .h h4 {
+        margin-left: calc(0.5 * var(--padding));
     }
 }
 
