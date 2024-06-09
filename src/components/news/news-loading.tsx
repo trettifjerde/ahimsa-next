@@ -1,5 +1,6 @@
 import { NewsSkeletonItem } from "@/components/news/news-skeleton";
-import { NEWS_BATCH_SIZE } from "@/utils/serverHelpers";
+import { NEWS_BATCH_SIZE } from "@/utils/env-fallback";
+
 
 export default function NewsLoading() {
 

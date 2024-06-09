@@ -42,6 +42,7 @@ export const volunteerFormFields = {
 export type VolunteerFormKey = keyof typeof volunteerFormFields;
 export const volunteerFormKeys : VolunteerFormKey[] = [NAME, SURNAME, EMAIL, MESSAGE];
 export type VolunteerFormErrorLog = {[key in VolunteerFormKey]?: string};
+export type VolunteerFormData = {[key in VolunteerFormKey]: string};
 
 export function validateVolunteerForm(data: FormData) {
 

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getYearGallery } from "@/sanity/lib/fetches";
 import { GalleryEntryPic as GP } from "@/sanity/lib/types";
-import { GALLERY_BATCH_SIZE, getYearFetchGroqParams, makeFetcherBody, makeGalleryPics } from "@/utils/serverHelpers";
+import { getYearFetchGroqParams, makeFetcherBody, makeGalleryPics } from "@/utils/serverHelpers";
 import { BatchFetcherBody } from "@/utils/types";
+import { GALLERY_BATCH_SIZE } from "@/utils/env-fallback";
 
 export async function GET(req: NextRequest) : Promise<NextResponse<BatchFetcherBody<GP>>>{
 

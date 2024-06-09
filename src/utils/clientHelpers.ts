@@ -25,23 +25,3 @@ export async function fetchData<T>(url: string, init?: RequestInit) : Promise<{d
 export async function fetchGallery(params: URLSearchParams) {
     return await fetchData<FetcherEntry<GalleryEntryPic>>(`/api/gallery?${params.toString()}`);
 }
-
-export function getDimens(img: ImageFullInfo, cont: HTMLDivElement | null) {
-    console.log(img, cont);
-    if (cont && img && img.width && img.height) {
-        const coef = Math.max((img.width / cont.offsetWidth), (img.height / (0.75 * window.screen.height)));
-        console.log(coef);
-
-        if (coef > 1) 
-            return {
-                width: Math.round(img.width / coef),
-                height: Math.round(img.height / coef)
-            }
-
-        return {
-            width: img.width,
-            height: img.height
-        }
-    }
-    return {width: 0, height: 0};
-}

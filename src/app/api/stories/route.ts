@@ -1,6 +1,7 @@
 import { getStories } from "@/sanity/lib/fetches";
 import { StoryPreview } from "@/sanity/lib/types";
-import { STORIES_BATCH_SIZE, getStoriesFetchGroqParams, makeFetcherBody } from "@/utils/serverHelpers";
+import { STORIES_BATCH_SIZE } from "@/utils/env-fallback";
+import { getStoriesFetchGroqParams, makeFetcherBody } from "@/utils/serverHelpers";
 import { BatchFetcherBody } from "@/utils/types";
 import { NextRequest, NextResponse } from "next/server";
 

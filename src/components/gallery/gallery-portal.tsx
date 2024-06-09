@@ -63,8 +63,6 @@ function PortalInner({ pic, curDir, selectNext, hasNext, hasPrev }: {
     const iciRef = useRef<HTMLDivElement>(null);
     const [zInfo, setZInfo] = useState(getZoomInfo(pic.image, icRef.current, false));
 
-    console.log(zInfo);
-
     const selectNextPic = (n: number, e: MouseEvent) => {
         e.stopPropagation();
         selectNext(n)

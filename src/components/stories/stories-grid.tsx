@@ -2,8 +2,9 @@ import { getStories } from '@/sanity/lib/fetches';
 import styles from './sg.module.css';
 import StoryItem from './story-item';
 import StoriesFetcher from './stories-fetcher';
-import { STORIES_BATCH_SIZE, makeFetcherInitInfo } from '@/utils/serverHelpers';
+import { makeFetcherInitInfo } from '@/utils/serverHelpers';
 import { GroqStoriesParams } from '@/utils/types';
+import { STORIES_BATCH_SIZE } from '@/utils/env-fallback';
 
 export default async function StoriesGrid({ fetchParams }: { fetchParams?: GroqStoriesParams }) {
     const stories = await getStories(fetchParams);

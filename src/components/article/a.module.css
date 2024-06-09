@@ -36,6 +36,7 @@
 
 .ic img {
     object-fit: contain;
+    margin-inline: auto;
 }
 
 .gg {

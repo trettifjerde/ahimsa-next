@@ -1,6 +1,7 @@
 'use server';
 
 import { ContactFormErrorLog, validateContactForm } from "@/utils/contact-form-helpers";
+import { sendMails } from "@/utils/mail-helpers";
 import { FormServerAction } from "@/utils/types";
 
 const submitContactForm : FormServerAction<ContactFormErrorLog> = async(formData: FormData) => {
@@ -11,9 +12,7 @@ const submitContactForm : FormServerAction<ContactFormErrorLog> = async(formData
         if (errors)
             return {status: 400, errors};
 
-        const someAsyncResponse = await new Promise<number>((resolve, reject) => {
-            setTimeout(() => resolve(1), 3000);
-        });
+        sendMails('contact', formData);
         
         return {status: 200};
     }

@@ -1,9 +1,10 @@
 import { getYearNews } from "@/sanity/lib/fetches";
-import { NEWS_BATCH_SIZE, getYearPageGroqParams, makeFetcherInitInfo } from "@/utils/serverHelpers";
+import { getYearPageGroqParams, makeFetcherInitInfo } from "@/utils/serverHelpers";
 import NewsItemPreview from "./news-prev";
 import NewsFetcher from "./news-fetcher";
 import styles from './year-news.module.css';
 import NewsGrid from "./news-grid";
+import { NEWS_BATCH_SIZE } from "@/utils/env-fallback";
 
 export default async function YearNews({ year }: {
     year?: number

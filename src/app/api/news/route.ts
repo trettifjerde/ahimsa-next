@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getYearNews } from "@/sanity/lib/fetches";
 import { NewsListPreviewItem as News } from "@/sanity/lib/types";
-import { NEWS_BATCH_SIZE, getYearFetchGroqParams, makeFetcherBody } from "@/utils/serverHelpers";
+import { getYearFetchGroqParams, makeFetcherBody } from "@/utils/serverHelpers";
 import { BatchFetcherBody } from "@/utils/types";
+import { NEWS_BATCH_SIZE } from "@/utils/env-fallback";
 
 export async function GET(req: NextRequest): Promise<NextResponse<BatchFetcherBody<News>>> {
     const params = getYearFetchGroqParams(NEWS_BATCH_SIZE, req.nextUrl.searchParams);

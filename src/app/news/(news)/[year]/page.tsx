@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import YearNews from "@/components/news/year-news";
-import { UDRUGA_ALL_YEARS, getYearFromString } from "@/utils/serverHelpers";
+import { getYearFromString } from "@/utils/serverHelpers";
+import { UDRUGA_ALL_YEARS } from "@/utils/env-fallback";
 
 export default function News({ params }: { params: { year: string } }) {
 

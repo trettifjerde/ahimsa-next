@@ -1,9 +1,10 @@
 import { client } from "./client";
 import { CatStoriesQueryResult, CategoryIdQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
 import { catStoriesQuery, categoryIdQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
-import { GALLERY_BATCH_SIZE, NEWS_BATCH_SIZE, REVALIDATE_TIMEOUT, getStoriesPageGroqParams, getYearPageGroqParams } from "@/utils/serverHelpers";
+import { getStoriesPageGroqParams, getYearPageGroqParams } from "@/utils/serverHelpers";
 import { StoryCategoryDict } from "./types";
 import { GroqStoriesParams, GroqYearParams } from "@/utils/types";
+import { GALLERY_BATCH_SIZE, NEWS_BATCH_SIZE, REVALIDATE_TIMEOUT } from "@/utils/env-fallback";
 
 const nextParams = {next: {revalidate: REVALIDATE_TIMEOUT}};
 

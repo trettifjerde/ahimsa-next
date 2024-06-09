@@ -2,21 +2,7 @@ import { GalleryEntry, GalleryEntryPic, ImageInfo, NewsEntryGallery } from "@/sa
 import { BatchFetcherBody, FetcherEntryMeta, GroqStoriesParams, GroqYearParams } from "./types";
 import { getCategoryId } from "@/sanity/lib/fetches";
 import { getMetaImageUrl } from "./image-helpers";
-
-export const UDRUGA_START_YEAR = parseInt(process.env.NEXT_PUBLIC_UDRUGA_START_YEAR || '2016');
-
-export const UDRUGA_ALL_YEARS = (() => {
-    const years: string[] = [];
-    const curYear = new Date().getFullYear();
-    for (let y = curYear; y >= UDRUGA_START_YEAR; y--)
-        years.push(y.toString());
-    return years;
-})();
-
-export const NEWS_BATCH_SIZE = parseInt(process.env.NEWS_BATCH_SIZE || '10');
-export const GALLERY_BATCH_SIZE = parseInt(process.env.GALLERY_BATCH_SIZE || '5');
-export const STORIES_BATCH_SIZE = parseInt(process.env.STORIES_BATCH_SIZE || '5');
-export const REVALIDATE_TIMEOUT = parseInt(process.env.REVALIDATE_TIMEOUT || '5');
+import { STORIES_BATCH_SIZE, UDRUGA_START_YEAR } from "./env-fallback";
 
 export function makeFetcherInitInfo<I extends { date: string }>(items: I[], batchSize: number, key?: string): FetcherEntryMeta {
     const lastItem: I | undefined = items[items.length - 1];

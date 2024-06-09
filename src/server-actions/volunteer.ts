@@ -1,5 +1,6 @@
 'use server';
 
+import { sendMails } from "@/utils/mail-helpers";
 import { FormServerAction } from "@/utils/types";
 import { VolunteerFormErrorLog, validateVolunteerForm } from "@/utils/volunteer-form-helpers";
 
@@ -11,9 +12,8 @@ const volunteer : FormServerAction<VolunteerFormErrorLog> = async(formData: Form
         if (errors)
             return {status: 400, errors};
 
-        const someAsyncResponse = await new Promise<number>((resolve, reject) => {
-            setTimeout(() => resolve(1), 3000);
-        });
+
+        sendMails('volunteer', formData);
         
         return {status: 200};
     }

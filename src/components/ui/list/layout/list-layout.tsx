@@ -1,9 +1,9 @@
-import { ComponentType, ReactNode, Suspense } from "react";
-import { UDRUGA_ALL_YEARS } from "@/utils/serverHelpers";
+import { ReactNode, Suspense } from "react";
 import { ListMenu } from "../menu/list-menu";
 import MainBlock from "@/components/layout/main-bl";
 import Main from "@/components/layout/main";
 import styles from './layout.module.css';
+import { UDRUGA_ALL_YEARS } from "@/utils/env-fallback";
 
 const list = [{name: 'Sve', url: ''}, ...UDRUGA_ALL_YEARS.map(year => ({name: year, url: year}))];
 

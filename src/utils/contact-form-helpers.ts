@@ -24,6 +24,7 @@ export const contactFormFields = {
 export type ContactFormKey = keyof typeof contactFormFields;
 export const contactFormKeys : ContactFormKey[] = [EMAIL, MESSAGE];
 export type ContactFormErrorLog = {[key in ContactFormKey]?: string};
+export type ContactFormData = {[key in ContactFormKey]: string};
 
 export function validateContactForm(data: FormData) {
 
