@@ -8,3 +8,11 @@
     max-width: 70rem;
     margin-inline: auto;
 }
+
+.m article code {
+    display: block;
+    margin-block: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    background-color: var(--cian-shadow);
+  }

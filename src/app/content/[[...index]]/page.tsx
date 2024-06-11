@@ -15,6 +15,8 @@ import MainBlock from '@/components/layout/main-bl'
 
 export default function StudioPage() {
   return <MainBlock>
+    <article>
     <NextStudio config={config} />
+    </article>
   </MainBlock>
 }

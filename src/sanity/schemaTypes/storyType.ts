@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { storyCategory } from "./storyCategory";
+import { BLOCK_INFO } from "./block-styles";
 
 export const storyType = defineType({
     name: 'story',
@@ -45,7 +46,7 @@ export const storyType = defineType({
             name: 'description',
             type: 'array',
             title: 'Tekst',
-            of: [{ type: 'block' }],
+            of: [BLOCK_INFO],
             validation: (rule) => rule
                 .required()
                 .error('Obavezno')

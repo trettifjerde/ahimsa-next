@@ -1,6 +1,6 @@
 import { client } from "./client";
-import { CatStoriesQueryResult, CategoryIdQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
-import { catStoriesQuery, categoryIdQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
+import { CatStoriesQueryResult, CategoryByIdQueryResult, ContactQueryResult, FooterContactQueryResult, GalleryListQueryResult, LandingQueryResult, NewsArticleQueryResult, NewsListQueryResult, StoryCategoriesQueryResult, StoryQueryResult, TeamQueryResult, UncatStoriesQueryResult } from "../../../sanity.types";
+import { catStoriesQuery, categoryByIdQuery, contactQuery, footerContactQuery, galleryListQuery, landingQuery, newsArticleQuery, newsListQuery, storyCategoriesQuery, storyQuery, teamQuery, uncatStoriesQuery } from "./queries";
 import { getStoriesPageGroqParams, getYearPageGroqParams } from "@/utils/serverHelpers";
 import { StoryCategoryDict } from "./types";
 import { GroqStoriesParams, GroqYearParams } from "@/utils/types";
@@ -60,8 +60,8 @@ export async function getStory(slug: string) {
     return client.fetch<StoryQueryResult>(storyQuery, {slug}, nextParams);
 }
 
-export async function getCategoryId(name: string) {
-    return client.fetch<CategoryIdQueryResult>(categoryIdQuery, {name}, nextParams);
+export async function getCategoryId(slug: string) {
+    return client.fetch<CategoryByIdQueryResult>(categoryByIdQuery, {slug}, nextParams);
 }
 
 export async function getStories(params?: GroqStoriesParams) {
@@ -82,14 +82,20 @@ export async function getCategories() {
 }
 
 export async function getCategoriesDict() {
+    const colorFallback = 0;
+    
     return getCategories()
         .then(cats => {
             if (!cats)
                 return {};
 
             return cats.reduce((acc, cat) => {
-                const {_id, name, color } = cat;
-                acc[_id] = {name, color: `${color.r},${color.g},${color.b}`};
+                const {_id, name, color, slug } = cat;
+                acc[_id] = {
+                    name, 
+                    slug, 
+                    color: `${color?.r || colorFallback },${color?.g || colorFallback },${color?.b || colorFallback}`
+                };
                 return acc;
 
             }, {} as StoryCategoryDict);

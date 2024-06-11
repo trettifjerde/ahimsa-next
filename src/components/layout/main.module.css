@@ -12,26 +12,14 @@
     height: var(--top-wing);
 }
 
-.m p {
-    margin-block: var(--p-margin);
-    line-height: var(--p-lh);
-}
-
-.m code {
-    display: block;
-    margin-block: 1rem;
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-    background-color: var(--cian-shadow);
-}
-
 .m.sh {
     --top-wing: 25vh;
     --main-top: var(--top-wing);
 }
 
 @media (max-width: 40rem) {
-    .m.shp {
-        --main-top: 15vh;
+    .m.np {
+        --top-wing: calc(40vh + 4rem);
+        --main-top: var(--nav-h);
     }
 }

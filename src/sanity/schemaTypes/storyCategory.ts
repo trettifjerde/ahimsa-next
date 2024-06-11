@@ -14,6 +14,15 @@ export const storyCategory = defineType({
                 .error('Obavezno + Ne smije se poklapati s postojećim nazivima kategorija')
         }),
         defineField({
+            name: 'slug',
+            type: 'slug',
+            title: 'Poveznica (dio koji će biti nakon "/stories/")',
+            options: { source: 'name.current'},
+            validation: (rule) => rule
+                .required()
+                .error('Ne smije se poklapati s postojećim poveznicama kategorija'),
+        }),
+        defineField({
             name: 'color',
             title: 'Boja',
             type: 'color',

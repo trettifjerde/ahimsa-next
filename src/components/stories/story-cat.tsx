@@ -11,7 +11,7 @@ export default function StoryCategoryItem({id}: {id: string}) {
     const categories = useContext(CategoriesContext);
     const cat = categories[id];
 
-    return <Link className={styles.i} href={`/stories${cat.name ? `/${cat.name}` : ''}`}>
+    return <Link className={styles.i} href={`/stories${cat.slug ? `/${cat.slug}` : ''}`}>
         <li className={menuStyles.active} style={{'--color': cat.color} as React.CSSProperties}>
             {cat.name}
         </li>

@@ -1,14 +1,14 @@
+import { CSSProperties } from 'react';
 import { PortableText } from '@portabletext/react';
+import { ImageFullInfo } from '@/sanity/lib/types';
 import { makePics } from '@/utils/serverHelpers';
+import { ArticleType } from '@/utils/types';
 import GalleryViewer from '../gallery/gallery-viewer';
 import GalleryGrid from '../gallery/gallery-grid';
+import StoryCategoriesGrid from '../stories/story-cats';
+import CustomImage from '../ui/image/customImage';
 import styles from './a.module.css';
 import leafStyles from '@/styles/leaf.module.css';
-import { ArticleType } from '@/utils/types';
-import StoryCategoriesGrid from '../stories/story-cats';
-import { CSSProperties } from 'react';
-import CustomImage from '../ui/image/customImage';
-import { ImageFullInfo } from '@/sanity/lib/types';
 
 const sizes = '(max-width: 40rem) 95vw, (max-width: 64rem) 48rem, 70rem';
 
@@ -58,15 +58,7 @@ function getImgContStyleProps(img: ImageFullInfo) {
 
             const props: CSSProperties = {};
             props.aspectRatio = width / height;
-
-            if (props.aspectRatio >= 1) {
-                props.maxWidth = `${width}px`;
-            }
-            else {
-                props.width = `${width}px`;
-                props.maxWidth = '100%';
-                props.maxHeight = '85vh';
-            }
+            props.maxWidth = `${width}px`;          
 
             return props;
         }

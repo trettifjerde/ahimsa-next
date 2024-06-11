@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { BLOCK_INFO } from "./block-styles";
 
 export const contactsType = defineType({
     name: 'contacts',
@@ -9,7 +10,7 @@ export const contactsType = defineType({
             name: 'greeting',
             title: 'Greeting text',
             type: 'array',
-            of: [{type: 'block'}],
+            of: [BLOCK_INFO],
             validation: (rule) => rule.required().error('Obavezno')
         }),
         defineField({

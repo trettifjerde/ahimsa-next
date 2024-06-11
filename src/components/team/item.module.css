@@ -12,29 +12,28 @@
     --bg: var(--green-trans);
     --shadow: var(--green-shadow);
     --br: 25% 85% 25% 100%;
+    --ic-br: 40% 0;
+    --h-coef: -1;
 }
 
 .c:nth-of-type(even) {
     --bg: var(--blue-trans);
     --shadow: var(--blue-shadow);
     --br: 85% 25% 100% 25%;
+    --ic-br: 0 40%;
+    --h-coef: 1;
 }
 
 .ic {
-    --br: 40% 0;
     position: relative;
     aspect-ratio: 1/1;
     z-index: -1;
 }
 
-.ic img {
-    border-radius: var(--br);
-}
-
 .ic::after {
     content: '';
     position: absolute;
-    border-radius: var(--br);
+    border-radius: var(--ic-br);
     inset: 0;
     background-color: var(--bg);
     z-index: -3;
@@ -42,10 +41,14 @@
     transition: transform .3s ease-in-out;
 }
 
+.ic img {
+    border-radius: var(--ic-br);
+}
+
 .h {
     --br: 0.25rem 100%;
     top: calc(-0.5 * var(--gap));
-    left: calc(-0.5 * var(--gap));
+    left: calc(0.5 * var(--gap) * var(--h-coef));
     background-color: var(--light);
     box-shadow: var(--box-shadow);
     border-radius: 5% 50% 5% 25%;
@@ -60,7 +63,6 @@
 
 .h h5 {
     text-align: center;
-    margin-block: 0;
 }
 
 .h h5:last-of-type {

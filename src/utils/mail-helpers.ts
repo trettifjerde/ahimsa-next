@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { ContactFormData } from './contact-form-helpers';
 import { VolunteerFormData } from './volunteer-form-helpers';

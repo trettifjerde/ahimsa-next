@@ -11,7 +11,7 @@ type Props = Omit<ImageProps, 'src' | 'alt' | 'fill' | 'placeholder' | 'blurData
     square?: boolean
 };
 
-export default function CustomImage({ source, full = false, square, ...props }: Props) {
+export default function CustomImage({ source, full = false, square = false, ...props }: Props) {
 
     if (source) {
 

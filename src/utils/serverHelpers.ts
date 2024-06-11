@@ -56,20 +56,20 @@ export function makeGalleryPics(entries: GalleryEntry[]): GalleryEntryPic[] {
         .flat()
 }
 
-export async function getStoriesPageGroqParams(catName?: string) {
+export async function getStoriesPageGroqParams(slug?: string) {
 
     const params: GroqStoriesParams = {
         end: new Date().toISOString(),
         batchSize: STORIES_BATCH_SIZE
     };
 
-    if (catName) {
-        const catId = await getCategoryId(catName);
+    if (slug) {
+        const catInfo = await getCategoryId(slug);
 
-        if (!catId)
+        if (!catInfo)
             return undefined;
 
-        params.catId = catId;
+        params.catId = catInfo._id;
     }
 
     return params;

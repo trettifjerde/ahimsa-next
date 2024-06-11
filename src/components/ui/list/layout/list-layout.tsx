@@ -11,7 +11,7 @@ export default function ListLayout({ children, url }: {
     children: ReactNode, url: string,
 }) {
 
-    return <Main shortPadding>
+    return <Main noPadding>
         <MainBlock>
             <div className={styles.c}>
                 <div className={styles.g}>

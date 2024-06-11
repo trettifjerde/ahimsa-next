@@ -104,7 +104,7 @@ export const galleryListQuery = groq`
 
 export const teamQuery = groq`
     *[_type == "member"]
-    | order(name asc)
+    | order(surname asc)
     {
         name,
         surname,
@@ -208,10 +208,11 @@ export const storyCategoriesQuery = groq`
     *[_type == "storyCategory"] {
         _id,
         "name": name.current,
+        "slug": slug.current,
         "color": color.rgb { r, g, b }
     }
 `;
 
-export const categoryIdQuery = groq`
-    *[_type == "storyCategory" && name.current == $name][0]._id
+export const categoryByIdQuery = groq`
+    *[_type == "storyCategory" && slug.current == $slug][0]{ _id, "name": name.current }
 `;

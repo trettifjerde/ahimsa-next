@@ -31,12 +31,12 @@
 
 .ic {
     position: relative;
+    max-height: 85vh;
     margin-inline: auto;
 }
 
 .ic img {
     object-fit: contain;
-    margin-inline: auto;
 }
 
 .gg {

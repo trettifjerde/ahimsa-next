@@ -6,9 +6,9 @@ type Img = Exclude<ImageInfo, null>
 type Props = {
     source: Img,
     full: boolean,
+    width?: number
     quality?: number,
     square?: boolean
-    width?: number
 }
 
 export default function getSanityImageUrl({ source, full, quality=95, width, square }: Props) {
@@ -16,10 +16,11 @@ export default function getSanityImageUrl({ source, full, quality=95, width, squ
     let b = imageBuilder?.image((full && source._ref) ? source._ref : source)
         .auto('format')
         .quality(quality)
-        .fit(full ? 'min' : 'crop')
-
+        .fit(full ? 'max' : 'crop')
+    
     if (width) {
-        b = b.width(width)
+
+        b = b.width(width);
 
         if (square)
             b = b.height(width)

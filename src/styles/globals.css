@@ -60,6 +60,8 @@ h4,
 h5 {
   font-weight: 400;
   font-family: var(--handwritten);
+}
+h1, h2, h3, h4 {
   margin-bottom: 1.75em;
 }
 
@@ -81,12 +83,13 @@ h4 {
 
 h5 {
   font-size: 1.5rem;
+  margin-block: 0;
 }
 
 body {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 100vw;
+  grid-template-columns: 100%;
   grid-template-rows: 1fr auto;
   background-color: var(--light-dark);
   color: var(--dark);
@@ -109,6 +112,43 @@ article a {
 .a:hover,
 article a:hover {
   color: var(--cian);
+}
+
+main p,
+article p,
+article ul,
+article ol {
+  margin-block: var(--p-margin);
+  line-height: var(--p-lh);
+}
+
+b {
+  font-weight: 500;
+}
+
+strong {
+  color: var(--cian-dark);
+  font-family: var(--handwritten);
+}
+
+ul {
+  list-style-type: none;
+}
+
+article ul {
+  list-style-type: disc;
+}
+
+article ul,
+article ol {
+  list-style-position: inside;
+  margin-left: var(--p-margin);
+}
+
+article li::marker {
+  color: var(--cian-dark);
+  font-weight: 400;
+  font-family: var(--handwritten);
 }
 
 footer {
@@ -228,15 +268,6 @@ footer .info span {
 .noscroll {
   max-height: 100vh;
   overflow: hidden;
-}
-
-b {
-  font-weight: 500;
-}
-
-strong {
-  color: var(--cian-dark);
-  font-family: var(--handwritten);
 }
 
 @keyframes popup {

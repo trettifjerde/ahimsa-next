@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { BLOCK_INFO } from "./block-styles";
 
 export const newsType = defineType({
     name: 'news',
@@ -35,7 +36,7 @@ export const newsType = defineType({
             name: 'description',
             type: 'array',
             title: 'Tekst vijesti',
-            of: [{ type: 'block' }],
+            of: [BLOCK_INFO],
             validation: (rule) => rule
                 .required()
                 .error('Obavezno')

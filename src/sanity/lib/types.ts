@@ -20,4 +20,4 @@ export type ContactOtherInfo = FooterInfo['other'][0];
 
 export type StoryCategory = StoryCategoriesQueryResult[0];
 export type StoryCategoriesIds = StoryArticle['categories'];
-export type StoryCategoryDict = {[key: string]: {name: string, color: string}};
+export type StoryCategoryDict = {[key: string]: Omit<StoryCategory, '_id'|'color'> & {color: string}};

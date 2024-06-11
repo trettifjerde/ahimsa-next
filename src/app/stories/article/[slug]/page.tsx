@@ -1,6 +1,5 @@
 import Article from "@/components/article/article";
-import { getCategories, getStory } from "@/sanity/lib/fetches";
-import { getMetaImageUrl } from "@/utils/image-helpers";
+import { getStory } from "@/sanity/lib/fetches";
 import { getPageOGMeta } from "@/utils/serverHelpers";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -15,15 +14,6 @@ export default async function StoryPage({ params }: Props) {
         notFound();
 
     return <Article article={story}/>
-}
-
-export async function generateStaticParams() {
-    const categories = await getCategories();
-
-    if (!categories) 
-        return [];
-    
-    return categories.map(cat => ({slug: cat.name}));
 }
 
 export async function generateMetadata(

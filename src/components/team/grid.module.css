@@ -1,6 +1,7 @@
 .g {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(auto, 20rem));
-    justify-content: space-evenly;
-    gap: calc(2 * var(--gap));
+    justify-content: space-around;
+    gap: var(--gap);
+    margin-block: 5vh;
 }

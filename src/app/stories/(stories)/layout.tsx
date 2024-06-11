@@ -10,12 +10,13 @@ const allCatColor = '85,176,179';
 export default async function StoriesLayout({ children }: { children: ReactNode }) {
 
     const categories = await getCategoriesDict();
-    const catsInfo = [{ name: 'Sve', url: '', cssVars: { '--color': allCatColor } },
-    ...Object.values(categories).map(({ name, color }) => ({
-        name,
-        url: name,
-        cssVars: { '--color': color }
-    }))];
+    const catsInfo = [
+        { name: 'Sve', url: '', cssVars: { '--color': allCatColor } },
+        ...Object.values(categories).map(({ name, slug, color }) => ({
+            name,
+            url: slug,
+            cssVars: { '--color': color }
+        }))];
 
     return <Main>
         <MainBlock>
@@ -25,7 +26,7 @@ export default async function StoriesLayout({ children }: { children: ReactNode 
                 {catsInfo && <div className={styles.c}>
                     <h5>Kategorije</h5>
                     <Suspense>
-                        <ListMenu url="/stories" paramName="cat" list={catsInfo} isGrowing />
+                        <ListMenu url="/stories" paramName="slug" list={catsInfo} isGrowing />
                     </Suspense>
                 </div>}
 

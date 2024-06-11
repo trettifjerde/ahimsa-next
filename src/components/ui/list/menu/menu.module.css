@@ -20,7 +20,7 @@
 
 .menu.st {
     position: sticky;
-    top: 15vh;
+    top: calc(1rem + var(--main-top));
     z-index: 10;
     align-self: start;
 }
@@ -70,7 +70,6 @@
 
     .menu.st {
         width: 100%;
-        top: calc(var(--nav-h) + 1rem);
     }
 
     .menu.vert ul {

@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import styles from './main.module.css';
 import leafStyles from '@/styles/leaf.module.css';
 
-export default function Main({ shortPadding, short, className, children }: { 
-    shortPadding?: boolean,
+export default function Main({ noPadding, short, className, children }: { 
+    noPadding?: boolean,
     short?: boolean, 
     className?: string, 
     children: ReactNode 
@@ -14,8 +14,8 @@ export default function Main({ shortPadding, short, className, children }: {
     if (short)
         classNames.push(styles.sh);
 
-    if (shortPadding)
-        classNames.push(styles.shp);
+    if (noPadding)
+        classNames.push(styles.np);
 
     if (className)
         classNames.push(className);

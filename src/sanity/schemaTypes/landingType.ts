@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { BLOCK_INFO } from "./block-styles";
 
 export const landingType = defineType({
     name: 'landing',
@@ -9,7 +10,7 @@ export const landingType = defineType({
             name: 'text',
             type: 'array',
             title: 'Glavni tekst',
-            of: [{type: 'block'}],
+            of: [BLOCK_INFO],
             validation: (rule) => rule.required().error('Obavezno')
         }),
         defineField({

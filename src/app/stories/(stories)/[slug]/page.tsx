@@ -4,10 +4,10 @@ import { getStoriesPageGroqParams } from "@/utils/serverHelpers";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-type Props = { params: { cat: string } };
+type Props = { params: { slug: string } };
 
 export default async function StoriesPage({params}: Props) {
-    const fetchParams = await getStoriesPageGroqParams(params.cat);
+    const fetchParams = await getStoriesPageGroqParams(params.slug);
 
     if (!fetchParams)
         notFound();
@@ -17,18 +17,22 @@ export default async function StoriesPage({params}: Props) {
 
 export async function generateStaticParams() {
     const categories = await getCategories();
-    return categories.map(cat => ({cat: cat.name}));
+
+    if (!categories) 
+        return [];
+    
+    return categories.map(cat => ({slug: cat.slug}));
 }
 
 export async function generateMetadata(
     { params }: Props,
 ): Promise<Metadata> {
-    const catName = await getCategoryId(params.cat)
+    const catInfo = await getCategoryId(params.slug)
 
-    if (catName)
+    if (catInfo)
 
         return {
-            title: `Priče: ${params.cat} | Ahimsa`,
+            title: `Priče: ${catInfo.name} | Ahimsa`,
         }
 
     else {
