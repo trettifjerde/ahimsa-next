@@ -21,14 +21,14 @@ export function makeFetcherBody<I extends { date: string }>(items: Array<I>, bat
     }
 }
 
-export function makePics(gallery: NewsEntryGallery) : GalleryEntryPic[] {
+export function makePics(gallery: NewsEntryGallery | null) {
     
-    return gallery.map((image, i) => {
+    return gallery ? gallery.map((image, i) => {
         return {
             id: `${i}`,
             image
         }
-    })
+    }) : [];
 }
 
 export function makeGalleryPics(entries: GalleryEntry[]): GalleryEntryPic[] {

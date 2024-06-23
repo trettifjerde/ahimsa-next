@@ -16,6 +16,7 @@ export default async function StoriesGrid({ fetchParams }: { fetchParams?: GroqS
         {stories.map(story => <StoryItem key={story.slug} story={story} />)}
 
         {stories.length === 0 && <div className={styles.emp}>No stories in this category</div>}
+        
         <StoriesFetcher initInfo={makeFetcherInitInfo(stories, STORIES_BATCH_SIZE, fetchParams?.catId)} />
 
     </div>

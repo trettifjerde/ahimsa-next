@@ -16,6 +16,7 @@
 
 .h {
     grid-area: h;
+    min-height: 3rem;
 }
 
 .ic {

@@ -17,7 +17,7 @@
 
 .s:nth-of-type(even),
 .s.r:nth-of-type(odd) {
-    --bg: var(--blue-shadow);
+    --bg: var(--blue-trans);
     --color: var(--blue);
     --color-dark: var(--blue-dark);
     --br: var(--shadow-br) 5% 20vw 5%;
@@ -32,7 +32,7 @@
 
 .s:nth-of-type(odd),
 .s.r:nth-of-type(even) {
-    --bg: var(--green-shadow);
+    --bg: var(--green-trans);
     --color: var(--green);
     --color-dark: var(--green-dark);
     --br: 5% var(--shadow-br) 5% 20vw;

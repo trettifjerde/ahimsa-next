@@ -1,13 +1,17 @@
-.gr {
+.h {
     --br: 5vw 50vw;
+    --in-br: 5% 25%;
+
     background-color: var(--light);
     padding: var(--main-p);
-    border-radius: 5% 25%;
+    border-radius: var(--in-br);
     box-shadow: var(--box-shadow);
     z-index: unset !important;
+
+    min-height: 15rem;
 }
 
-.gr::before {
-    background-image: linear-gradient(140deg, var(--green-trans), var(--blue-trans));
+.h::before {
+    background-image: linear-gradient(140deg, var(--green-shadow), var(--blue-shadow));
     transform: scale(1.04) rotate(1deg);
 }

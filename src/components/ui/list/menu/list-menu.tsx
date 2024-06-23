@@ -4,7 +4,6 @@ import { memo, useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from './menu.module.css';
 import menuStyles from '@/styles/menu.module.css';
-import shimmerStyles from '@/styles/shimmer.module.css';
 
 type ListItemInfo = {
     name: string,
@@ -54,7 +53,7 @@ export function ListMenu({url, list, paramName, isSticky, isVert, isGrowing}: {
                 activeStyle={`${menuStyles.active} ${styles.active}`} active={l.url === curParam}
             />)}
 
-            {loading && <div className={shimmerStyles.l}></div>}
+            {loading && <div className="shmr"></div>}
         </ul>
     </div>
 }

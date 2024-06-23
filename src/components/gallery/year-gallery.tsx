@@ -1,27 +1,16 @@
-
-import { getYearGallery } from "@/sanity/lib/fetches";
-import { makeFetcherInitInfo, makeGalleryPics } from "@/utils/serverHelpers";
-import GalleryFetcher from "./gallery-fetcher";
-import { GroqYearParams } from "@/utils/types";
 import GalleryGrid from "./gallery-grid";
-import { GALLERY_BATCH_SIZE } from "@/utils/env-fallback";
+import GalleryFetcher from "./gallery-fetcher";
+import { Suspense } from "react";
+import { GallerySkeletonFallback } from "./gallery-skeleton-fallback";
 
-export default async function YearGallery({ fetchParams }: {
-    fetchParams?: GroqYearParams,
-}) {
-
-    const entries = await getYearGallery(fetchParams);
-
-    if (!entries)
-        throw new Error('Failed to fetch gallery');
+export default function YearGallery({ year }: {year?: number}) {
 
     return <>
         <h1>Galerije</h1>
         <GalleryGrid>
-            <GalleryFetcher 
-                initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams?.start)}
-                initItems={makeGalleryPics(entries)} 
-            />
+            <Suspense fallback={<GallerySkeletonFallback />}>
+                <GalleryFetcher year={year} />
+            </Suspense>
         </GalleryGrid>
     </>
 }

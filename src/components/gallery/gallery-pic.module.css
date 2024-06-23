@@ -1,5 +1,6 @@
 .c {
     --br: 10% .25rem;
+    --in-br: var(--br);
     position: relative;
     aspect-ratio: 1/1;
     transition: transform .4s;

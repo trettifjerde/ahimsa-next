@@ -19,19 +19,15 @@ async function sanityFetch<QueryResponse>({query, qParams = {}, tags}: {
 }
 
 export async function getLanding() {
+    await new Promise((res, rej) => setTimeout(() => res(1), 3000));
+    
     return sanityFetch<LandingQueryResult>({
         query: landingQuery,
         tags: ["landing"]
     });
 }
 
-export async function getYearNews(params?: GroqYearParams) {
-    if (!params)
-        params = getYearPageGroqParams(NEWS_BATCH_SIZE);
-
-    if (!params)
-        return null;
-
+export async function getYearNews(params: GroqYearParams) {
     // await new Promise((res, rej) => {
     //     setTimeout(() => res(1), 3000);
     // });
@@ -51,13 +47,7 @@ export async function getNewsArticle(slug: string) {
     });
 }
 
-export async function getYearGallery(params?: GroqYearParams) {
-    if (!params)
-        params = getYearPageGroqParams(GALLERY_BATCH_SIZE);
-
-    if (!params)
-        return null;
-
+export async function getYearGallery(params: GroqYearParams) {
     // await new Promise((res, rej) => {
     //     setTimeout(() => res(1), 3000);
     // });
@@ -83,11 +73,11 @@ export async function getFooterContacts() {
     });
 }
 
-export async function getContacts() {
+export async function getContactsGreeting() {
     return sanityFetch<ContactQueryResult>({
         query: contactQuery, 
         tags: ["contacts"]
-    });
+    })
 }
 
 export async function getStory(slug: string) {
@@ -119,6 +109,10 @@ export async function getStories(params?: GroqStoriesParams) {
             qParams: params,
             tags: ["story"]
         });
+
+    await new Promise((res, rej) => {
+        setTimeout(() => res(1), 3000);
+    });
 
     return sanityFetch<UncatStoriesQueryResult>({
         query: uncatStoriesQuery, 

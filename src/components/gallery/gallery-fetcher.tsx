@@ -1,29 +1,16 @@
-'use client'
+import GalleryFetcherClient from "./gallery-fetcher-client";
+import { getYearPageGroqParams, makeFetcherInitInfo, makeGalleryPics } from "@/utils/serverHelpers";
+import { GALLERY_BATCH_SIZE } from "@/utils/env-fallback";
+import { getYearGallery } from "@/sanity/lib/fetches";
 
-import { useMemo } from "react";
-import { GalleryEntryPic } from "@/sanity/lib/types";
-import { FetcherEntryMeta } from "@/utils/types";
-import GalleryViewer from "./gallery-viewer";
-import gridStyles from './gallery-grid.module.css';
-import FetchButton from "../ui/list/fetch-button/fetch-button";
-import GalleryContext from "./gallery-context";
-import useFetcherContextConsumer from "@/hooks/useContextConsumer";
+export default async function GalleryFetcher({ year }: {year?: number}) {
+    const fetchParams = getYearPageGroqParams(GALLERY_BATCH_SIZE, year);
+    const entries = await getYearGallery(fetchParams);
 
-export default function GalleryFetcher({ initInfo, initItems }: { 
-    initInfo: FetcherEntryMeta, 
-    initItems: GalleryEntryPic[] 
-}) {
+    await new Promise((res, rej) => setTimeout(() => res(1), 3000));
 
-    const { state, handleFetchMore } = useFetcherContextConsumer(GalleryContext, initInfo);
-    const { loading, errorMsg, items, hasMore } = state;
-
-    const pics = useMemo(() => {
-        return [...initItems, ...items];
-    }, [items]);
-
-    return <>
-        <GalleryViewer pics={pics} emptyClass={gridStyles.emp} />
-
-        {hasMore && <FetchButton loading={loading} fetchMore={handleFetchMore} />}
-    </>
+    return <GalleryFetcherClient 
+            initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams.start)}
+            initItems={makeGalleryPics(entries)} 
+    />
 }

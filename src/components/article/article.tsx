@@ -32,7 +32,7 @@ export default function Article({article}: {article: ArticleType}) {
             <PortableText value={article.description} />
         </div>
 
-        {article.gallery && <GalleryGrid className={styles.gg}>
+        {article.gallery && <GalleryGrid>
             <GalleryViewer pics={makePics(article.gallery)} />
         </GalleryGrid>}
     </article>

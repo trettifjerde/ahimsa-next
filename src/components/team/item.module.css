@@ -9,16 +9,16 @@
 }
 
 .c:nth-of-type(odd) {
-    --bg: var(--green-trans);
-    --shadow: var(--green-shadow);
+    --bg: var(--green-shadow);
+    --shadow: var(--green-trans);
     --br: 25% 85% 25% 100%;
     --ic-br: 40% 0;
     --h-coef: -1;
 }
 
 .c:nth-of-type(even) {
-    --bg: var(--blue-trans);
-    --shadow: var(--blue-shadow);
+    --bg: var(--blue-shadow);
+    --shadow: var(--blue-trans);
     --br: 85% 25% 100% 25%;
     --ic-br: 0 40%;
     --h-coef: 1;

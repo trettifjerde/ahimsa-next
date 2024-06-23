@@ -7,7 +7,7 @@
 
 .h {
     position: relative;
-    background-image: linear-gradient(transparent 30%, var(--light-trans));
+    background-image: linear-gradient(transparent 30%, var(--light-shadow));
 }
 
 .h h1,
@@ -67,14 +67,14 @@
 
 
 .join::before {
-    --bg: var(--green-trans);
+    --bg: var(--green-shadow);
     --scale: 1.2;
     --br: 50% 25%;
     inset: 1rem 0 !important;
     --tr-dur: .8s;
 }
 .join::after {
-    --bg: var(--blue-trans);
+    --bg: var(--blue-shadow);
     --scale: 1.25;
     --br: 25% 50%;
     inset: 0 1.5rem !important;

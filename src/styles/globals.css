@@ -1,24 +1,25 @@
 :root {
   --cianRgb: 85, 176, 179;
   --cian: #55b0b3;
-  --cian-trans: rgba(85, 176, 179, 0.5);
-  --cian-shadow: rgba(85, 176, 179, 0.15);
+  --cian-shadow: rgba(85, 176, 179, 0.5);
+  --cian-trans: rgba(85, 176, 179, 0.15);
   --cian-dark: #1f8184;
   --green: #a1d3a7;
-  --green-trans: rgba(64, 183, 95, 0.5);
-  --green-shadow: rgba(64, 183, 95, 0.15);
+  --green-shadow: rgba(64, 183, 95, 0.5);
+  --green-trans: rgba(64, 183, 95, 0.15);
   --green-dark: rgb(15, 149, 86);
   --blue: #a9d3ec;
-  --blue-trans: rgba(89, 181, 234, 0.5);
+  --blue-shadow: rgba(89, 181, 234, 0.5);
+  --blue-trans: rgba(89, 181, 234, 0.15);
   --blue-dark: rgb(46, 137, 191);
-  --blue-shadow: rgba(89, 181, 234, 0.15);
   --light: #f5faf6;
   --light-dark: #f0f5f1;
-  --light-trans: rgb(240, 245, 241, 0.85);
-  --light-shadow: rgb(240, 245, 241, 0.3);
+  --light-shadow: rgb(240, 245, 241, 0.85);
+  --light-trans: rgb(240, 245, 241, 0.15);
   --dark: rgb(34, 34, 34);
   --gray: #535353;
-  --gray-shadow: #8f949080;
+  --gray-shadow: rgba(143, 148, 144, 0.5);
+  --gray-trans: rgba(143, 148, 144, 0.15);
   --red: rgb(176, 29, 22);
   --color: var(--cian-dark);
 
@@ -268,6 +269,23 @@ footer .info span {
 .noscroll {
   max-height: 100vh;
   overflow: hidden;
+}
+
+
+.shmr {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--in-br);
+  background-image: linear-gradient(90deg, var(--gray-trans) 35%, var(--light-trans) 50%, var(--gray-trans) 65%);
+  background-size: 300% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+
+@keyframes shimmer {
+  from {background-position-x: 100%;}
+  to {background-position-x: 0%;}
 }
 
 @keyframes popup {
