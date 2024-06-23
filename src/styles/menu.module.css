@@ -1,5 +1,6 @@
 .ul {
   font-family: var(--handwritten);
+  list-style-type: none;
 }
 
 .ul li {
@@ -10,6 +11,7 @@
   cursor: pointer;
   background-color: transparent;
   text-align: center;
+  white-space: nowrap;
   transition: padding .2s ease-in-out, background-color .2s ease-out, color .3s ease-in, transform .2s ease-in-out;
 }
 
