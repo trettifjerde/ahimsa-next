@@ -1,15 +1,14 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getArtcile } from "@/sanity/lib/fetches";
+import { getNewsArticle } from "@/sanity/lib/fetches";
 import Article from "@/components/article/article";
-import { getMetaImageUrl } from "@/utils/image-helpers";
 import { getPageOGMeta } from "@/utils/serverHelpers";
 
 type Props = { params: { slug: string } };
 
 export default async function NewsItem({ params }: Props) {
 
-    const news = await getArtcile(params.slug);
+    const news = await getNewsArticle(params.slug);
 
     if (!news)
         notFound();
@@ -20,7 +19,7 @@ export default async function NewsItem({ params }: Props) {
 export async function generateMetadata(
     { params }: Props,
 ): Promise<Metadata> {
-    const news = await getArtcile(params.slug);
+    const news = await getNewsArticle(params.slug);
 
     if (news)
 
