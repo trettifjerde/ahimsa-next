@@ -7,7 +7,7 @@ export default async function GalleryFetcher({ year }: {year?: number}) {
     const fetchParams = getYearPageGroqParams(GALLERY_BATCH_SIZE, year);
     const entries = await getYearGallery(fetchParams);
 
-    await new Promise((res, rej) => setTimeout(() => res(1), 3000));
+    // await new Promise((res, rej) => setTimeout(() => res(1), 3000));
 
     return <GalleryFetcherClient 
             initInfo={makeFetcherInitInfo(entries, GALLERY_BATCH_SIZE, fetchParams.start)}

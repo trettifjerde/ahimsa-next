@@ -19,7 +19,7 @@ async function sanityFetch<QueryResponse>({query, qParams = {}, tags}: {
 }
 
 export async function getLanding() {
-    await new Promise((res, rej) => setTimeout(() => res(1), 3000));
+    // await new Promise((res, rej) => setTimeout(() => res(1), 3000));
     
     return sanityFetch<LandingQueryResult>({
         query: landingQuery,
@@ -110,9 +110,9 @@ export async function getStories(params?: GroqStoriesParams) {
             tags: ["story"]
         });
 
-    await new Promise((res, rej) => {
-        setTimeout(() => res(1), 3000);
-    });
+    // await new Promise((res, rej) => {
+    //     setTimeout(() => res(1), 3000);
+    // });
 
     return sanityFetch<UncatStoriesQueryResult>({
         query: uncatStoriesQuery, 
